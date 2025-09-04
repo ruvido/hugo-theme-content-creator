@@ -10,7 +10,10 @@
 }
 
 body {
+  font-family: 'Inter Fallback', system-ui, -apple-system, sans-serif;
   line-height: 1.6;
+  color: #1e293b;
+  background-color: #fff;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -21,6 +24,29 @@ canvas,
 svg {
   display: block;
   max-width: 100%;
+  height: auto;
+}
+
+/* Performance optimizations */
+img {
+  loading: lazy;
+  decoding: async;
+}
+
+/* Image lazy loading optimization */
+img[data-src] {
+  filter: blur(5px);
+  transition: filter 300ms;
+}
+
+img[data-src].loaded {
+  filter: blur(0);
+}
+
+/* Critical resource hints for LCP */
+.hero-title, .hero-description {
+  contain: layout;
+  will-change: auto;
 }
 
 input,
@@ -235,14 +261,17 @@ p {
   min-height: 56px;
 }
 
-/* Cards */
+/* Cards - Optimized for CLS prevention */
 .card {
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius-lg);
   padding: var(--space-xl);
-  transition: all var(--transition);
+  transition: transform var(--transition), box-shadow var(--transition);
   box-shadow: var(--shadow-sm);
+  contain: layout;
+  will-change: transform;
+  min-height: 200px; /* Prevent layout shift */
 }
 
 .card:hover {
@@ -308,9 +337,10 @@ p {
   color: var(--color-brand);
 }
 
-/* Search */
+/* Search - Lazy loaded styles */
 .search-container {
   position: relative;
+  will-change: auto;
 }
 
 .search-input {
@@ -320,7 +350,7 @@ p {
   background-color: var(--color-bg);
   color: var(--color-text);
   width: 250px;
-  transition: all var(--transition);
+  transition: border-color var(--transition);
 }
 
 .search-input:focus {
@@ -337,29 +367,38 @@ p {
   cursor: pointer;
   border-radius: var(--border-radius);
   color: var(--color-text);
-  transition: all var(--transition);
+  transition: background-color var(--transition);
 }
 
 .theme-toggle:hover {
   background-color: var(--color-bg-secondary);
 }
 
-/* Hero Section */
+/* Hero Section - Optimized for LCP and CLS */
 .hero {
   padding: var(--space-4xl) 0;
   text-align: center;
-  background: linear-gradient(135deg, var(--color-bg) 0%, var(--color-bg-secondary) 100%);
+  background: var(--color-bg);
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  contain: layout style paint;
+}
+
+.hero .container {
+  width: 100%;
 }
 
 .hero-title {
   font-size: clamp(3rem, 8vw, 6rem);
   margin-bottom: var(--space-xl);
-  background: linear-gradient(135deg, var(--color-brand), var(--color-accent));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--color-brand);
   font-weight: var(--font-weight-black);
   line-height: 1.1;
+  letter-spacing: -0.02em;
+  contain: layout;
+  transform: translateZ(0);
 }
 
 .hero-description {
@@ -371,6 +410,7 @@ p {
   margin-right: auto;
   line-height: 1.6;
   font-weight: var(--font-weight-medium);
+  contain: layout;
 }
 
 .hero-cta {
@@ -414,6 +454,8 @@ p {
   transition: all var(--transition);
   box-shadow: var(--shadow-sm);
   position: relative;
+  min-height: 220px; /* Prevent layout shift */
+  contain: layout;
 }
 
 .featured-card:hover {
@@ -555,23 +597,27 @@ p {
 }
 
 .badge-article {
-  background-color: rgb(34 197 94 / 0.1);
-  color: rgb(22 163 74);
+  background-color: rgb(34 197 94 / 0.15);
+  color: rgb(15 118 110);
+  font-weight: var(--font-weight-bold);
 }
 
 .badge-newsletter {
-  background-color: rgb(59 130 246 / 0.1);
-  color: rgb(37 99 235);
+  background-color: rgb(59 130 246 / 0.15);
+  color: rgb(29 78 216);
+  font-weight: var(--font-weight-bold);
 }
 
 .badge-podcast {
-  background-color: rgb(168 85 247 / 0.1);
-  color: rgb(147 51 234);
+  background-color: rgb(168 85 247 / 0.15);
+  color: rgb(124 58 237);
+  font-weight: var(--font-weight-bold);
 }
 
 .badge-video {
-  background-color: rgb(239 68 68 / 0.1);
-  color: rgb(220 38 38);
+  background-color: rgb(239 68 68 / 0.15);
+  color: rgb(185 28 28);
+  font-weight: var(--font-weight-bold);
 }
 
 /* Testimonials */

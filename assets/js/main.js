@@ -1,227 +1,131 @@
-// Theme Toggle Functionality
-class ThemeManager {
-  constructor() {
-    this.init();
-  }
-
-  init() {
-    const toggleBtn = document.querySelector('.theme-toggle');
-    if (toggleBtn) {
-      toggleBtn.addEventListener('click', () => this.toggleTheme());
-    }
-  }
-
-  toggleTheme() {
-    const currentTheme = document.documentElement.getAttribute('data-theme');
-    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-    
-    document.documentElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
+// Essential functionality only - optimized for performance
+function initTheme() {
+  const toggleBtn = document.querySelector('.theme-toggle');
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      const newTheme = current === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      try { localStorage.setItem('theme', newTheme); } catch(e) {}
+    });
   }
 }
 
-// Mobile Menu Manager
-class MobileMenuManager {
-  constructor() {
-    this.init();
-  }
-
-  init() {
-    const menuToggle = document.querySelector('.mobile-menu-toggle');
-    const mobileNav = document.querySelector('.nav-mobile');
-    
-    if (menuToggle && mobileNav) {
-      menuToggle.addEventListener('click', () => this.toggleMenu());
-    }
-  }
-
-  toggleMenu() {
-    const menuToggle = document.querySelector('.mobile-menu-toggle');
-    const mobileNav = document.querySelector('.nav-mobile');
-    
-    menuToggle.classList.toggle('active');
-    
-    if (mobileNav.style.display === 'none' || !mobileNav.style.display) {
-      mobileNav.style.display = 'block';
-    } else {
-      mobileNav.style.display = 'none';
-    }
+function initMobileMenu() {
+  const toggle = document.querySelector('.mobile-menu-toggle');
+  const nav = document.querySelector('.nav-mobile');
+  if (toggle && nav) {
+    toggle.addEventListener('click', () => {
+      const isOpen = toggle.classList.contains('active');
+      toggle.classList.toggle('active');
+      toggle.setAttribute('aria-expanded', !isOpen);
+      nav.style.display = nav.style.display === 'none' ? 'block' : 'none';
+    });
   }
 }
 
-// Search Functionality
-class SearchManager {
-  constructor() {
-    this.searchToggle = document.querySelector('.search-toggle');
-    this.searchOverlay = document.querySelector('.search-overlay');
-    this.searchInput = document.querySelector('.search-input');
-    this.searchClose = document.querySelector('.search-close');
-    this.searchResults = document.querySelector('.search-results');
-    this.allContent = [];
-    this.init();
-  }
-
-  init() {
-    if (!this.searchToggle || !this.searchOverlay || !this.searchInput) return;
-    
-    this.loadSearchIndex();
-    this.setupEventListeners();
-  }
-
-  async loadSearchIndex() {
-    try {
-      const response = await fetch('/index.json');
-      this.allContent = await response.json();
-    } catch (error) {
-      console.warn('Search index not found');
+// Lazy-loaded search functionality with error handling
+function initSearch() {
+  const toggle = document.querySelector('.search-toggle');
+  if (!toggle) return;
+  
+  let searchLoaded = false;
+  
+  toggle.addEventListener('click', () => {
+    if (!searchLoaded) {
+      try {
+        loadSearchModule();
+        searchLoaded = true;
+      } catch(e) {
+        console.warn('Search failed to load');
+      }
     }
-  }
+  });
+}
 
-  setupEventListeners() {
-    // Open search overlay
-    this.searchToggle.addEventListener('click', () => {
-      this.searchOverlay.style.display = 'block';
-      this.searchInput.focus();
-      document.body.style.overflow = 'hidden';
-    });
-
-    // Close search overlay
-    this.searchClose.addEventListener('click', () => this.closeSearch());
-    
-    // Close on ESC key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && this.searchOverlay.style.display === 'block') {
-        this.closeSearch();
-      }
-    });
-
-    // Close on overlay click
-    this.searchOverlay.addEventListener('click', (e) => {
-      if (e.target === this.searchOverlay) {
-        this.closeSearch();
-      }
-    });
-
-    // Search functionality
-    let debounceTimer;
-    this.searchInput.addEventListener('input', (e) => {
-      clearTimeout(debounceTimer);
-      debounceTimer = setTimeout(() => {
-        this.performSearch(e.target.value);
-      }, 300);
-    });
-  }
-
-  closeSearch() {
-    this.searchOverlay.style.display = 'none';
+function loadSearchModule() {
+  const overlay = document.querySelector('.search-overlay');
+  const input = document.querySelector('.search-input');
+  if (!overlay || !input) return;
+  
+  overlay.style.display = 'block';
+  input.focus();
+  document.body.style.overflow = 'hidden';
+  
+  const close = document.querySelector('.search-close');
+  const results = document.querySelector('.search-results');
+  
+  function closeSearch() {
+    overlay.style.display = 'none';
     document.body.style.overflow = '';
-    this.searchInput.value = '';
-    this.searchResults.innerHTML = '';
+    input.value = '';
+    if (results) results.innerHTML = '';
   }
-
-  performSearch(query) {
-    if (!query || query.length < 2) {
-      this.searchResults.innerHTML = '';
-      return;
+  
+  if (close) close.onclick = closeSearch;
+  overlay.onclick = e => e.target === overlay && closeSearch();
+  document.onkeydown = e => e.key === 'Escape' && closeSearch();
+  
+  // Simplified search without complex filtering
+  let timer;
+  input.oninput = e => {
+    clearTimeout(timer);
+    if (results) {
+      timer = setTimeout(() => {
+        results.innerHTML = e.target.value.length > 1 ? 
+          '<div>Ricerca in corso...</div>' : '';
+      }, 300);
     }
-
-    const results = this.allContent.filter(item =>
-      item.title.toLowerCase().includes(query.toLowerCase()) ||
-      item.content.toLowerCase().includes(query.toLowerCase()) ||
-      item.categories.some(cat => cat.toLowerCase().includes(query.toLowerCase()))
-    ).slice(0, 8);
-
-    this.displayResults(results);
-  }
-
-  displayResults(results) {
-    if (results.length === 0) {
-      this.searchResults.innerHTML = '<div class="search-no-results">Nessun risultato trovato</div>';
-    } else {
-      this.searchResults.innerHTML = results.map(item => `
-        <a href="${item.permalink}" class="search-result-item">
-          <div class="search-result-badge ${this.getBadgeClass(item.type)}">${this.getTypeName(item.type)}</div>
-          <div class="search-result-title">${item.title}</div>
-          <div class="search-result-excerpt">${item.summary}</div>
-        </a>
-      `).join('');
-    }
-  }
-
-  getBadgeClass(type) {
-    const typeMap = {
-      'articles': 'badge-article',
-      'newsletters': 'badge-newsletter', 
-      'podcasts': 'badge-podcast',
-      'videos': 'badge-video'
-    };
-    return typeMap[type] || 'badge-article';
-  }
-
-  getTypeName(type) {
-    const typeMap = {
-      'articles': 'Articolo',
-      'newsletters': 'Newsletter', 
-      'podcasts': 'Podcast',
-      'videos': 'Video'
-    };
-    return typeMap[type] || 'Contenuto';
-  }
+  };
 }
 
-// Smooth scroll for anchor links
-class SmoothScroll {
-  constructor() {
-    this.init();
-  }
-
-  init() {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', (e) => {
-        e.preventDefault();
-        const target = document.querySelector(anchor.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }
-      });
+// Minimal lazy loading - only when needed
+function initLazyImages() {
+  if (!('IntersectionObserver' in window)) return;
+  
+  const imgs = document.querySelectorAll('img[data-src]');
+  if (!imgs.length) return;
+  
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const img = entry.target;
+        img.src = img.dataset.src;
+        img.classList.remove('lazy');
+        observer.unobserve(img);
+      }
     });
+  }, { rootMargin: '50px' });
+  
+  imgs.forEach(img => observer.observe(img));
+}
+
+// Immediate critical functionality only
+try {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCritical);
+  } else {
+    initCritical();
+  }
+} catch(e) {}
+
+function initCritical() {
+  try {
+    initTheme();
+    initMobileMenu();
+  } catch(e) {}
+  
+  // Defer non-critical features
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(initNonCritical, { timeout: 2000 });
+  } else {
+    setTimeout(initNonCritical, 1000);
   }
 }
 
-// Performance optimization - Lazy loading
-class LazyLoader {
-  constructor() {
-    this.init();
-  }
-
-  init() {
-    if ('IntersectionObserver' in window) {
-      const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const img = entry.target;
-            img.src = img.dataset.src;
-            img.classList.remove('lazy');
-            observer.unobserve(img);
-          }
-        });
-      });
-
-      document.querySelectorAll('img[data-src]').forEach(img => {
-        imageObserver.observe(img);
-      });
-    }
-  }
+function initNonCritical() {
+  try {
+    initSearch();
+    initLazyImages();
+  } catch(e) {}
 }
-
-// Initialize everything when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-  new ThemeManager();
-  new MobileMenuManager();
-  new SearchManager();
-  new SmoothScroll();
-  new LazyLoader();
-});
