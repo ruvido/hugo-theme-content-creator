@@ -17,6 +17,12 @@
   
   # Featured content (manual selection)
   featured_limit = 6
+  description = "Creatore di contenuti, newsletter, podcast e video. Trasforma la tua passione in una professione con strategie, strumenti e tecniche per diventare un content creator di successo."
+  
+  # Author configuration (replaces deprecated .Site.Author)
+  [params.author]
+    name = "Content Creator"
+    email = "creator@example.com"
   
   # Social links
   [params.social]
@@ -34,17 +40,33 @@
     [markup.goldmark.renderer]
       unsafe = true
 
+baseURL = "http://localhost:1313"
+title = "Content Creator Hub"
+languageCode = "it-IT"
+defaultContentLanguage = "it"
+
+[minify]
+  disableCSS = false
+  disableHTML = false
+  disableJS = false
+  disableJSON = false
+  disableSVG = false
+  disableXML = false
+  
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
 [languages]
   [languages.it]
     languageName = "Italiano"
-    title = "Il Tuo Nome"
-    description = "Creatore di contenuti, newsletter, podcast e video"
+    title = "Content Creator Hub"
+    description = "Creatore di contenuti, newsletter, podcast e video. Trasforma la tua passione in una professione con strategie, strumenti e tecniche per diventare un content creator di successo."
     weight = 1
     
   [languages.en]
     languageName = "English"
-    title = "Your Name"
-    description = "Content creator, newsletters, podcasts and videos"
+    title = "Content Creator Hub"
+    description = "Content creator, newsletters, podcasts and videos. Transform your passion into a profession with strategies, tools and techniques to become a successful content creator."
     weight = 2
 
 [taxonomies]

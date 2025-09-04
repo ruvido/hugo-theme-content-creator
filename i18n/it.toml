@@ -78,3 +78,84 @@ other = "Torna alla Home"
 
 [all_rights_reserved]
 other = "Tutti i diritti riservati"
+
+[hero_newsletter_title]
+other = "Ricevi le migliori idee direttamente nella tua inbox"
+
+[hero_newsletter_description]
+other = "Unisciti a migliaia di creatori che ricevono contenuti esclusivi, consigli pratici e insights dal mondo della creatività digitale."
+
+[hero_community_title]
+other = "Entra nella community dei creatori italiani"
+
+[hero_community_description]
+other = "Connettiti con altri content creator, condividi esperienze e cresci insieme alla più attiva community italiana."
+
+[hero_creator_title]
+other = "Crea contenuti che fanno la differenza"
+
+[hero_creator_description]
+other = "Trasforma la tua passione in una professione. Scopri strategie, strumenti e tecniche per diventare un content creator di successo."
+
+[cta_newsletter_subscribe]
+other = "📧 Iscriviti Gratis"
+
+[cta_read_articles]
+other = "Leggi gli Articoli"
+
+[cta_join_community]
+other = "🚀 Unisciti Ora"
+
+[cta_discover_more]
+other = "Scopri di Più"
+
+[cta_start_creating]
+other = "🎯 Inizia Ora"
+
+[cta_about_me]
+other = "Chi Sono"
+
+[nav_articles]
+other = "Articoli"
+
+[nav_newsletters]
+other = "Newsletter"
+
+[nav_podcasts]
+other = "Podcast"
+
+[nav_videos]
+other = "Video"
+
+[badge_article]
+other = "Articolo"
+
+[badge_newsletter]
+other = "Newsletter"
+
+[badge_podcast]
+other = "Podcast"
+
+[badge_video]
+other = "Video"
+
+[newsletter_number]
+other = "Newsletter #"
+
+[change_theme]
+other = "Cambia tema"
+
+[menu_home]
+other = "Home"
+
+[menu_articles]
+other = "Articoli"
+
+[menu_newsletters]
+other = "Newsletter"
+
+[menu_podcasts]
+other = "Podcast"
+
+[menu_videos]
+other = "Video"

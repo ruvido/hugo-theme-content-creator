@@ -1,0 +1,161 @@
+[read_more]
+other = "Read more"
+
+[listen]
+other = "Listen"
+
+[watch]  
+other = "Watch"
+
+[previous]
+other = "Previous"
+
+[next]
+other = "Next"
+
+[search_placeholder]
+other = "Search content..."
+
+[no_results]
+other = "No results found"
+
+[featured]
+other = "Featured"
+
+[latest_articles]
+other = "Latest Articles"
+
+[latest_newsletters]
+other = "Latest Newsletters"
+
+[latest_podcasts]
+other = "Latest Podcasts"
+
+[view_all]
+other = "View all"
+
+[listen_all]
+other = "Listen all"
+
+[what_people_say]
+other = "What People Say"
+
+[newsletter_signup]
+other = "Don't Miss Any Updates"
+
+[newsletter_description]
+other = "Get exclusive content, practical tips and latest news directly in your inbox."
+
+[email_placeholder]
+other = "Your email"
+
+[subscribe_free]
+other = "Subscribe Free"
+
+[no_spam]
+other = "No spam, only quality content. Unsubscribe anytime."
+
+[reading_time]
+other = "min read"
+
+[duration]
+other = "Duration"
+
+[tags]
+other = "Tags"
+
+[page_of]
+other = "Page {{ .Current }} of {{ .Total }}"
+
+[no_content]
+other = "No content found"
+
+[no_content_description] 
+other = "There is no content in this section yet."
+
+[back_to_home]
+other = "Back to Home"
+
+[all_rights_reserved]
+other = "All rights reserved"
+
+[hero_newsletter_title]
+other = "Get the best ideas directly in your inbox"
+
+[hero_newsletter_description]
+other = "Join thousands of creators who receive exclusive content, practical tips and insights from the world of digital creativity."
+
+[hero_community_title]
+other = "Join the Italian creators community"
+
+[hero_community_description]
+other = "Connect with other content creators, share experiences and grow together with the most active Italian community."
+
+[hero_creator_title]
+other = "Create content that makes a difference"
+
+[hero_creator_description]
+other = "Transform your passion into a profession. Discover strategies, tools and techniques to become a successful content creator."
+
+[cta_newsletter_subscribe]
+other = "📧 Subscribe Free"
+
+[cta_read_articles]
+other = "Read Articles"
+
+[cta_join_community]
+other = "🚀 Join Now"
+
+[cta_discover_more]
+other = "Discover More"
+
+[cta_start_creating]
+other = "🎯 Start Now"
+
+[cta_about_me]
+other = "About Me"
+
+[nav_articles]
+other = "Articles"
+
+[nav_newsletters]
+other = "Newsletters"
+
+[nav_podcasts]
+other = "Podcasts"
+
+[nav_videos]
+other = "Videos"
+
+[badge_article]
+other = "Article"
+
+[badge_newsletter]
+other = "Newsletter"
+
+[badge_podcast]
+other = "Podcast"
+
+[badge_video]
+other = "Video"
+
+[newsletter_number]
+other = "Newsletter #"
+
+[change_theme]
+other = "Change theme"
+
+[menu_home]
+other = "Home"
+
+[menu_articles]
+other = "Articles"
+
+[menu_newsletters]
+other = "Newsletters"
+
+[menu_podcasts]
+other = "Podcasts"
+
+[menu_videos]
+other = "Videos"

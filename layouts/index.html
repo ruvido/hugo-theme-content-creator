@@ -1,36 +1,30 @@
 {{ define "main" }}
 
 <!-- Hero Section with CTA -->
-<section class="hero">
+<section class="hero" role="banner" aria-labelledby="hero-title">
   <div class="container">
     {{ $cta_type := .Site.Params.cta_type | default "newsletter" }}
     
     {{ if eq $cta_type "newsletter" }}
-      <h1 class="hero-title">Ricevi le migliori idee direttamente nella tua inbox</h1>
-      <p class="hero-description">
-        Unisciti a migliaia di creatori che ricevono contenuti esclusivi, consigli pratici e insights dal mondo della creatività digitale.
-      </p>
+      <h1 id="hero-title" class="hero-title">{{ i18n "hero_newsletter_title" }}</h1>
+      <p class="hero-description">{{ i18n "hero_newsletter_description" }}</p>
       <div class="hero-cta">
-        <a href="#newsletter-signup" class="btn btn-primary btn-large">📧 Iscriviti Gratis</a>
-        <a href="/articles/" class="btn btn-secondary btn-large">Leggi gli Articoli</a>
+        <a href="#newsletter-signup" class="btn btn-primary btn-large" aria-label="Iscriviti gratuitamente alla newsletter">{{ i18n "cta_newsletter_subscribe" }}</a>
+        <a href="/articles/" class="btn btn-secondary btn-large" aria-label="Naviga nella sezione articoli">{{ i18n "cta_read_articles" }}</a>
       </div>
     {{ else if eq $cta_type "community" }}
-      <h1 class="hero-title">Entra nella community dei creatori italiani</h1>
-      <p class="hero-description">
-        Connettiti con altri content creator, condividi esperienze e cresci insieme alla più attiva community italiana.
-      </p>
+      <h1 id="hero-title" class="hero-title">{{ i18n "hero_community_title" }}</h1>
+      <p class="hero-description">{{ i18n "hero_community_description" }}</p>
       <div class="hero-cta">
-        <a href="#community-join" class="btn btn-primary btn-large">🚀 Unisciti Ora</a>
-        <a href="/community/" class="btn btn-secondary btn-large">Scopri di Più</a>
+        <a href="#community-join" class="btn btn-primary btn-large" aria-label="Unisciti alla community dei creator">{{ i18n "cta_join_community" }}</a>
+        <a href="/community/" class="btn btn-secondary btn-large" aria-label="Scopri di più sulla community">{{ i18n "cta_discover_more" }}</a>
       </div>
     {{ else }}
-      <h1 class="hero-title">Crea contenuti che fanno la differenza</h1>
-      <p class="hero-description">
-        Trasforma la tua passione in una professione. Scopri strategie, strumenti e tecniche per diventare un content creator di successo.
-      </p>
+      <h1 id="hero-title" class="hero-title">{{ i18n "hero_creator_title" }}</h1>
+      <p class="hero-description">{{ i18n "hero_creator_description" }}</p>
       <div class="hero-cta">
-        <a href="#start-creating" class="btn btn-primary btn-large">🎯 Inizia Ora</a>
-        <a href="/about/" class="btn btn-secondary btn-large">Chi Sono</a>
+        <a href="#start-creating" class="btn btn-primary btn-large" aria-label="Inizia il tuo percorso da content creator">{{ i18n "cta_start_creating" }}</a>
+        <a href="/about/" class="btn btn-secondary btn-large" aria-label="Scopri chi sono e la mia storia">{{ i18n "cta_about_me" }}</a>
       </div>
     {{ end }}
   </div>
@@ -39,31 +33,31 @@
 <!-- Featured Content -->
 {{ $featured := where .Site.Pages "Params.featured" true }}
 {{ if $featured }}
-<section class="featured">
+<section class="featured" aria-labelledby="featured-heading">
   <div class="container">
-    <h2 class="section-title">Contenuti in Evidenza</h2>
+    <h2 id="featured-heading" class="section-title">{{ i18n "featured" }}</h2>
     
     <div class="featured-grid">
       {{ range first 3 $featured }}
-        <article class="featured-card">
+        <article class="featured-card" role="article">
           <div class="featured-header">
             {{ $contentType := .Type }}
             {{ if eq $contentType "articles" }}
-              <span class="featured-badge badge-article">Articolo</span>
+              <span class="featured-badge badge-article">{{ i18n "badge_article" }}</span>
             {{ else if eq $contentType "newsletters" }}
               <span class="featured-badge badge-newsletter">Newsletter</span>
             {{ else if eq $contentType "podcasts" }}
-              <span class="featured-badge badge-podcast">Podcast</span>
+              <span class="featured-badge badge-podcast">{{ i18n "badge_podcast" }}</span>
             {{ else if eq $contentType "videos" }}
-              <span class="featured-badge badge-video">Video</span>
+              <span class="featured-badge badge-video">{{ i18n "badge_video" }}</span>
             {{ else }}
               <span class="featured-badge badge-article">Speciale</span>
             {{ end }}
           </div>
           
-          <h4 class="featured-title">
+          <h3 class="featured-title">
             <a href="{{ .Permalink }}">{{ .Title }}</a>
-          </h4>
+          </h3>
           
           <div class="featured-meta">
             {{ with .Params.author }}
@@ -100,18 +94,18 @@
   <div class="container">
     
     <!-- Latest Articles -->
-    {{ $articles := where .Site.Pages "Type" "articles" }}
+    {{ $articles := where (where .Site.Pages "Type" "articles") "Kind" "page" }}
     {{ if $articles }}
     <div class="content-section" style="margin-bottom: var(--space-4xl);">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-2xl);">
-        <h3 class="section-subtitle">Ultimi Articoli</h3>
+        <h3 class="section-subtitle">{{ i18n "latest_articles" }}</h3>
         <a href="/articles/" class="btn btn-secondary">Vedi tutti →</a>
       </div>
       
       {{ range first 1 $articles }}
-        <article class="latest-card">
+        <article class="latest-card" role="article">
           <div class="latest-header">
-            <span class="content-badge badge-article">Articolo</span>
+            <span class="content-badge badge-article">{{ i18n "badge_article" }}</span>
             <div class="latest-meta">
               {{ with .Params.author }}
                 <span class="latest-author">{{ . }}</span> · 
@@ -125,9 +119,9 @@
             </div>
           </div>
           
-          <h4 class="latest-title">
+          <h3 class="latest-title">
             <a href="{{ .Permalink }}">{{ .Title }}</a>
-          </h4>
+          </h3>
           
           <div class="latest-preview">
             {{ .Summary | truncate 300 }}
@@ -142,18 +136,18 @@
     {{ end }}
     
     <!-- Latest Newsletter -->
-    {{ $newsletters := where .Site.Pages "Type" "newsletters" }}
+    {{ $newsletters := where (where .Site.Pages "Type" "newsletters") "Kind" "page" }}
     {{ if $newsletters }}
     <div class="content-section" style="margin-bottom: var(--space-4xl);">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-2xl);">
-        <h3 class="section-subtitle">Ultime Newsletter</h3>
+        <h3 class="section-subtitle">{{ i18n "latest_newsletters" }}</h3>
         <a href="/newsletters/" class="btn btn-secondary">Vedi tutte →</a>
       </div>
       
       {{ range first 1 $newsletters }}
-        <article class="latest-card">
+        <article class="latest-card" role="article">
           <div class="latest-header">
-            <span class="content-badge badge-newsletter">Newsletter #{{ .Params.newsletter_number | default "1" }}</span>
+            <span class="content-badge badge-newsletter">{{ i18n "newsletter_number" }}{{ .Params.newsletter_number | default "1" }}</span>
             <div class="latest-meta">
               {{ with .Params.author }}
                 <span class="latest-author">{{ . }}</span> · 
@@ -162,9 +156,9 @@
             </div>
           </div>
           
-          <h4 class="latest-title">
+          <h3 class="latest-title">
             <a href="{{ .Permalink }}">{{ .Title }}</a>
-          </h4>
+          </h3>
           
           <div class="latest-preview">
             {{ .Summary | truncate 300 }}
@@ -179,16 +173,16 @@
     {{ end }}
     
     <!-- Latest Podcasts -->
-    {{ $podcasts := where .Site.Pages "Type" "podcasts" }}
+    {{ $podcasts := where (where .Site.Pages "Type" "podcasts") "Kind" "page" }}
     {{ if $podcasts }}
     <div class="content-section">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-2xl);">
-        <h3 class="section-subtitle">Ultimi Podcast</h3>
+        <h3 class="section-subtitle">{{ i18n "latest_podcasts" }}</h3>
         <a href="/podcasts/" class="btn btn-secondary">Ascolta tutti →</a>
       </div>
       
       {{ range first 1 $podcasts }}
-        <article class="latest-card">
+        <article class="latest-card" role="article">
           <div class="latest-header">
             <span class="content-badge badge-podcast">Episodio #{{ .Params.episode_number | default "1" }}</span>
             <div class="latest-meta">
@@ -199,9 +193,9 @@
             </div>
           </div>
           
-          <h4 class="latest-title">
+          <h3 class="latest-title">
             <a href="{{ .Permalink }}">{{ .Title }}</a>
-          </h4>
+          </h3>
           
           <div class="latest-preview">
             {{ .Summary | truncate 300 }}
@@ -219,9 +213,9 @@
 
 <!-- Testimonials Section -->
 {{ if .Site.Data.testimonials }}
-<section class="testimonials">
+<section class="testimonials" aria-labelledby="testimonials-heading">
   <div class="container">
-    <h2 class="section-title">Cosa Dicono i Lettori</h2>
+    <h2 id="testimonials-heading" class="section-title">Cosa Dicono i Lettori</h2>
     
     <div class="grid grid-3">
       {{ range .Site.Data.testimonials }}
@@ -245,10 +239,11 @@
       Ricevi contenuti esclusivi, consigli pratici e le ultime novità direttamente nella tua inbox.
     </p>
     
-    <form action="#" method="post" style="max-width: 500px; margin: 0 auto; display: flex; gap: var(--space-md); flex-wrap: wrap;">
-      <input type="email" placeholder="La tua email" required 
-             style="flex: 1; padding: var(--space-md) var(--space-lg); border: none; border-radius: var(--border-radius); font-size: 1rem; min-width: 250px;">
-      <button type="submit" class="btn btn-secondary" style="background: white; color: var(--color-brand); border: none; font-weight: var(--font-weight-bold);">
+    <form action="#" method="post" style="max-width: 500px; margin: 0 auto; display: flex; gap: var(--space-md); flex-wrap: wrap; min-height: 56px;" aria-label="Modulo iscrizione newsletter" role="form">
+      <label for="newsletter-email" class="sr-only">Indirizzo email per la newsletter</label>
+      <input type="email" id="newsletter-email" placeholder="La tua email" required aria-label="Inserisci il tuo indirizzo email" 
+             style="flex: 1; padding: var(--space-md) var(--space-lg); border: none; border-radius: var(--border-radius); font-size: 1rem; min-width: 250px; height: 56px;">
+      <button type="submit" class="btn btn-secondary" style="background: white; color: var(--color-brand); border: none; font-weight: var(--font-weight-bold); height: 56px;" aria-label="Iscriviti alla newsletter">
         Iscriviti Gratis
       </button>
     </form>

@@ -2,7 +2,7 @@
   <div class="container">
     <div class="footer-content">
       <div class="footer-main">
-        <p>&copy; {{ now.Format "2006" }} {{ .Site.Title }}. Tutti i diritti riservati.</p>
+        <p>&copy; {{ now.Format "2006" }} {{ .Site.Title }}. {{ i18n "all_rights_reserved" }}</p>
         
         {{ if .Site.Params.social }}
         <div class="social-links">
@@ -24,7 +24,7 @@
       
       {{ if .Site.Params.enable_dark_mode }}
       <div class="theme-controls">
-        <button class="theme-toggle" aria-label="Cambia tema">
+        <button class="theme-toggle" aria-label="{{ i18n "change_theme" }}">
           <span class="theme-icon-light">☀️</span>
           <span class="theme-icon-dark">🌙</span>
         </button>
