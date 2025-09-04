@@ -42,16 +42,16 @@
     </div>
     
     <!-- Mobile Navigation -->
-    <nav id="mobile-navigation" class="nav nav-mobile display-none" aria-label="Navigazione mobile">
+    <nav id="mobile-navigation" class="nav nav-mobile" aria-label="Navigazione mobile" aria-hidden="true">
       {{ $currentLang := .Site.Language.Lang }}
       {{ $menuData := index .Site.Data $currentLang "menu" }}
       {{ if $menuData }}
         {{ range $menuData.main }}
-          <a href="{{ .url }}" class="nav-link">{{ .name }}</a>
+          <a href="{{ .url }}" class="nav-link" tabindex="-1">{{ .name }}</a>
         {{ end }}
       {{ else }}
         {{ range .Site.Menus.main }}
-          <a href="{{ .URL }}" class="nav-link">{{ i18n (printf "menu_%s" .Identifier) }}</a>
+          <a href="{{ .URL }}" class="nav-link" tabindex="-1">{{ i18n (printf "menu_%s" .Identifier) }}</a>
         {{ end }}
       {{ end }}
     </nav>
