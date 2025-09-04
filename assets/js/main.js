@@ -1,131 +1,156 @@
 // Essential functionality only - optimized for performance
+
+// Cache DOM elements for better performance
+let cachedElements = {};
+
+function getCachedElement(selector) {
+  if (!cachedElements[selector]) {
+    cachedElements[selector] = document.querySelector(selector);
+  }
+  return cachedElements[selector];
+}
+
 function initTheme() {
-  const toggleBtn = document.querySelector('.theme-toggle');
-  if (toggleBtn) {
-    toggleBtn.addEventListener('click', () => {
-      const current = document.documentElement.getAttribute('data-theme');
-      const newTheme = current === 'light' ? 'dark' : 'light';
-      document.documentElement.setAttribute('data-theme', newTheme);
-      try { localStorage.setItem('theme', newTheme); } catch(e) {}
-    });
+  const toggleBtn = getCachedElement('.theme-toggle');
+  const themeIcon = getCachedElement('.theme-icon');
+  
+  if (toggleBtn && themeIcon) {
+    // Set initial icon based on current theme
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+    updateThemeIcon(themeIcon, currentTheme);
+    
+    // Use passive event listener for better performance
+    toggleBtn.addEventListener('click', handleThemeToggle, { passive: true });
+  }
+}
+
+function handleThemeToggle() {
+  const current = document.documentElement.getAttribute('data-theme') || 'light';
+  const newTheme = current === 'light' ? 'dark' : 'light';
+  
+  // Batch DOM updates
+  requestAnimationFrame(() => {
+    document.documentElement.setAttribute('data-theme', newTheme);
+    const themeIcon = getCachedElement('.theme-icon');
+    if (themeIcon) {
+      updateThemeIcon(themeIcon, newTheme);
+    }
+  });
+  
+  // Store theme preference
+  try { 
+    localStorage.setItem('theme', newTheme); 
+  } catch(e) {
+    // Silently fail if localStorage is not available
+  }
+}
+
+function updateThemeIcon(icon, theme) {
+  if (icon) {
+    // Use consistent icon handling - show sun in dark mode, moon in light mode
+    icon.textContent = theme === 'dark' ? '☀️' : '🌙';
   }
 }
 
 function initMobileMenu() {
-  const toggle = document.querySelector('.mobile-menu-toggle');
-  const nav = document.querySelector('.nav-mobile');
+  const toggle = getCachedElement('.mobile-menu-toggle');
+  const nav = getCachedElement('.nav-mobile');
+  
   if (toggle && nav) {
-    toggle.addEventListener('click', () => {
-      const isOpen = toggle.classList.contains('active');
-      toggle.classList.toggle('active');
-      toggle.setAttribute('aria-expanded', !isOpen);
-      nav.style.display = nav.style.display === 'none' ? 'block' : 'none';
-    });
+    toggle.addEventListener('click', handleMobileMenuToggle, { passive: true });
   }
 }
 
-// Lazy-loaded search functionality with error handling
-function initSearch() {
-  const toggle = document.querySelector('.search-toggle');
-  if (!toggle) return;
+function handleMobileMenuToggle() {
+  const toggle = getCachedElement('.mobile-menu-toggle');
+  const nav = getCachedElement('.nav-mobile');
   
-  let searchLoaded = false;
+  if (!toggle || !nav) return;
   
-  toggle.addEventListener('click', () => {
-    if (!searchLoaded) {
-      try {
-        loadSearchModule();
-        searchLoaded = true;
-      } catch(e) {
-        console.warn('Search failed to load');
-      }
-    }
+  const isOpen = toggle.classList.contains('active');
+  
+  // Batch DOM updates
+  requestAnimationFrame(() => {
+    toggle.classList.toggle('active');
+    toggle.setAttribute('aria-expanded', !isOpen);
+    nav.classList.toggle('display-none');
   });
 }
 
-function loadSearchModule() {
-  const overlay = document.querySelector('.search-overlay');
-  const input = document.querySelector('.search-input');
-  if (!overlay || !input) return;
-  
-  overlay.style.display = 'block';
-  input.focus();
-  document.body.style.overflow = 'hidden';
-  
-  const close = document.querySelector('.search-close');
-  const results = document.querySelector('.search-results');
-  
-  function closeSearch() {
-    overlay.style.display = 'none';
-    document.body.style.overflow = '';
-    input.value = '';
-    if (results) results.innerHTML = '';
-  }
-  
-  if (close) close.onclick = closeSearch;
-  overlay.onclick = e => e.target === overlay && closeSearch();
-  document.onkeydown = e => e.key === 'Escape' && closeSearch();
-  
-  // Simplified search without complex filtering
-  let timer;
-  input.oninput = e => {
-    clearTimeout(timer);
-    if (results) {
-      timer = setTimeout(() => {
-        results.innerHTML = e.target.value.length > 1 ? 
-          '<div>Ricerca in corso...</div>' : '';
-      }, 300);
-    }
-  };
-}
-
-// Minimal lazy loading - only when needed
+// Optimized lazy loading with better performance
 function initLazyImages() {
+  // Early return if IntersectionObserver is not supported
   if (!('IntersectionObserver' in window)) return;
   
   const imgs = document.querySelectorAll('img[data-src]');
   if (!imgs.length) return;
   
-  const observer = new IntersectionObserver(entries => {
+  const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const img = entry.target;
-        img.src = img.dataset.src;
-        img.classList.remove('lazy');
+        
+        // Create a new image to preload
+        const newImg = new Image();
+        newImg.onload = () => {
+          requestAnimationFrame(() => {
+            img.src = img.dataset.src;
+            img.classList.remove('lazy');
+            img.classList.add('loaded');
+          });
+        };
+        
+        newImg.src = img.dataset.src;
         observer.unobserve(img);
       }
     });
-  }, { rootMargin: '50px' });
+  }, { 
+    rootMargin: '50px',
+    threshold: 0.1
+  });
   
   imgs.forEach(img => observer.observe(img));
 }
 
-// Immediate critical functionality only
-try {
+// Optimized initialization with better error handling
+(function() {
+  'use strict';
+  
+  // Critical functionality that must run immediately
+  function initCritical() {
+    try {
+      initTheme();
+      initMobileMenu();
+    } catch(e) {
+      console.warn('Critical initialization failed:', e);
+    }
+    
+    // Schedule non-critical features
+    scheduleNonCritical();
+  }
+  
+  // Non-critical functionality can be deferred
+  function initNonCritical() {
+    try {
+      initLazyImages();
+    } catch(e) {
+      console.warn('Non-critical initialization failed:', e);
+    }
+  }
+  
+  function scheduleNonCritical() {
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(initNonCritical, { timeout: 2000 });
+    } else {
+      setTimeout(initNonCritical, 500);
+    }
+  }
+  
+  // Optimized DOM ready check
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initCritical);
+    document.addEventListener('DOMContentLoaded', initCritical, { once: true });
   } else {
+    // DOM is already ready, initialize immediately
     initCritical();
   }
-} catch(e) {}
-
-function initCritical() {
-  try {
-    initTheme();
-    initMobileMenu();
-  } catch(e) {}
-  
-  // Defer non-critical features
-  if ('requestIdleCallback' in window) {
-    requestIdleCallback(initNonCritical, { timeout: 2000 });
-  } else {
-    setTimeout(initNonCritical, 1000);
-  }
-}
-
-function initNonCritical() {
-  try {
-    initSearch();
-    initLazyImages();
-  } catch(e) {}
-}
+})();

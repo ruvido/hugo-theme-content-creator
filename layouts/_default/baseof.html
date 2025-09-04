@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.Language.Lang }}" data-theme="light">
+<html lang="{{ .Site.Language.Lang }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -85,7 +85,6 @@
     
     <!-- Performance optimized - minimal external requests -->
     <meta name="theme-color" content="#2563eb">
-    <meta name="color-scheme" content="light dark">
     
     <!-- System fonts for instant loading -->
     <style>
@@ -122,17 +121,6 @@
     @media(max-width:768px){.hero-cta{flex-direction:column;gap:1rem}.btn-large{width:100%;max-width:320px}.featured-grid{grid-template-columns:1fr}}
     </style>
     
-    <!-- Theme toggle script (inline for no flash) -->
-    <script>
-        (function() {
-            try {
-                const theme = localStorage.getItem('theme') || 'light';
-                document.documentElement.setAttribute('data-theme', theme);
-            } catch(e) {
-                document.documentElement.setAttribute('data-theme', 'light');
-            }
-        })();
-    </script>
 </head>
 <body>
     {{ partial "header.html" . }}

@@ -1,0 +1,393 @@
+{{ define "main" }}
+<section class="search-page" style="padding: var(--space-2xl) 0 var(--space-4xl);">
+  <div class="container">
+    <div class="search-header" style="text-align: center; margin-bottom: var(--space-3xl);">
+      <h1 class="search-title">{{ i18n "search_page_title" | default "Cerca Contenuti" }}</h1>
+      <p class="search-description" style="font-size: 1.125rem; color: var(--color-text-muted); max-width: 600px; margin: var(--space-lg) auto 0;">
+        {{ i18n "search_page_description" | default "Trova articoli, newsletter, podcast e video usando la ricerca avanzata." }}
+      </p>
+    </div>
+    
+    <!-- Search Form -->
+    <div class="search-form-container" style="max-width: 800px; margin: 0 auto var(--space-3xl);">
+      <form id="search-form" class="search-form" style="margin-bottom: var(--space-xl);">
+        <!-- Main search input -->
+        <div class="search-input-group" style="margin-bottom: var(--space-lg);">
+          <input type="search" 
+                 id="search-query" 
+                 name="q" 
+                 placeholder="{{ i18n "search_placeholder" | default "Cerca contenuti..." }}"
+                 class="search-input-main"
+                 style="width: 100%; padding: var(--space-lg); font-size: 1.125rem; border: 2px solid var(--color-border); border-radius: var(--border-radius-lg); background: var(--color-surface); color: var(--color-text); transition: border-color var(--transition);"
+                 autocomplete="off"
+                 autofocus>
+        </div>
+        
+        <!-- Filter buttons -->
+        <div class="search-filters" style="display: flex; gap: var(--space-sm); flex-wrap: wrap; justify-content: center;">
+          <button type="button" class="filter-btn active" data-filter="all" 
+                  style="padding: var(--space-sm) var(--space-lg); background: var(--color-brand); color: white; border: none; border-radius: var(--border-radius); cursor: pointer; font-weight: var(--font-weight-semibold); transition: all var(--transition);">
+            {{ i18n "filter_all" | default "Tutti" }}
+          </button>
+          <button type="button" class="filter-btn" data-filter="articles"
+                  style="padding: var(--space-sm) var(--space-lg); background: var(--color-surface); color: var(--color-text); border: 2px solid var(--color-border); border-radius: var(--border-radius); cursor: pointer; font-weight: var(--font-weight-semibold); transition: all var(--transition);">
+            {{ i18n "filter_articles" | default "Articoli" }}
+          </button>
+          <button type="button" class="filter-btn" data-filter="newsletters"
+                  style="padding: var(--space-sm) var(--space-lg); background: var(--color-surface); color: var(--color-text); border: 2px solid var(--color-border); border-radius: var(--border-radius); cursor: pointer; font-weight: var(--font-weight-semibold); transition: all var(--transition);">
+            {{ i18n "filter_newsletters" | default "Newsletter" }}
+          </button>
+          <button type="button" class="filter-btn" data-filter="podcasts"
+                  style="padding: var(--space-sm) var(--space-lg); background: var(--color-surface); color: var(--color-text); border: 2px solid var(--color-border); border-radius: var(--border-radius); cursor: pointer; font-weight: var(--font-weight-semibold); transition: all var(--transition);">
+            {{ i18n "filter_podcasts" | default "Podcast" }}
+          </button>
+          <button type="button" class="filter-btn" data-filter="videos"
+                  style="padding: var(--space-sm) var(--space-lg); background: var(--color-surface); color: var(--color-text); border: 2px solid var(--color-border); border-radius: var(--border-radius); cursor: pointer; font-weight: var(--font-weight-semibold); transition: all var(--transition);">
+            {{ i18n "filter_videos" | default "Video" }}
+          </button>
+        </div>
+      </form>
+    </div>
+    
+    <!-- Search Results -->
+    <div id="search-results" class="search-results">
+      <!-- Initial state message -->
+      <div id="search-initial" class="search-message" style="text-align: center; padding: var(--space-3xl); color: var(--color-text-muted);">
+        <div style="font-size: 3rem; margin-bottom: var(--space-lg);">🔍</div>
+        <p style="font-size: 1.125rem;">{{ i18n "search_initial_message" | default "Digita qualcosa per iniziare la ricerca..." }}</p>
+      </div>
+      
+      <!-- Loading state -->
+      <div id="search-loading" class="search-message" style="display: none; text-align: center; padding: var(--space-3xl); color: var(--color-text-muted);">
+        <div style="font-size: 2rem; margin-bottom: var(--space-md);">⏳</div>
+        <p>{{ i18n "search_loading" | default "Ricerca in corso..." }}</p>
+      </div>
+      
+      <!-- No results state -->
+      <div id="search-no-results" class="search-message" style="display: none; text-align: center; padding: var(--space-3xl); color: var(--color-text-muted);">
+        <div style="font-size: 2rem; margin-bottom: var(--space-lg);">📭</div>
+        <h3 style="margin-bottom: var(--space-md);">{{ i18n "no_results" | default "Nessun risultato trovato" }}</h3>
+        <p>{{ i18n "search_no_results_description" | default "Prova con parole chiave diverse o rimuovi alcuni filtri." }}</p>
+      </div>
+      
+      <!-- Results container -->
+      <div id="search-results-container" class="search-results-grid" style="display: none; display: grid; gap: var(--space-xl);">
+        <!-- Results will be dynamically inserted here -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+/* Search page specific styles */
+.search-input-main:focus {
+  outline: none;
+  border-color: var(--color-brand);
+  box-shadow: 0 0 0 3px rgb(37 99 235 / 0.1);
+}
+
+.filter-btn:hover {
+  background-color: var(--color-bg-secondary);
+  border-color: var(--color-brand);
+}
+
+.filter-btn.active {
+  background-color: var(--color-brand) !important;
+  color: white !important;
+  border-color: var(--color-brand) !important;
+}
+
+/* Search result card styles */
+.search-result-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-lg);
+  padding: var(--space-xl);
+  transition: all var(--transition);
+  box-shadow: var(--shadow-sm);
+}
+
+.search-result-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.search-result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--space-md);
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.search-result-badge {
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--border-radius);
+  letter-spacing: 0.05em;
+  display: inline-block;
+}
+
+.search-result-title {
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.4;
+  margin-bottom: var(--space-sm);
+}
+
+.search-result-title a {
+  text-decoration: none;
+  color: var(--color-text);
+  transition: color var(--transition);
+}
+
+.search-result-title a:hover {
+  color: var(--color-brand);
+}
+
+.search-result-meta {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-md);
+}
+
+.search-result-excerpt {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-text);
+  margin-bottom: var(--space-lg);
+}
+
+.search-result-tags {
+  display: flex;
+  gap: var(--space-xs);
+  flex-wrap: wrap;
+}
+
+.search-result-tag {
+  font-size: 0.75rem;
+  padding: var(--space-xs) var(--space-sm);
+  background: var(--color-bg-secondary);
+  border-radius: var(--border-radius);
+  color: var(--color-text-muted);
+}
+
+@media (max-width: 768px) {
+  .search-input-group {
+    flex-direction: column;
+  }
+  
+  .search-filters {
+    justify-content: flex-start;
+  }
+  
+  .filter-btn {
+    font-size: 0.9rem;
+    padding: var(--space-sm) var(--space-md) !important;
+  }
+}
+</style>
+
+<!-- Search JSON data for JavaScript -->
+<script type="application/json" id="search-data">
+{{ $pages := where .Site.RegularPages "Type" "in" (slice "articles" "newsletters" "podcasts" "videos") }}
+{{ $searchData := slice }}
+{{ range $pages }}
+  {{ $item := dict 
+    "title" .Title 
+    "url" .Permalink
+    "content" (.Plain | truncate 500)
+    "summary" (.Summary | plainify | truncate 200)
+    "date" (.Date.Format "2006-01-02")
+    "dateFormatted" (.Date.Format "2 January 2006")
+    "type" .Type
+    "tags" .Params.tags
+    "categories" .Params.categories
+    "author" (.Params.author | default "")
+    "duration" (.Params.duration | default "")
+    "episode_number" (.Params.episode_number | default "")
+    "newsletter_number" (.Params.newsletter_number | default "")
+  }}
+  {{ $searchData = $searchData | append $item }}
+{{ end }}
+{{ $searchData | jsonify | safeJS }}
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const searchForm = document.getElementById('search-form');
+  const searchInput = document.getElementById('search-query');
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const resultsContainer = document.getElementById('search-results-container');
+  const initialMessage = document.getElementById('search-initial');
+  const loadingMessage = document.getElementById('search-loading');
+  const noResultsMessage = document.getElementById('search-no-results');
+  
+  if (!searchForm || !searchInput) return;
+  
+  let searchData = [];
+  let currentFilter = 'all';
+  
+  // Load search data
+  try {
+    const dataElement = document.getElementById('search-data');
+    if (dataElement) {
+      searchData = JSON.parse(dataElement.textContent);
+    }
+  } catch(e) {
+    console.warn('Failed to load search data');
+  }
+  
+  // Filter button handlers
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentFilter = btn.dataset.filter;
+      
+      if (searchInput.value.trim()) {
+        performSearch(searchInput.value.trim());
+      }
+    });
+  });
+  
+  // Search input handler
+  let searchTimer;
+  function handleSearchInput() {
+    clearTimeout(searchTimer);
+    const query = searchInput.value.trim();
+    
+    if (query.length < 2) {
+      showInitialState();
+      return;
+    }
+    
+    showLoadingState();
+    searchTimer = setTimeout(() => performSearch(query), 300);
+  }
+  
+  searchInput.addEventListener('input', handleSearchInput);
+  
+  // URL params handling
+  const urlParams = new URLSearchParams(window.location.search);
+  const initialQuery = urlParams.get('q');
+  if (initialQuery) {
+    searchInput.value = initialQuery;
+    performSearch(initialQuery);
+  }
+  
+  function performSearch(query) {
+    if (!searchData.length) {
+      showNoResults();
+      return;
+    }
+    
+    const filtered = searchData.filter(item => {
+      // Filter by type
+      if (currentFilter !== 'all' && item.type !== currentFilter) {
+        return false;
+      }
+      
+      // Search in title, content, and tags
+      const searchText = `${item.title} ${item.content} ${(item.tags || []).join(' ')} ${(item.categories || []).join(' ')}`.toLowerCase();
+      return searchText.includes(query.toLowerCase());
+    });
+    
+    if (filtered.length === 0) {
+      showNoResults();
+    } else {
+      showResults(filtered, query);
+    }
+  }
+  
+  function showInitialState() {
+    hideAllStates();
+    initialMessage.style.display = 'block';
+  }
+  
+  function showLoadingState() {
+    hideAllStates();
+    loadingMessage.style.display = 'block';
+  }
+  
+  function showNoResults() {
+    hideAllStates();
+    noResultsMessage.style.display = 'block';
+  }
+  
+  function showResults(results, query) {
+    hideAllStates();
+    resultsContainer.style.display = 'grid';
+    
+    resultsContainer.innerHTML = results.map(item => {
+      const badge = getBadgeHTML(item);
+      const meta = getMetaHTML(item);
+      const tags = getTagsHTML(item);
+      
+      return `
+        <article class="search-result-card">
+          <div class="search-result-header">
+            ${badge}
+            <div class="search-result-meta">${meta}</div>
+          </div>
+          
+          <h3 class="search-result-title">
+            <a href="${item.url}">${highlightQuery(item.title, query)}</a>
+          </h3>
+          
+          <div class="search-result-excerpt">
+            ${highlightQuery(item.summary, query)}
+          </div>
+          
+          ${tags}
+        </article>
+      `;
+    }).join('');
+  }
+  
+  function hideAllStates() {
+    initialMessage.style.display = 'none';
+    loadingMessage.style.display = 'none';
+    noResultsMessage.style.display = 'none';
+    resultsContainer.style.display = 'none';
+  }
+  
+  function getBadgeHTML(item) {
+    const badges = {
+      articles: `<span class="search-result-badge badge-article">Articolo</span>`,
+      newsletters: `<span class="search-result-badge badge-newsletter">${item.newsletter_number ? `Newsletter #${item.newsletter_number}` : 'Newsletter'}</span>`,
+      podcasts: `<span class="search-result-badge badge-podcast">${item.episode_number ? `Episodio #${item.episode_number}` : 'Podcast'}</span>`,
+      videos: `<span class="search-result-badge badge-video">Video</span>`
+    };
+    return badges[item.type] || `<span class="search-result-badge badge-article">${item.type}</span>`;
+  }
+  
+  function getMetaHTML(item) {
+    let meta = `<time datetime="${item.date}">${item.dateFormatted}</time>`;
+    if (item.author) meta = `<span style="color: var(--color-brand); font-weight: var(--font-weight-semibold);">${item.author}</span> · ${meta}`;
+    if (item.duration) meta += ` · <span style="color: var(--color-accent);">${item.duration}</span>`;
+    return meta;
+  }
+  
+  function getTagsHTML(item) {
+    if (!item.tags || !item.tags.length) return '';
+    return `
+      <div class="search-result-tags">
+        ${item.tags.slice(0, 5).map(tag => 
+          `<span class="search-result-tag">${tag}</span>`
+        ).join('')}
+      </div>
+    `;
+  }
+  
+  function highlightQuery(text, query) {
+    if (!query || query.length < 2) return text;
+    const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+    return text.replace(regex, '<mark style="background: rgba(37, 99, 235, 0.2); padding: 0 2px; border-radius: 2px;">$1</mark>');
+  }
+});
+</script>
+{{ end }}

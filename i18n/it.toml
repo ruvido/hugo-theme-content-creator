@@ -86,7 +86,8 @@ other = "Ricevi le migliori idee direttamente nella tua inbox"
 other = "Unisciti a migliaia di creatori che ricevono contenuti esclusivi, consigli pratici e insights dal mondo della creatività digitale."
 
 [hero_community_title]
-other = "Entra nella community dei creatori italiani"
+other = "FIX yourself first!"
+# other = "Entra nella community dei creatori italiani"
 
 [hero_community_description]
 other = "Connettiti con altri content creator, condividi esperienze e cresci insieme alla più attiva community italiana."
@@ -159,3 +160,36 @@ other = "Podcast"
 
 [menu_videos]
 other = "Video"
+
+[search_page_title]
+other = "Cerca Contenuti"
+
+[search_page_description]
+other = "Trova articoli, newsletter, podcast e video usando la ricerca avanzata."
+
+[search_button]
+other = "Cerca"
+
+[filter_all]
+other = "Tutti"
+
+[filter_articles]
+other = "Articoli"
+
+[filter_newsletters]
+other = "Newsletter"
+
+[filter_podcasts]
+other = "Podcast"
+
+[filter_videos]
+other = "Video"
+
+[search_initial_message]
+other = "Digita qualcosa per iniziare la ricerca..."
+
+[search_loading]
+other = "Ricerca in corso..."
+
+[search_no_results_description]
+other = "Prova con parole chiave diverse o rimuovi alcuni filtri."

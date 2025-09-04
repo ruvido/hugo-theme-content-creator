@@ -1,0 +1,86 @@
+baseURL = "http://localhost:1313"
+languageCode = "it"
+defaultContentLanguage = "it"
+title = "5pani2pesci"
+theme = "content-creator"
+
+[params]
+  description = "Il tuo sito di contenuti creativi"
+
+  # CTA Configuration - community | creator | newsletter
+  cta_type = "newsletter"
+  
+  # Theme customization
+  brand_color = "#2563eb"
+  accent_color = "#7c3aed"
+  
+  # Typography
+  font_family = "Inter"
+  heading_weight = 900
+  
+  # Features
+  enable_search = true
+  enable_dark_mode = true
+  show_reading_time = true
+  
+  # Featured content
+  featured_limit = 6
+  
+  # Social links
+  [params.social]
+    twitter = "https://twitter.com/username"
+    instagram = "https://instagram.com/username"
+    youtube = "https://youtube.com/channel/username"
+    linkedin = "https://linkedin.com/in/username"
+
+[outputs]
+  home = ["HTML", "JSON"]
+
+[markup]
+  [markup.highlight]
+    style = "github"
+    lineNos = false
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+# Fallback menu with i18n identifiers (used when data/{lang}/menu.toml doesn't exist)
+[menu]
+  [[menu.main]]
+    identifier = "home"
+    url = "/"
+    weight = 10
+  [[menu.main]]
+    identifier = "articles"
+    url = "/articles/"
+    weight = 20
+  [[menu.main]]
+    identifier = "newsletters"
+    url = "/newsletters/"
+    weight = 30
+  [[menu.main]]
+    identifier = "podcasts"
+    url = "/podcasts/"
+    weight = 40
+  [[menu.main]]
+    identifier = "videos"
+    url = "/videos/"
+    weight = 50
+
+[languages]
+  [languages.it]
+    languageName = "Italiano"
+    # title = "Override main title here if needed"
+    # description = "Override main description here if needed"
+    weight = 1
+  
+  [languages.en]
+    languageName = "English"
+    weight = 2
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+  author = "authors"
+
+# Menu is now defined per-language in [languages.{lang}.menu] sections above
