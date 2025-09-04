@@ -1,0 +1,172 @@
+{{ define "main" }}
+
+<!-- Community-focused Hero -->
+<section class="hero">
+  <div class="container">
+    <h1 class="hero-title">Entra nella community dei creatori italiani</h1>
+    <p class="hero-description">
+      Connettiti con oltre 2.000 content creator italiani, condividi esperienze, fai networking e cresci insieme alla community più attiva del paese.
+    </p>
+    <div class="hero-cta">
+      <a href="#community-join" class="btn btn-primary btn-large">🚀 Unisciti Ora</a>
+      <a href="/community/" class="btn btn-secondary btn-large">Scopri di Più</a>
+    </div>
+  </div>
+</section>
+
+<!-- Community Stats -->
+<section style="padding: var(--space-4xl) 0; background: var(--color-bg-secondary);">
+  <div class="container">
+    <div class="grid grid-3" style="text-align: center;">
+      <div class="card">
+        <div style="font-size: 3rem; font-weight: var(--font-weight-black); color: var(--color-brand); margin-bottom: var(--space-md);">2.000+</div>
+        <h3 style="margin-bottom: var(--space-sm);">Creator Attivi</h3>
+        <p style="color: var(--color-text-muted);">YouTuber, podcaster, blogger e influencer</p>
+      </div>
+      
+      <div class="card">
+        <div style="font-size: 3rem; font-weight: var(--font-weight-black); color: var(--color-brand); margin-bottom: var(--space-md);">500+</div>
+        <h3 style="margin-bottom: var(--space-sm);">Discussioni Mensili</h3>
+        <p style="color: var(--color-text-muted);">Conversazioni costruttive e di valore</p>
+      </div>
+      
+      <div class="card">
+        <div style="font-size: 3rem; font-weight: var(--font-weight-black); color: var(--color-brand); margin-bottom: var(--space-md);">100+</div>
+        <h3 style="margin-bottom: var(--space-sm);">Eventi All'Anno</h3>
+        <p style="color: var(--color-text-muted);">Workshop, meetup e networking</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Community Benefits -->
+<section style="padding: var(--space-4xl) 0;">
+  <div class="container">
+    <h2 class="section-title">Perché Unirsi</h2>
+    
+    <div class="grid grid-2">
+      <div class="card" style="display: flex; align-items: flex-start; gap: var(--space-lg);">
+        <div style="font-size: 2rem; min-width: 60px;">🤝</div>
+        <div>
+          <h3>Networking Autentico</h3>
+          <p>Connettiti con creator della tua nicchia, trova collaboratori e costruisci relazioni durature nel mondo digitale.</p>
+        </div>
+      </div>
+      
+      <div class="card" style="display: flex; align-items: flex-start; gap: var(--space-lg);">
+        <div style="font-size: 2rem; min-width: 60px;">💡</div>
+        <div>
+          <h3>Idee e Feedback</h3>
+          <p>Condividi i tuoi progetti, ricevi feedback costruttivi e trova ispirazione dalle esperienze di altri creator.</p>
+        </div>
+      </div>
+      
+      <div class="card" style="display: flex; align-items: flex-start; gap: var(--space-lg);">
+        <div style="font-size: 2rem; min-width: 60px;">🎯</div>
+        <div>
+          <h3>Opportunità Esclusive</h3>
+          <p>Accesso prioritario a collaborazioni, sponsor, eventi e opportunità di business riservate alla community.</p>
+        </div>
+      </div>
+      
+      <div class="card" style="display: flex; align-items: flex-start; gap: var(--space-lg);">
+        <div style="font-size: 2rem; min-width: 60px;">📚</div>
+        <div>
+          <h3>Risorse Condivise</h3>
+          <p>Template, tool, strategie e risorse premium condivise dai membri più esperti della community.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Community Content -->
+{{ $featured := where .Site.Pages "Params.featured" true }}
+{{ if $featured }}
+<section style="padding: var(--space-4xl) 0; background: var(--color-bg-secondary);">
+  <div class="container">
+    <h2 class="section-title">Dalla Community</h2>
+    <p style="text-align: center; color: var(--color-text-muted); margin-bottom: var(--space-3xl);">
+      Contenuti creati e condivisi dai membri della nostra community
+    </p>
+    
+    <div class="grid grid-3">
+      {{ range first 6 $featured }}
+        <article class="card">
+          <div class="card-header">
+            {{ $contentType := .Type }}
+            {{ if eq $contentType "articles" }}
+              <span class="content-badge badge-article">Articolo</span>
+            {{ else if eq $contentType "newsletters" }}
+              <span class="content-badge badge-newsletter">Newsletter</span>
+            {{ else if eq $contentType "podcasts" }}
+              <span class="content-badge badge-podcast">Podcast</span>
+            {{ else if eq $contentType "videos" }}
+              <span class="content-badge badge-video">Video</span>
+            {{ end }}
+          </div>
+          
+          <h3 class="card-title">
+            <a href="{{ .Permalink }}" style="text-decoration: none; color: inherit;">{{ .Title }}</a>
+          </h3>
+          
+          <div class="card-meta">
+            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time>
+            {{ with .Params.author }}
+              · da {{ . }}
+            {{ end }}
+          </div>
+          
+          <p>{{ .Summary }}</p>
+        </article>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+
+<!-- Community Testimonials -->
+{{ if .Site.Data.testimonials }}
+<section class="testimonials">
+  <div class="container">
+    <h2 class="section-title">Voci dalla Community</h2>
+    
+    <div class="grid grid-3">
+      {{ range .Site.Data.testimonials }}
+        <div class="testimonial-card">
+          <blockquote class="testimonial-quote">"{{ .quote }}"</blockquote>
+          <div class="testimonial-author">{{ .name }}</div>
+          <div class="testimonial-role">{{ .role }}</div>
+        </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+
+<!-- Community Join CTA -->
+<section id="community-join" style="padding: var(--space-4xl) 0; background: linear-gradient(135deg, var(--color-brand), var(--color-accent));">
+  <div class="container" style="text-align: center; color: white;">
+    <h2 style="color: white; margin-bottom: var(--space-lg);">Pronto a Iniziare?</h2>
+    <p style="font-size: 1.25rem; margin-bottom: var(--space-2xl); opacity: 0.9;">
+      Unisciti oggi alla community e inizia a connetterti con creator di tutta Italia.
+    </p>
+    
+    <div style="display: flex; justify-content: center; gap: var(--space-lg); flex-wrap: wrap;">
+      <a href="#" class="btn btn-secondary btn-large" style="background: white; color: var(--color-brand); border: none; font-weight: var(--font-weight-bold);">
+        💬 Entra su Discord
+      </a>
+      <a href="#" class="btn btn-secondary btn-large" style="background: rgba(255,255,255,0.1); color: white; border: 2px solid white;">
+        📱 Gruppo Telegram
+      </a>
+    </div>
+    
+    <div style="display: flex; justify-content: center; align-items: center; gap: var(--space-lg); margin-top: var(--space-xl); flex-wrap: wrap; font-size: 0.875rem; opacity: 0.8;">
+      <span>✓ Accesso immediato</span>
+      <span>✓ Completamente gratuito</span>
+      <span>✓ Community moderata</span>
+    </div>
+  </div>
+</section>
+
+{{ end }}

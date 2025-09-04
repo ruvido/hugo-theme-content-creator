@@ -1,0 +1,208 @@
+{{ define "main" }}
+
+<!-- Creator-focused Hero -->
+<section class="hero">
+  <div class="container">
+    <h1 class="hero-title">Crea contenuti che fanno la differenza</h1>
+    <p class="hero-description">
+      Trasforma la tua passione in una professione. Impara strategie, strumenti e tecniche per costruire un personal brand autentico e monetizzare i tuoi contenuti.
+    </p>
+    <div class="hero-cta">
+      <a href="#start-creating" class="btn btn-primary btn-large">🎯 Inizia il Percorso</a>
+      <a href="/about/" class="btn btn-secondary btn-large">Chi Sono</a>
+    </div>
+  </div>
+</section>
+
+<!-- Creator Journey -->
+<section style="padding: var(--space-4xl) 0; background: var(--color-bg-secondary);">
+  <div class="container">
+    <h2 class="section-title">Il Tuo Percorso da Creator</h2>
+    
+    <div class="creator-timeline" style="max-width: 800px; margin: 0 auto;">
+      <div class="timeline-item" style="display: flex; align-items: flex-start; gap: var(--space-lg); margin-bottom: var(--space-2xl); position: relative;">
+        <div style="min-width: 60px; height: 60px; background: var(--color-brand); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: var(--font-weight-black); font-size: 1.25rem;">1</div>
+        <div>
+          <h3 style="margin-bottom: var(--space-sm);">Trova la Tua Nicchia</h3>
+          <p style="color: var(--color-text-muted);">Scopri la tua voce unica, identifica il tuo pubblico target e definisci il tuo posizionamento nel mercato dei contenuti.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item" style="display: flex; align-items: flex-start; gap: var(--space-lg); margin-bottom: var(--space-2xl); position: relative;">
+        <div style="min-width: 60px; height: 60px; background: var(--color-brand); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: var(--font-weight-black); font-size: 1.25rem;">2</div>
+        <div>
+          <h3 style="margin-bottom: var(--space-sm);">Crea Contenuti di Qualità</h3>
+          <p style="color: var(--color-text-muted);">Impara tecniche di storytelling, produzione e editing per creare contenuti che catturano l'attenzione e generano engagement.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item" style="display: flex; align-items: flex-start; gap: var(--space-lg); margin-bottom: var(--space-2xl); position: relative;">
+        <div style="min-width: 60px; height: 60px; background: var(--color-brand); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: var(--font-weight-black); font-size: 1.25rem;">3</div>
+        <div>
+          <h3 style="margin-bottom: var(--space-sm);">Costruisci la Tua Audience</h3>
+          <p style="color: var(--color-text-muted);">Strategie di crescita organica, community building e creazione di una fanbase fedele attraverso tutti i canali digitali.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item" style="display: flex; align-items: flex-start; gap: var(--space-lg);">
+        <div style="min-width: 60px; height: 60px; background: var(--color-accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: var(--font-weight-black); font-size: 1.25rem;">4</div>
+        <div>
+          <h3 style="margin-bottom: var(--space-sm);">Monetizza la Tua Passione</h3>
+          <p style="color: var(--color-text-muted);">Diversifica le tue entrate: sponsorizzazioni, prodotti digitali, servizi, affiliazioni e molto altro per vivere della tua creatività.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Learning Resources -->
+<section style="padding: var(--space-4xl) 0;">
+  <div class="container">
+    <h2 class="section-title">Risorse per la Crescita</h2>
+    
+    <div class="grid grid-3">
+      <!-- Articles -->
+      {{ $articles := where .Site.Pages "Type" "articles" }}
+      {{ if $articles }}
+      <div class="card" style="text-align: center;">
+        <div style="font-size: 3rem; margin-bottom: var(--space-lg);">📝</div>
+        <h3>Guide Pratiche</h3>
+        <p>Articoli approfonditi su strategie, tool e tecniche per migliorare la tua presenza online.</p>
+        <div style="margin-top: var(--space-lg);">
+          <strong style="font-size: 2rem; color: var(--color-brand);">{{ len $articles }}+</strong>
+          <div style="color: var(--color-text-muted); font-size: 0.875rem;">Articoli pubblicati</div>
+        </div>
+        <a href="/articles/" class="btn btn-secondary" style="margin-top: var(--space-md);">Esplora →</a>
+      </div>
+      {{ end }}
+      
+      <!-- Podcasts -->
+      {{ $podcasts := where .Site.Pages "Type" "podcasts" }}
+      {{ if $podcasts }}
+      <div class="card" style="text-align: center;">
+        <div style="font-size: 3rem; margin-bottom: var(--space-lg);">🎙️</div>
+        <h3>Podcast Esclusivi</h3>
+        <p>Conversazioni con creator di successo che condividono strategie e lezioni apprese.</p>
+        <div style="margin-top: var(--space-lg);">
+          <strong style="font-size: 2rem; color: var(--color-brand);">{{ len $podcasts }}+</strong>
+          <div style="color: var(--color-text-muted); font-size: 0.875rem;">Episodi disponibili</div>
+        </div>
+        <a href="/podcasts/" class="btn btn-secondary" style="margin-top: var(--space-md);">Ascolta →</a>
+      </div>
+      {{ end }}
+      
+      <!-- Videos -->
+      {{ $videos := where .Site.Pages "Type" "videos" }}
+      {{ if $videos }}
+      <div class="card" style="text-align: center;">
+        <div style="font-size: 3rem; margin-bottom: var(--space-lg);">📹</div>
+        <h3>Video Tutorial</h3>
+        <p>Contenuti video pratici che mostrano step-by-step come implementare strategie e usare strumenti.</p>
+        <div style="margin-top: var(--space-lg);">
+          <strong style="font-size: 2rem; color: var(--color-brand);">{{ len $videos }}+</strong>
+          <div style="color: var(--color-text-muted); font-size: 0.875rem;">Video tutorial</div>
+        </div>
+        <a href="/videos/" class="btn btn-secondary" style="margin-top: var(--space-md);">Guarda →</a>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<!-- Featured Success Stories -->
+{{ $featured := where .Site.Pages "Params.featured" true }}
+{{ if $featured }}
+<section style="padding: var(--space-4xl) 0; background: var(--color-bg-secondary);">
+  <div class="container">
+    <h2 class="section-title">Case Study di Successo</h2>
+    <p style="text-align: center; color: var(--color-text-muted); margin-bottom: var(--space-3xl);">
+      Storie reali di creator che hanno trasformato la loro passione in business
+    </p>
+    
+    <div class="grid grid-2">
+      {{ range first 4 $featured }}
+        <article class="card">
+          <div class="card-header">
+            {{ $contentType := .Type }}
+            {{ if eq $contentType "articles" }}
+              <span class="content-badge badge-article">Case Study</span>
+            {{ else if eq $contentType "newsletters" }}
+              <span class="content-badge badge-newsletter">Success Story</span>
+            {{ else if eq $contentType "podcasts" }}
+              <span class="content-badge badge-podcast">Intervista</span>
+            {{ else if eq $contentType "videos" }}
+              <span class="content-badge badge-video">Tutorial</span>
+            {{ end }}
+          </div>
+          
+          <h3 class="card-title">
+            <a href="{{ .Permalink }}" style="text-decoration: none; color: inherit;">{{ .Title }}</a>
+          </h3>
+          
+          <div class="card-meta">
+            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time>
+          </div>
+          
+          <p>{{ .Summary }}</p>
+          
+          <a href="{{ .Permalink }}" class="btn btn-secondary">
+            {{ if eq .Type "podcasts" }}
+              Ascolta →
+            {{ else if eq .Type "videos" }}
+              Guarda →
+            {{ else }}
+              Leggi →
+            {{ end }}
+          </a>
+        </article>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+
+<!-- Success Testimonials -->
+{{ if .Site.Data.testimonials }}
+<section class="testimonials">
+  <div class="container">
+    <h2 class="section-title">I Risultati Parlano</h2>
+    
+    <div class="grid grid-3">
+      {{ range .Site.Data.testimonials }}
+        <div class="testimonial-card">
+          <blockquote class="testimonial-quote">"{{ .quote }}"</blockquote>
+          <div class="testimonial-author">{{ .name }}</div>
+          <div class="testimonial-role">{{ .role }}</div>
+        </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+
+<!-- Start Creating CTA -->
+<section id="start-creating" style="padding: var(--space-4xl) 0; background: linear-gradient(135deg, var(--color-brand), var(--color-accent));">
+  <div class="container" style="text-align: center; color: white;">
+    <h2 style="color: white; margin-bottom: var(--space-lg);">Il Momento Giusto è Ora</h2>
+    <p style="font-size: 1.25rem; margin-bottom: var(--space-2xl); opacity: 0.9;">
+      Ogni grande creator ha iniziato con il primo contenuto. Non aspettare che tutto sia perfetto.
+    </p>
+    
+    <div style="display: flex; justify-content: center; gap: var(--space-lg); flex-wrap: wrap; margin-bottom: var(--space-xl);">
+      <a href="/newsletter/" class="btn btn-secondary btn-large" style="background: white; color: var(--color-brand); border: none; font-weight: var(--font-weight-bold);">
+        📧 Inizia con la Newsletter
+      </a>
+      <a href="/about/" class="btn btn-secondary btn-large" style="background: rgba(255,255,255,0.1); color: white; border: 2px solid white;">
+        🤝 Parliamone Insieme
+      </a>
+    </div>
+    
+    <div style="display: flex; justify-content: center; align-items: center; gap: var(--space-lg); flex-wrap: wrap; font-size: 0.875rem; opacity: 0.8;">
+      <span>✓ Supporto personalizzato</span>
+      <span>✓ Community di creator</span>
+      <span>✓ Strategie testate</span>
+    </div>
+  </div>
+</section>
+
+{{ end }}

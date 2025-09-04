@@ -1,0 +1,129 @@
+{{ define "main" }}
+<div class="list-page" style="padding: var(--space-4xl) 0;">
+  <div class="container">
+    
+    <!-- Page Header -->
+    <header class="page-header" style="text-align: center; margin-bottom: var(--space-3xl);">
+      <h1>{{ .Title }}</h1>
+      {{ with .Params.description }}
+        <p class="page-description" style="font-size: 1.25rem; color: var(--color-text-muted); margin-top: var(--space-lg); max-width: 600px; margin-left: auto; margin-right: auto;">
+          {{ . }}
+        </p>
+      {{ end }}
+    </header>
+    
+    <!-- Content List -->
+    {{ $paginator := .Paginate (.Pages) 12 }}
+    {{ if $paginator.Pages }}
+      <div class="content-grid">
+        <div class="grid grid-3">
+          {{ range $paginator.Pages }}
+            <article class="card">
+              <div class="card-header">
+                {{ $contentType := .Type }}
+                {{ if eq $contentType "articles" }}
+                  <span class="content-badge badge-article">Articolo</span>
+                {{ else if eq $contentType "newsletters" }}
+                  <span class="content-badge badge-newsletter">Newsletter</span>
+                {{ else if eq $contentType "podcasts" }}
+                  <span class="content-badge badge-podcast">Podcast</span>
+                {{ else if eq $contentType "videos" }}
+                  <span class="content-badge badge-video">Video</span>
+                {{ else }}
+                  <span class="content-badge badge-article">Contenuto</span>
+                {{ end }}
+                
+                {{ if .Params.featured }}
+                  <span class="featured-badge" style="float: right; background: var(--color-accent); color: white; font-size: 0.75rem; padding: 2px 6px; border-radius: 3px;">
+                    ⭐ In Evidenza
+                  </span>
+                {{ end }}
+              </div>
+              
+              <h3 class="card-title">
+                <a href="{{ .Permalink }}" style="text-decoration: none; color: inherit;">{{ .Title }}</a>
+              </h3>
+              
+              <div class="card-meta">
+                <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time>
+                {{ if .Site.Params.show_reading_time }}
+                  {{ with .ReadingTime }}
+                    · {{ . }} min lettura
+                  {{ end }}
+                {{ end }}
+                {{ with .Params.duration }}
+                  · {{ . }}
+                {{ end }}
+              </div>
+              
+              <p>{{ .Summary }}</p>
+              
+              <a href="{{ .Permalink }}" class="btn btn-secondary">
+                {{ if eq .Type "podcasts" }}
+                  Ascolta →
+                {{ else if eq .Type "videos" }}
+                  Guarda →
+                {{ else }}
+                  Leggi di più →
+                {{ end }}
+              </a>
+            </article>
+          {{ end }}
+        </div>
+      </div>
+      
+      <!-- Pagination -->
+      {{ if gt $paginator.TotalPages 1 }}
+        <nav class="pagination" style="margin-top: var(--space-3xl); text-align: center;">
+          <div class="pagination-links" style="display: flex; justify-content: center; align-items: center; gap: var(--space-md); flex-wrap: wrap;">
+            
+            {{ if $paginator.HasPrev }}
+              <a href="{{ $paginator.Prev.URL }}" class="pagination-link" style="text-decoration: none; padding: var(--space-sm) var(--space-md); border: 1px solid var(--color-border); border-radius: var(--border-radius); color: var(--color-text);">
+                ← Precedente
+              </a>
+            {{ end }}
+            
+            <span class="pagination-info" style="color: var(--color-text-muted);">
+              Pagina {{ $paginator.PageNumber }} di {{ $paginator.TotalPages }}
+            </span>
+            
+            {{ if $paginator.HasNext }}
+              <a href="{{ $paginator.Next.URL }}" class="pagination-link" style="text-decoration: none; padding: var(--space-sm) var(--space-md); border: 1px solid var(--color-border); border-radius: var(--border-radius); color: var(--color-text);">
+                Successiva →
+              </a>
+            {{ end }}
+            
+          </div>
+        </nav>
+      {{ end }}
+      
+    {{ else }}
+      <div class="no-content" style="text-align: center; padding: var(--space-4xl) 0;">
+        <h2 style="color: var(--color-text-muted); margin-bottom: var(--space-md);">Nessun contenuto trovato</h2>
+        <p style="color: var(--color-text-muted);">Non ci sono ancora contenuti in questa sezione.</p>
+        <a href="{{ .Site.BaseURL }}" class="btn btn-primary" style="margin-top: var(--space-lg);">
+          Torna alla Home
+        </a>
+      </div>
+    {{ end }}
+    
+  </div>
+</div>
+
+<style>
+.pagination-link:hover {
+  background-color: var(--color-bg-secondary);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .grid-3 {
+    grid-template-columns: 1fr;
+  }
+  
+  .pagination-links {
+    flex-direction: column;
+  }
+}
+</style>
+{{ end }}

@@ -1,0 +1,76 @@
+baseURL = "https://example.com"
+languageCode = "it"
+title = "Mario Rossi - Content Creator"
+# theme will be auto-detected from parent directory
+
+[params]
+  # Theme customization
+  brand_color = "#2563eb"
+  accent_color = "#7c3aed"
+  
+  # Typography
+  font_family = "Inter"
+  heading_weight = 900
+  
+  # Features
+  enable_search = true
+  enable_dark_mode = true
+  show_reading_time = true
+  
+  # CTA Configuration - Change to "community" or "creator" for different landing pages
+  cta_type = "newsletter"
+  
+  # Featured content
+  featured_limit = 6
+  
+  # Social links
+  [params.social]
+    twitter = "https://twitter.com/username"
+    instagram = "https://instagram.com/username"
+    youtube = "https://youtube.com/channel/username"
+    linkedin = "https://linkedin.com/in/username"
+
+[outputs]
+  home = ["HTML", "JSON"]
+
+[markup]
+  [markup.highlight]
+    style = "github"
+    lineNos = false
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[languages]
+  [languages.it]
+    languageName = "Italiano"
+    title = "Mario Rossi - Content Creator"
+    description = "Creatore di contenuti, newsletter, podcast e video per aiutare altri creator a crescere"
+    weight = 1
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+  author = "authors"
+
+[menu]
+  [[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 10
+  [[menu.main]]
+    name = "Articoli"
+    url = "/articles/"
+    weight = 20
+  [[menu.main]]
+    name = "Newsletter"
+    url = "/newsletters/"
+    weight = 30
+  [[menu.main]]
+    name = "Podcast"
+    url = "/podcasts/"
+    weight = 40
+  [[menu.main]]
+    name = "Video"
+    url = "/videos/"
+    weight = 50

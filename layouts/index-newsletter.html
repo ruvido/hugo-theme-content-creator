@@ -1,0 +1,117 @@
+{{ define "main" }}
+
+<!-- Newsletter-focused Hero -->
+<section class="hero">
+  <div class="container">
+    <h1 class="hero-title">Ricevi le migliori idee direttamente nella tua inbox</h1>
+    <p class="hero-description">
+      Unisciti a migliaia di creatori che ricevono contenuti esclusivi, consigli pratici e insights dal mondo della creatività digitale. Ogni settimana, direttamente nella tua email.
+    </p>
+    <div class="hero-cta">
+      <a href="#newsletter-signup" class="btn btn-primary btn-large">📧 Iscriviti Gratis</a>
+      <a href="/newsletters/" class="btn btn-secondary btn-large">Leggi le Newsletter</a>
+    </div>
+  </div>
+</section>
+
+<!-- Newsletter Benefits -->
+<section style="padding: var(--space-4xl) 0; background: var(--color-bg-secondary);">
+  <div class="container">
+    <h2 class="section-title">Cosa Riceverai</h2>
+    
+    <div class="grid grid-3">
+      <div class="card" style="text-align: center;">
+        <div style="font-size: 3rem; margin-bottom: var(--space-lg);">💡</div>
+        <h3>Idee Innovative</h3>
+        <p>Strategie creative e tendenze emergenti per distinguerti nella creazione di contenuti.</p>
+      </div>
+      
+      <div class="card" style="text-align: center;">
+        <div style="font-size: 3rem; margin-bottom: var(--space-lg);">🛠️</div>
+        <h3>Strumenti Pratici</h3>
+        <p>Template, checklist e risorse per ottimizzare il tuo workflow di creazione.</p>
+      </div>
+      
+      <div class="card" style="text-align: center;">
+        <div style="font-size: 3rem; margin-bottom: var(--space-lg);">📈</div>
+        <h3>Crescita Garantita</h3>
+        <p>Tecniche testate per aumentare reach, engagement e monetizzazione dei tuoi contenuti.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Latest Newsletters Preview -->
+{{ $newsletters := where .Site.Pages "Type" "newsletters" }}
+{{ if $newsletters }}
+<section style="padding: var(--space-4xl) 0;">
+  <div class="container">
+    <h2 class="section-title">Ultime Newsletter</h2>
+    
+    <div class="grid grid-2">
+      {{ range first 4 $newsletters }}
+        <article class="card">
+          <span class="content-badge badge-newsletter">Newsletter #{{ .Params.newsletter_number | default "1" }}</span>
+          <h3 class="card-title">
+            <a href="{{ .Permalink }}" style="text-decoration: none; color: inherit;">{{ .Title }}</a>
+          </h3>
+          <div class="card-meta">
+            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time>
+          </div>
+          <p>{{ .Summary }}</p>
+          <a href="{{ .Permalink }}" class="btn btn-secondary">Leggi Ora →</a>
+        </article>
+      {{ end }}
+    </div>
+    
+    <div style="text-align: center; margin-top: var(--space-2xl);">
+      <a href="/newsletters/" class="btn btn-primary">Vedi Tutte le Newsletter →</a>
+    </div>
+  </div>
+</section>
+{{ end }}
+
+<!-- Social Proof -->
+{{ if .Site.Data.testimonials }}
+<section class="testimonials">
+  <div class="container">
+    <h2 class="section-title">Cosa Dicono i Lettori</h2>
+    
+    <div class="grid grid-3">
+      {{ range first 3 .Site.Data.testimonials }}
+        <div class="testimonial-card">
+          <blockquote class="testimonial-quote">"{{ .quote }}"</blockquote>
+          <div class="testimonial-author">{{ .name }}</div>
+          <div class="testimonial-role">{{ .role }}</div>
+        </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+
+<!-- Newsletter Signup CTA -->
+<section id="newsletter-signup" style="padding: var(--space-4xl) 0; background: linear-gradient(135deg, var(--color-brand), var(--color-accent));">
+  <div class="container" style="text-align: center; color: white;">
+    <h2 style="color: white; margin-bottom: var(--space-lg);">Inizia Oggi Stesso</h2>
+    <p style="font-size: 1.25rem; margin-bottom: var(--space-2xl); opacity: 0.9;">
+      Unisciti a oltre 5.000 creator che ricevono la newsletter ogni settimana.
+    </p>
+    
+    <form action="#" method="post" style="max-width: 500px; margin: 0 auto; display: flex; gap: var(--space-md); flex-wrap: wrap;">
+      <input type="email" placeholder="La tua email" required 
+             style="flex: 1; padding: var(--space-md) var(--space-lg); border: none; border-radius: var(--border-radius); font-size: 1rem; min-width: 250px;">
+      <button type="submit" class="btn btn-secondary" style="background: white; color: var(--color-brand); border: none; font-weight: var(--font-weight-bold);">
+        Iscriviti Gratis
+      </button>
+    </form>
+    
+    <div style="display: flex; justify-content: center; align-items: center; gap: var(--space-lg); margin-top: var(--space-xl); flex-wrap: wrap; font-size: 0.875rem; opacity: 0.8;">
+      <span>✓ Gratis per sempre</span>
+      <span>✓ Cancellati quando vuoi</span>
+      <span>✓ Zero spam</span>
+    </div>
+  </div>
+</section>
+
+{{ end }}

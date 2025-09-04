@@ -1,0 +1,176 @@
+{{ define "main" }}
+<article class="single-content" style="padding: var(--space-4xl) 0;">
+  <div class="container">
+    <div style="max-width: 800px; margin: 0 auto;">
+      
+      <!-- Article Header -->
+      <header class="article-header" style="margin-bottom: var(--space-3xl); text-align: center;">
+        {{ $contentType := .Type }}
+        {{ if eq $contentType "articles" }}
+          <span class="content-badge badge-article">Articolo</span>
+        {{ else if eq $contentType "newsletters" }}
+          <span class="content-badge badge-newsletter">Newsletter</span>
+        {{ else if eq $contentType "podcasts" }}
+          <span class="content-badge badge-podcast">Podcast</span>
+        {{ else if eq $contentType "videos" }}
+          <span class="content-badge badge-video">Video</span>
+        {{ else }}
+          <span class="content-badge badge-article">Contenuto</span>
+        {{ end }}
+        
+        <h1 style="margin: var(--space-lg) 0; font-size: clamp(2rem, 5vw, 3rem);">{{ .Title }}</h1>
+        
+        <div class="article-meta" style="color: var(--color-text-muted); margin-bottom: var(--space-lg);">
+          <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time>
+          {{ if .Site.Params.show_reading_time }}
+            {{ with .ReadingTime }}
+              · {{ . }} min lettura
+            {{ end }}
+          {{ end }}
+          {{ with .Params.duration }}
+            · Durata: {{ . }}
+          {{ end }}
+        </div>
+        
+        {{ if .Params.description }}
+          <p class="article-description" style="font-size: 1.25rem; color: var(--color-text-muted); line-height: 1.6;">
+            {{ .Params.description }}
+          </p>
+        {{ end }}
+      </header>
+      
+      <!-- Audio/Video Player for Podcasts/Videos -->
+      {{ if and (eq .Type "podcasts") .Params.audio_url }}
+        <div class="audio-player" style="margin-bottom: var(--space-2xl);">
+          <audio controls style="width: 100%; height: 60px;">
+            <source src="{{ .Params.audio_url }}" type="audio/mpeg">
+            Il tuo browser non supporta l'elemento audio.
+          </audio>
+        </div>
+      {{ end }}
+      
+      {{ if and (eq .Type "videos") .Params.video_url }}
+        <div class="video-player" style="margin-bottom: var(--space-2xl); position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+          <iframe src="{{ .Params.video_url }}" 
+                  style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: var(--border-radius);"
+                  allowfullscreen>
+          </iframe>
+        </div>
+      {{ end }}
+      
+      <!-- Content -->
+      <div class="prose" style="font-size: 1.125rem; line-height: 1.7;">
+        {{ .Content }}
+      </div>
+      
+      <!-- Tags -->
+      {{ if .Params.tags }}
+        <div class="article-tags" style="margin-top: var(--space-2xl); padding-top: var(--space-xl); border-top: 1px solid var(--color-border);">
+          <h3 style="font-size: 1rem; margin-bottom: var(--space-md); color: var(--color-text-muted);">Tag:</h3>
+          <div style="display: flex; gap: var(--space-sm); flex-wrap: wrap;">
+            {{ range .Params.tags }}
+              <span style="padding: var(--space-xs) var(--space-sm); background: var(--color-bg-secondary); border-radius: var(--border-radius); font-size: 0.875rem;">
+                #{{ . }}
+              </span>
+            {{ end }}
+          </div>
+        </div>
+      {{ end }}
+      
+      <!-- Navigation -->
+      <nav class="article-nav" style="margin-top: var(--space-3xl); display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg);">
+        {{ with .PrevInSection }}
+          <a href="{{ .Permalink }}" class="nav-link nav-prev" style="text-decoration: none; padding: var(--space-lg); background: var(--color-bg-secondary); border-radius: var(--border-radius); transition: all var(--transition);">
+            <div style="font-size: 0.875rem; color: var(--color-text-muted); margin-bottom: var(--space-xs);">← Precedente</div>
+            <div style="font-weight: var(--font-weight-semibold);">{{ .Title }}</div>
+          </a>
+        {{ end }}
+        
+        {{ with .NextInSection }}
+          <a href="{{ .Permalink }}" class="nav-link nav-next" style="text-decoration: none; padding: var(--space-lg); background: var(--color-bg-secondary); border-radius: var(--border-radius); transition: all var(--transition); text-align: right;">
+            <div style="font-size: 0.875rem; color: var(--color-text-muted); margin-bottom: var(--space-xs);">Successivo →</div>
+            <div style="font-weight: var(--font-weight-semibold);">{{ .Title }}</div>
+          </a>
+        {{ end }}
+      </nav>
+    </div>
+  </div>
+</article>
+
+<style>
+.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+  margin-top: var(--space-2xl);
+  margin-bottom: var(--space-md);
+}
+
+.prose h1:first-child,
+.prose h2:first-child,
+.prose h3:first-child {
+  margin-top: 0;
+}
+
+.prose p {
+  margin-bottom: var(--space-lg);
+}
+
+.prose ul, .prose ol {
+  margin-bottom: var(--space-lg);
+  padding-left: var(--space-xl);
+}
+
+.prose li {
+  margin-bottom: var(--space-sm);
+}
+
+.prose blockquote {
+  margin: var(--space-xl) 0;
+  padding: var(--space-lg);
+  background: var(--color-bg-secondary);
+  border-left: 4px solid var(--color-brand);
+  border-radius: var(--border-radius);
+  font-style: italic;
+}
+
+.prose img {
+  margin: var(--space-xl) auto;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-md);
+}
+
+.prose pre {
+  margin: var(--space-xl) 0;
+  padding: var(--space-lg);
+  background: var(--color-bg-secondary);
+  border-radius: var(--border-radius);
+  overflow-x: auto;
+  font-size: 0.875rem;
+}
+
+.prose code {
+  background: var(--color-bg-secondary);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+.prose pre code {
+  background: none;
+  padding: 0;
+}
+
+.nav-link:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+@media (max-width: 768px) {
+  .article-nav {
+    grid-template-columns: 1fr;
+  }
+  
+  .nav-next {
+    text-align: left !important;
+  }
+}
+</style>
+{{ end }}

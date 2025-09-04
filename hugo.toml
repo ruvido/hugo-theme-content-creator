@@ -1,0 +1,53 @@
+[params]
+  # Theme customization
+  brand_color = "#2563eb"  # Blue-600
+  accent_color = "#7c3aed"  # Violet-600
+  
+  # Typography
+  font_family = "Inter"
+  heading_weight = 900
+  
+  # Features
+  enable_search = true
+  enable_dark_mode = true
+  show_reading_time = true
+  
+  # CTA Configuration
+  cta_type = "newsletter"  # newsletter | community | creator
+  
+  # Featured content (manual selection)
+  featured_limit = 6
+  
+  # Social links
+  [params.social]
+    twitter = ""
+    instagram = ""
+    youtube = ""
+    linkedin = ""
+    github = ""
+
+[markup]
+  [markup.highlight]
+    style = "github"
+    lineNos = false
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[languages]
+  [languages.it]
+    languageName = "Italiano"
+    title = "Il Tuo Nome"
+    description = "Creatore di contenuti, newsletter, podcast e video"
+    weight = 1
+    
+  [languages.en]
+    languageName = "English"
+    title = "Your Name"
+    description = "Content creator, newsletters, podcasts and videos"
+    weight = 2
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+  author = "authors"

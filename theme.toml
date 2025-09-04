@@ -1,0 +1,13 @@
+name = "ContentCreator"
+license = "MIT"
+licenselink = "https://github.com/user/hugo-theme-content-creator/blob/main/LICENSE"
+description = "A modern, responsive Hugo theme designed for content creators with newsletters, podcasts, videos, and articles support"
+homepage = "https://github.com/user/hugo-theme-content-creator"
+demosite = "https://hugo-theme-content-creator.netlify.app"
+tags = ["responsive", "modern", "content", "creator", "newsletter", "podcast", "video", "blog", "minimal", "clean", "fast"]
+features = ["responsive", "dark-mode", "search", "multilingual", "typography", "performance"]
+min_version = "0.112.0"
+
+[author]
+name = "Content Creator Theme"
+homepage = "https://github.com/user/hugo-theme-content-creator"

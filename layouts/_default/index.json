@@ -1,0 +1,18 @@
+{{ $pages := where .Site.Pages "Kind" "page" }}
+{{ $searchIndex := slice }}
+
+{{ range $pages }}
+  {{ $item := dict 
+    "title" .Title
+    "content" (plainify .Content)
+    "summary" (plainify .Summary)
+    "permalink" .Permalink
+    "date" .Date
+    "type" .Type
+    "categories" .Params.categories
+    "tags" .Params.tags
+  }}
+  {{ $searchIndex = $searchIndex | append $item }}
+{{ end }}
+
+{{ jsonify $searchIndex }}

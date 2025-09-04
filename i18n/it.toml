@@ -1,0 +1,80 @@
+[read_more]
+other = "Leggi di più"
+
+[listen]
+other = "Ascolta"
+
+[watch]  
+other = "Guarda"
+
+[previous]
+other = "Precedente"
+
+[next]
+other = "Successivo"
+
+[search_placeholder]
+other = "Cerca contenuti..."
+
+[no_results]
+other = "Nessun risultato trovato"
+
+[featured]
+other = "In Evidenza"
+
+[latest_articles]
+other = "Ultimi Articoli"
+
+[latest_newsletters]
+other = "Ultime Newsletter"
+
+[latest_podcasts]
+other = "Ultimi Podcast"
+
+[view_all]
+other = "Vedi tutti"
+
+[listen_all]
+other = "Ascolta tutti"
+
+[what_people_say]
+other = "Cosa Dicono i Lettori"
+
+[newsletter_signup]
+other = "Non Perdere Nessun Aggiornamento"
+
+[newsletter_description]
+other = "Ricevi contenuti esclusivi, consigli pratici e le ultime novità direttamente nella tua inbox."
+
+[email_placeholder]
+other = "La tua email"
+
+[subscribe_free]
+other = "Iscriviti Gratis"
+
+[no_spam]
+other = "Niente spam, solo contenuti di qualità. Cancellati quando vuoi."
+
+[reading_time]
+other = "min lettura"
+
+[duration]
+other = "Durata"
+
+[tags]
+other = "Tag"
+
+[page_of]
+other = "Pagina {{ .Current }} di {{ .Total }}"
+
+[no_content]
+other = "Nessun contenuto trovato"
+
+[no_content_description] 
+other = "Non ci sono ancora contenuti in questa sezione."
+
+[back_to_home]
+other = "Torna alla Home"
+
+[all_rights_reserved]
+other = "Tutti i diritti riservati"

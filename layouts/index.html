@@ -1,0 +1,263 @@
+{{ define "main" }}
+
+<!-- Hero Section with CTA -->
+<section class="hero">
+  <div class="container">
+    {{ $cta_type := .Site.Params.cta_type | default "newsletter" }}
+    
+    {{ if eq $cta_type "newsletter" }}
+      <h1 class="hero-title">Ricevi le migliori idee direttamente nella tua inbox</h1>
+      <p class="hero-description">
+        Unisciti a migliaia di creatori che ricevono contenuti esclusivi, consigli pratici e insights dal mondo della creatività digitale.
+      </p>
+      <div class="hero-cta">
+        <a href="#newsletter-signup" class="btn btn-primary btn-large">📧 Iscriviti Gratis</a>
+        <a href="/articles/" class="btn btn-secondary btn-large">Leggi gli Articoli</a>
+      </div>
+    {{ else if eq $cta_type "community" }}
+      <h1 class="hero-title">Entra nella community dei creatori italiani</h1>
+      <p class="hero-description">
+        Connettiti con altri content creator, condividi esperienze e cresci insieme alla più attiva community italiana.
+      </p>
+      <div class="hero-cta">
+        <a href="#community-join" class="btn btn-primary btn-large">🚀 Unisciti Ora</a>
+        <a href="/community/" class="btn btn-secondary btn-large">Scopri di Più</a>
+      </div>
+    {{ else }}
+      <h1 class="hero-title">Crea contenuti che fanno la differenza</h1>
+      <p class="hero-description">
+        Trasforma la tua passione in una professione. Scopri strategie, strumenti e tecniche per diventare un content creator di successo.
+      </p>
+      <div class="hero-cta">
+        <a href="#start-creating" class="btn btn-primary btn-large">🎯 Inizia Ora</a>
+        <a href="/about/" class="btn btn-secondary btn-large">Chi Sono</a>
+      </div>
+    {{ end }}
+  </div>
+</section>
+
+<!-- Featured Content -->
+{{ $featured := where .Site.Pages "Params.featured" true }}
+{{ if $featured }}
+<section class="featured">
+  <div class="container">
+    <h2 class="section-title">Contenuti in Evidenza</h2>
+    
+    <div class="featured-grid">
+      {{ range first 3 $featured }}
+        <article class="featured-card">
+          <div class="featured-header">
+            {{ $contentType := .Type }}
+            {{ if eq $contentType "articles" }}
+              <span class="featured-badge badge-article">Articolo</span>
+            {{ else if eq $contentType "newsletters" }}
+              <span class="featured-badge badge-newsletter">Newsletter</span>
+            {{ else if eq $contentType "podcasts" }}
+              <span class="featured-badge badge-podcast">Podcast</span>
+            {{ else if eq $contentType "videos" }}
+              <span class="featured-badge badge-video">Video</span>
+            {{ else }}
+              <span class="featured-badge badge-article">Speciale</span>
+            {{ end }}
+          </div>
+          
+          <h4 class="featured-title">
+            <a href="{{ .Permalink }}">{{ .Title }}</a>
+          </h4>
+          
+          <div class="featured-meta">
+            {{ with .Params.author }}
+              <span class="featured-author">{{ . }}</span>
+            {{ end }}
+            {{ with .Params.duration }}
+              <span class="featured-duration">{{ . }}</span>
+            {{ end }}
+            {{ if or .Params.author .Params.duration }} · {{ end }}
+            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time>
+            {{ if .Site.Params.show_reading_time }}
+              {{ with .ReadingTime }}
+                · {{ . }} min
+              {{ end }}
+            {{ end }}
+          </div>
+          
+          <div class="featured-preview">
+            {{ .Summary | truncate 180 }}
+          </div>
+        </article>
+      {{ end }}
+    </div>
+    
+    <div class="featured-link" style="text-align: center; margin-top: var(--space-2xl);">
+      <a href="/featured/" class="btn btn-secondary">Vedi tutti i contenuti in evidenza →</a>
+    </div>
+  </div>
+</section>
+{{ end }}
+
+<!-- Latest Content by Type -->
+<section class="content-sections" style="padding: var(--space-4xl) 0;">
+  <div class="container">
+    
+    <!-- Latest Articles -->
+    {{ $articles := where .Site.Pages "Type" "articles" }}
+    {{ if $articles }}
+    <div class="content-section" style="margin-bottom: var(--space-4xl);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-2xl);">
+        <h3 class="section-subtitle">Ultimi Articoli</h3>
+        <a href="/articles/" class="btn btn-secondary">Vedi tutti →</a>
+      </div>
+      
+      {{ range first 1 $articles }}
+        <article class="latest-card">
+          <div class="latest-header">
+            <span class="content-badge badge-article">Articolo</span>
+            <div class="latest-meta">
+              {{ with .Params.author }}
+                <span class="latest-author">{{ . }}</span> · 
+              {{ end }}
+              <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time>
+              {{ if .Site.Params.show_reading_time }}
+                {{ with .ReadingTime }}
+                  · {{ . }} min lettura
+                {{ end }}
+              {{ end }}
+            </div>
+          </div>
+          
+          <h4 class="latest-title">
+            <a href="{{ .Permalink }}">{{ .Title }}</a>
+          </h4>
+          
+          <div class="latest-preview">
+            {{ .Summary | truncate 300 }}
+          </div>
+          
+          <div class="latest-action">
+            <a href="{{ .Permalink }}" class="btn btn-primary">Leggi articolo →</a>
+          </div>
+        </article>
+      {{ end }}
+    </div>
+    {{ end }}
+    
+    <!-- Latest Newsletter -->
+    {{ $newsletters := where .Site.Pages "Type" "newsletters" }}
+    {{ if $newsletters }}
+    <div class="content-section" style="margin-bottom: var(--space-4xl);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-2xl);">
+        <h3 class="section-subtitle">Ultime Newsletter</h3>
+        <a href="/newsletters/" class="btn btn-secondary">Vedi tutte →</a>
+      </div>
+      
+      {{ range first 1 $newsletters }}
+        <article class="latest-card">
+          <div class="latest-header">
+            <span class="content-badge badge-newsletter">Newsletter #{{ .Params.newsletter_number | default "1" }}</span>
+            <div class="latest-meta">
+              {{ with .Params.author }}
+                <span class="latest-author">{{ . }}</span> · 
+              {{ end }}
+              <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time>
+            </div>
+          </div>
+          
+          <h4 class="latest-title">
+            <a href="{{ .Permalink }}">{{ .Title }}</a>
+          </h4>
+          
+          <div class="latest-preview">
+            {{ .Summary | truncate 300 }}
+          </div>
+          
+          <div class="latest-action">
+            <a href="{{ .Permalink }}" class="btn btn-primary">Leggi newsletter →</a>
+          </div>
+        </article>
+      {{ end }}
+    </div>
+    {{ end }}
+    
+    <!-- Latest Podcasts -->
+    {{ $podcasts := where .Site.Pages "Type" "podcasts" }}
+    {{ if $podcasts }}
+    <div class="content-section">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-2xl);">
+        <h3 class="section-subtitle">Ultimi Podcast</h3>
+        <a href="/podcasts/" class="btn btn-secondary">Ascolta tutti →</a>
+      </div>
+      
+      {{ range first 1 $podcasts }}
+        <article class="latest-card">
+          <div class="latest-header">
+            <span class="content-badge badge-podcast">Episodio #{{ .Params.episode_number | default "1" }}</span>
+            <div class="latest-meta">
+              {{ with .Params.duration }}
+                <span class="featured-duration">{{ . }}</span> · 
+              {{ end }}
+              <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time>
+            </div>
+          </div>
+          
+          <h4 class="latest-title">
+            <a href="{{ .Permalink }}">{{ .Title }}</a>
+          </h4>
+          
+          <div class="latest-preview">
+            {{ .Summary | truncate 300 }}
+          </div>
+          
+          <div class="latest-action">
+            <a href="{{ .Permalink }}" class="btn btn-primary">Ascolta episodio →</a>
+          </div>
+        </article>
+      {{ end }}
+    </div>
+    {{ end }}
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+{{ if .Site.Data.testimonials }}
+<section class="testimonials">
+  <div class="container">
+    <h2 class="section-title">Cosa Dicono i Lettori</h2>
+    
+    <div class="grid grid-3">
+      {{ range .Site.Data.testimonials }}
+        <div class="testimonial-card">
+          <blockquote class="testimonial-quote">"{{ .quote }}"</blockquote>
+          <div class="testimonial-author">{{ .name }}</div>
+          <div class="testimonial-role">{{ .role }}</div>
+        </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+
+<!-- Newsletter Signup CTA -->
+{{ if eq (.Site.Params.cta_type | default "newsletter") "newsletter" }}
+<section id="newsletter-signup" style="padding: var(--space-4xl) 0; background: linear-gradient(135deg, var(--color-brand), var(--color-accent));">
+  <div class="container" style="text-align: center; color: white;">
+    <h2 style="color: white; margin-bottom: var(--space-lg);">Non Perdere Nessun Aggiornamento</h2>
+    <p style="font-size: 1.25rem; margin-bottom: var(--space-2xl); opacity: 0.9;">
+      Ricevi contenuti esclusivi, consigli pratici e le ultime novità direttamente nella tua inbox.
+    </p>
+    
+    <form action="#" method="post" style="max-width: 500px; margin: 0 auto; display: flex; gap: var(--space-md); flex-wrap: wrap;">
+      <input type="email" placeholder="La tua email" required 
+             style="flex: 1; padding: var(--space-md) var(--space-lg); border: none; border-radius: var(--border-radius); font-size: 1rem; min-width: 250px;">
+      <button type="submit" class="btn btn-secondary" style="background: white; color: var(--color-brand); border: none; font-weight: var(--font-weight-bold);">
+        Iscriviti Gratis
+      </button>
+    </form>
+    
+    <p style="font-size: 0.875rem; margin-top: var(--space-md); opacity: 0.8;">
+      Niente spam, solo contenuti di qualità. Cancellati quando vuoi.
+    </p>
+  </div>
+</section>
+{{ end }}
+
+{{ end }}
