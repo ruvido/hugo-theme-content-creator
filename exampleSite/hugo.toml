@@ -1,9 +1,15 @@
-baseURL = "https://example.com"
+baseURL = "http://localhost:1313"
 languageCode = "it"
-title = "Mario Rossi - Content Creator"
-# theme will be auto-detected from parent directory
+defaultContentLanguage = "it"
+title = "5pani2pesci"
+theme = "content-creator"
 
 [params]
+  description = "Il tuo sito di contenuti creativi"
+
+  # CTA Configuration - Change to "community" or "creator" for different landing pages
+  cta_type = "newsletter"
+  
   # Theme customization
   brand_color = "#2563eb"
   accent_color = "#7c3aed"
@@ -16,9 +22,6 @@ title = "Mario Rossi - Content Creator"
   enable_search = true
   enable_dark_mode = true
   show_reading_time = true
-  
-  # CTA Configuration - Change to "community" or "creator" for different landing pages
-  cta_type = "newsletter"
   
   # Featured content
   featured_limit = 6
@@ -41,36 +44,43 @@ title = "Mario Rossi - Content Creator"
     [markup.goldmark.renderer]
       unsafe = true
 
+# Fallback menu with i18n identifiers (used when data/{lang}/menu.toml doesn't exist)
+[menu]
+  [[menu.main]]
+    identifier = "home"
+    url = "/"
+    weight = 10
+  [[menu.main]]
+    identifier = "articles"
+    url = "/articles/"
+    weight = 20
+  [[menu.main]]
+    identifier = "newsletters"
+    url = "/newsletters/"
+    weight = 30
+  [[menu.main]]
+    identifier = "podcasts"
+    url = "/podcasts/"
+    weight = 40
+  [[menu.main]]
+    identifier = "videos"
+    url = "/videos/"
+    weight = 50
+
 [languages]
   [languages.it]
     languageName = "Italiano"
-    title = "Mario Rossi - Content Creator"
-    description = "Creatore di contenuti, newsletter, podcast e video per aiutare altri creator a crescere"
+    # title = "Override main title here if needed"
+    # description = "Override main description here if needed"
     weight = 1
+  
+  [languages.en]
+    languageName = "English"
+    weight = 2
 
 [taxonomies]
   category = "categories"
   tag = "tags"
   author = "authors"
 
-[menu]
-  [[menu.main]]
-    name = "Home"
-    url = "/"
-    weight = 10
-  [[menu.main]]
-    name = "Articoli"
-    url = "/articles/"
-    weight = 20
-  [[menu.main]]
-    name = "Newsletter"
-    url = "/newsletters/"
-    weight = 30
-  [[menu.main]]
-    name = "Podcast"
-    url = "/podcasts/"
-    weight = 40
-  [[menu.main]]
-    name = "Video"
-    url = "/videos/"
-    weight = 50
+# Menu is now defined per-language in [languages.{lang}.menu] sections above
