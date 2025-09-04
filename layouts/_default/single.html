@@ -18,7 +18,7 @@
           <span class="content-badge badge-article">Contenuto</span>
         {{ end }}
         
-        <h1 style="margin: var(--space-lg) 0; font-size: clamp(2rem, 5vw, 3rem);">{{ .Title }}</h1>
+        <h1 style="margin: var(--space-lg) 0;">{{ .Title }}</h1>
         
         <div class="article-meta" style="color: var(--color-text-muted); margin-bottom: var(--space-lg);">
           <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time>
@@ -66,7 +66,7 @@
       <!-- Tags -->
       {{ if .Params.tags }}
         <div class="article-tags" style="margin-top: var(--space-2xl); padding-top: var(--space-xl); border-top: 1px solid var(--color-border);">
-          <h3 style="font-size: 1rem; margin-bottom: var(--space-md); color: var(--color-text-muted);">Tag:</h3>
+          <h6 style="margin-bottom: var(--space-md);">Tag:</h6>
           <div style="display: flex; gap: var(--space-sm); flex-wrap: wrap;">
             {{ range .Params.tags }}
               <span style="padding: var(--space-xs) var(--space-sm); background: var(--color-bg-secondary); border-radius: var(--border-radius); font-size: 0.875rem;">

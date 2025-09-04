@@ -35,7 +35,7 @@
 {{ if $featured }}
 <section class="featured" aria-labelledby="featured-heading">
   <div class="container">
-    <h2 id="featured-heading" class="section-title">{{ i18n "featured" }}</h2>
+    <h2 id="featured-heading" class="section-subtitle">{{ i18n "featured" }}</h2>
     
     <div class="featured-grid">
       {{ range first 3 $featured }}
@@ -76,7 +76,7 @@
           </div>
           
           <div class="featured-preview">
-            {{ .Summary | truncate 180 }}
+            {{ .Summary | plainify | truncate 180 }}
           </div>
         </article>
       {{ end }}
@@ -124,7 +124,7 @@
           </h3>
           
           <div class="latest-preview">
-            {{ .Summary | truncate 300 }}
+            {{ .Summary | plainify | truncate 300 }}
           </div>
           
           <div class="latest-action">
@@ -161,7 +161,7 @@
           </h3>
           
           <div class="latest-preview">
-            {{ .Summary | truncate 300 }}
+            {{ .Summary | plainify | truncate 300 }}
           </div>
           
           <div class="latest-action">
@@ -198,7 +198,7 @@
           </h3>
           
           <div class="latest-preview">
-            {{ .Summary | truncate 300 }}
+            {{ .Summary | plainify | truncate 300 }}
           </div>
           
           <div class="latest-action">
@@ -215,7 +215,7 @@
 {{ if .Site.Data.testimonials }}
 <section class="testimonials" aria-labelledby="testimonials-heading">
   <div class="container">
-    <h2 id="testimonials-heading" class="section-title">Cosa Dicono i Lettori</h2>
+    <h2 id="testimonials-heading" class="section-subtitle">{{ i18n "what_people_say" }}</h2>
     
     <div class="grid grid-3">
       {{ range .Site.Data.testimonials }}
