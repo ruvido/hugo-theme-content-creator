@@ -2,6 +2,56 @@
 
 Un tema Hugo moderno, responsive e ad alte prestazioni progettato specificamente per content creator che pubblicano articoli, newsletter, podcast e video.
 
+## 🚀 Installazione Rapida (Hugo Modules - Raccomandato)
+
+**Metodo più semplice e aggiornabile:**
+
+```bash
+# Crea un nuovo sito
+hugo new site mio-sito
+cd mio-sito
+
+# Inizializza come modulo Hugo
+hugo mod init github.com/user/mio-sito
+
+# Crea hugo.toml con configurazione moduli
+cat > hugo.toml << 'EOF'
+baseURL = "http://localhost:1313"
+languageCode = "it"
+defaultContentLanguage = "it"
+title = "Il Mio Sito"
+
+[module]
+  [[module.imports]]
+    path = "github.com/ruvido/hugo-theme-content-creator"
+
+[params]
+  description = "Il tuo sito di contenuti creativi"
+  cta_type = "newsletter"
+  enable_search = true
+  enable_dark_mode = true
+
+[outputs]
+  home = ["HTML", "JSON"]
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+  keyword = "keywords"
+  author = "authors"
+EOF
+
+# Scarica il tema e avvia
+hugo mod get github.com/ruvido/hugo-theme-content-creator@v0.1.0
+hugo server
+```
+
+**Per aggiornamenti futuri:**
+```bash
+hugo mod get -u  # Aggiorna all'ultima versione
+hugo mod get github.com/ruvido/hugo-theme-content-creator@v0.2.0  # Versione specifica
+```
+
 ## ✨ Caratteristiche
 
 - **🚀 Performance-First**: Ottimizzato per Lighthouse 100/100/100/100
@@ -15,57 +65,6 @@ Un tema Hugo moderno, responsive e ad alte prestazioni progettato specificamente
 - **🎯 CTA Customizzabili**: 3 varianti di landing page (newsletter, community, creator)
 - **🇮🇹 Italian-First**: Lingua italiana come priorità con supporto multilingua
 - **⚡ Zero Build Dependencies**: CSS e JS vanilla, nessun preprocessing necessario
-
-## 🧪 Testing del Tema
-
-Per testare il tema localmente prima dell'installazione:
-
-### Metodo Rapido (Raccomandato)
-```bash
-# Clona il tema
-git clone https://github.com/user/hugo-theme-content-creator.git
-cd hugo-theme-content-creator
-
-# Crea un sito test
-cd .. && mkdir test-site && cd test-site
-hugo new site . --force
-
-# Copia configurazione di esempio
-cp ../hugo-theme-content-creator/exampleSite/hugo.toml ./
-
-# Crea link al tema
-mkdir themes
-cd themes && ln -s ../../hugo-theme-content-creator content-creator && cd ..
-
-# Copia contenuti di esempio
-cp -r ../hugo-theme-content-creator/exampleSite/content/* content/
-cp -r ../hugo-theme-content-creator/exampleSite/data/* data/
-
-# Avvia il server
-hugo server --buildDrafts
-```
-
-Il tema sarà disponibile su **http://localhost:1313**
-
-### Test Landing Page Variants
-Cambia `cta_type` in `hugo.toml` per testare le 3 varianti:
-- `cta_type = "newsletter"` - Focus su iscrizioni newsletter
-- `cta_type = "community"` - Focus su community building  
-- `cta_type = "creator"` - Focus su crescita come creator
-
-## 🏗️ Installazione
-
-### Metodo 1: Git Submodule
-```bash
-git submodule add https://github.com/user/hugo-theme-content-creator.git themes/content-creator
-```
-
-### Metodo 2: Download Diretto
-1. Scarica il tema dal repository
-2. Estrai nella cartella `themes/content-creator`
-
-### Configurazione
-Copia il contenuto di `exampleSite/hugo.toml` nel tuo `hugo.toml`:
 
 ```toml
 theme = "content-creator"
@@ -250,6 +249,113 @@ Il tema supporta:
 - Google Analytics (configura in `hugo.toml`)
 - Custom tracking events per CTA
 - Performance monitoring pronto
+
+## 🚀 Content Creator Shortcodes
+
+Il tema include una potente collezione di shortcodes per content creator, ispirati a Ghost CMS:
+
+### 📧 Newsletter Signup
+```html
+{{< newsletter 
+   title="Iscriviti alla Newsletter" 
+   description="Contenuti esclusivi ogni settimana"
+   button="Iscriviti Gratis" >}}
+```
+
+### 📚 Book Download (Lead Magnet)
+```html
+{{< book-download 
+   title="📚 Il Mio Libro Gratuito"
+   cover="/images/book-cover.jpg"
+   description="Scarica la guida completa in PDF"
+   file="/downloads/libro.pdf"
+   pages="150 pagine"
+   email_required="true" >}}
+```
+
+### 💬 Callout Boxes
+```html
+{{< callout type="info" >}}
+💡 **Pro Tip**: Contenuto importante qui
+{{< /callout >}}
+
+{{< callout type="warning" title="Attenzione!" >}}
+Questo è un avviso importante
+{{< /callout >}}
+```
+Tipi disponibili: `info`, `warning`, `success`, `error`, `tip`, `note`
+
+### ⭐ Testimonials
+```html
+{{< testimonial 
+   quote="I suoi contenuti hanno cambiato il mio business!"
+   author="Maria Rossi"
+   role="Content Creator"
+   avatar="/images/maria.jpg"
+   rating="5" >}}
+```
+
+### 📖 Book Showcase (Vendita)
+```html
+{{< book-showcase 
+   title="Il Mio Bestseller"
+   cover="/images/book.jpg"
+   price="€19.99"
+   description="Una guida completa per content creators"
+   amazon="https://amazon.it/..."
+   gumroad="https://gumroad.com/..."
+   rating="4.8"
+   reviews="127" >}}
+```
+
+### 🎥 Video Embed
+```html
+{{< video 
+   youtube="dQw4w9WgXcQ"
+   title="Tutorial Completo"
+   description="Impara in 20 minuti"
+   privacy="true" >}}
+```
+
+### 🎙️ Podcast Player
+```html
+{{< podcast 
+   title="Episodio #15: Mindset Vincente"
+   file="/audio/ep15.mp3"
+   duration="32:45"
+   episode="15"
+   cover="/images/podcast-cover.jpg" >}}
+```
+
+### 🔗 Social Sharing
+```html
+{{< social-share 
+   platforms="twitter,facebook,linkedin,whatsapp"
+   text="Condividi questo contenuto" >}}
+```
+
+### 👤 Author Bio
+```html
+{{< author-bio 
+   name="Il Tuo Nome"
+   bio="Content Creator e Digital Strategist"
+   avatar="/images/avatar.jpg"
+   website="https://tuosito.com"
+   twitter="@username"
+   instagram="@username" >}}
+```
+
+### 📝 Shortcode con Contenuto
+Molti shortcodes supportano contenuto interno:
+
+```html
+{{< book-download title="La Mia Guida" file="/guide.pdf" >}}
+**Cosa imparerai:**
+- Strategia di contenuto
+- Crescita organica
+- Monetizzazione
+{{< /book-download >}}
+```
 
 ## 🤝 Contribuire
 

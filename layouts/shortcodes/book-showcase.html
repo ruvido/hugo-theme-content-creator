@@ -1,0 +1,88 @@
+{{/* Book Showcase/Sales Shortcode */}}
+{{ $title := .Get "title" }}
+{{ $cover := .Get "cover" }}
+{{ $price := .Get "price" }}
+{{ $description := .Get "description" }}
+{{ $amazon := .Get "amazon" }}
+{{ $gumroad := .Get "gumroad" }}
+{{ $kobo := .Get "kobo" }}
+{{ $apple := .Get "apple" }}
+{{ $rating := .Get "rating" }}
+{{ $reviews := .Get "reviews" }}
+{{ $pages := .Get "pages" }}
+{{ $isbn := .Get "isbn" }}
+
+<div class="book-showcase">
+  <div class="book-showcase-content">
+    {{ if $cover }}
+    <div class="book-showcase-cover">
+      <img src="{{ $cover }}" alt="{{ $title }}" class="book-showcase-image">
+      {{ if $price }}
+      <div class="book-price-badge">{{ $price }}</div>
+      {{ end }}
+    </div>
+    {{ end }}
+    
+    <div class="book-showcase-info">
+      {{ if $title }}
+      <h3 class="book-showcase-title">{{ $title }}</h3>
+      {{ end }}
+      
+      {{ if $description }}
+      <p class="book-showcase-description">{{ $description }}</p>
+      {{ end }}
+      
+      {{ if or $rating $reviews $pages }}
+      <div class="book-showcase-meta">
+        {{ if $rating }}
+        <div class="book-rating">
+          {{ range seq (int $rating) }}⭐{{ end }}
+          <span class="rating-number">{{ $rating }}/5</span>
+        </div>
+        {{ end }}
+        {{ if $reviews }}
+        <span class="book-reviews">📝 {{ $reviews }} recensioni</span>
+        {{ end }}
+        {{ if $pages }}
+        <span class="book-pages">📄 {{ $pages }} pagine</span>
+        {{ end }}
+      </div>
+      {{ end }}
+      
+      <div class="book-purchase-links">
+        {{ if $amazon }}
+        <a href="{{ $amazon }}" target="_blank" rel="noopener" class="book-link book-link-amazon">
+          📚 Amazon
+        </a>
+        {{ end }}
+        {{ if $gumroad }}
+        <a href="{{ $gumroad }}" target="_blank" rel="noopener" class="book-link book-link-gumroad">
+          💳 Gumroad
+        </a>
+        {{ end }}
+        {{ if $kobo }}
+        <a href="{{ $kobo }}" target="_blank" rel="noopener" class="book-link book-link-kobo">
+          📱 Kobo
+        </a>
+        {{ end }}
+        {{ if $apple }}
+        <a href="{{ $apple }}" target="_blank" rel="noopener" class="book-link book-link-apple">
+          🍎 Apple Books
+        </a>
+        {{ end }}
+      </div>
+      
+      {{ if $isbn }}
+      <div class="book-isbn">
+        <small>ISBN: {{ $isbn }}</small>
+      </div>
+      {{ end }}
+      
+      {{ if .Inner }}
+      <div class="book-showcase-extra">
+        {{ .Inner | markdownify }}
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</div>

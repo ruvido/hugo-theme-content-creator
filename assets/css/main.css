@@ -12,8 +12,8 @@
 body {
   font-family: 'Inter Fallback', system-ui, -apple-system, sans-serif;
   line-height: 1.6;
-  color: #1e293b;
-  background-color: #fff;
+  color: var(--color-text);
+  background-color: var(--color-bg);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -86,7 +86,7 @@ img[data-src].loaded {
 
 /* Performance optimization for paint layers */
 .header {
-  /* transform: translateZ(0); - COMMENTATO: crea containing block che intrappola il dropdown mobile */
+  transform: translateZ(0); /* Riapplicato: ottimizza performance senza interferire con menu absolute */
   backface-visibility: hidden;
 }
 
@@ -121,12 +121,27 @@ h6 {
   --color-text: #1e293b;
   --color-text-muted: #64748b;
   --color-brand: #2563eb;
+  --color-brand-rgb: 37, 99, 235;
   --color-accent: #7c3aed;
   --color-border: #e2e8f0;
   --color-surface: #ffffff;
   --color-card-hover: #ffffff;
   --color-input-bg: #ffffff;
   --color-overlay: rgba(0, 0, 0, 0.5);
+  
+  /* Semantic colors */
+  --color-success: #22c55e;
+  --color-info: #3b82f6;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-success-bg: rgba(34, 197, 94, 0.15);
+  --color-info-bg: rgba(59, 130, 246, 0.15);
+  --color-warning-bg: rgba(245, 158, 11, 0.15);
+  --color-error-bg: rgba(239, 68, 68, 0.15);
+  --color-success-text: #15803d;
+  --color-info-text: #1d4ed8;
+  --color-warning-text: #a16207;
+  --color-error-text: #b91c1c;
   
   /* Typography */
   --font-family: 'Inter', system-ui, -apple-system, sans-serif;
@@ -170,12 +185,27 @@ h6 {
   --color-text: #f1f5f9;
   --color-text-muted: #94a3b8;
   --color-brand: #3b82f6;
+  --color-brand-rgb: 59, 130, 246;
   --color-accent: #8b5cf6;
   --color-border: #334155;
   --color-surface: #1e293b;
   --color-card-hover: #334155;
   --color-input-bg: #1e293b;
   --color-overlay: rgba(0, 0, 0, 0.7);
+  
+  /* Semantic colors - dark theme */
+  --color-success: #16a34a;
+  --color-info: #2563eb;
+  --color-warning: #d97706;
+  --color-error: #dc2626;
+  --color-success-bg: rgba(22, 163, 74, 0.2);
+  --color-info-bg: rgba(37, 99, 235, 0.2);
+  --color-warning-bg: rgba(217, 119, 6, 0.2);
+  --color-error-bg: rgba(220, 38, 38, 0.2);
+  --color-success-text: #22c55e;
+  --color-info-text: #60a5fa;
+  --color-warning-text: #fbbf24;
+  --color-error-text: #f87171;
   
   /* Dark Theme Shadows */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
@@ -383,9 +413,9 @@ p {
   position: sticky;
   top: 0;
   z-index: 100;
-  /* backdrop-filter: blur(10px); - COMMENTATO: crea containing block che intrappola il dropdown mobile */
-  background-color: rgba(255, 255, 255, 0.95); /* Fallback semi-trasparente per mantenere visibilità */
+  position: relative;
 }
+
 
 .header-content {
   display: flex;
@@ -514,7 +544,7 @@ p {
 .search-input:focus {
   outline: none;
   border-color: var(--color-brand);
-  box-shadow: 0 0 0 3px rgb(37 99 235 / 0.1);
+  box-shadow: 0 0 0 3px rgba(var(--color-brand-rgb), 0.1);
 }
 
 /* Theme Toggle Button */
@@ -852,26 +882,26 @@ p {
 }
 
 .badge-article {
-  background-color: rgb(34 197 94 / 0.15);
-  color: rgb(15 118 110);
+  background-color: var(--color-success-bg);
+  color: var(--color-success-text);
   font-weight: var(--font-weight-bold);
 }
 
 .badge-newsletter {
-  background-color: rgb(59 130 246 / 0.15);
-  color: rgb(29 78 216);
+  background-color: var(--color-info-bg);
+  color: var(--color-info-text);
   font-weight: var(--font-weight-bold);
 }
 
 .badge-podcast {
-  background-color: rgb(168 85 247 / 0.15);
-  color: rgb(124 58 237);
+  background-color: var(--color-warning-bg);
+  color: var(--color-warning-text);
   font-weight: var(--font-weight-bold);
 }
 
 .badge-video {
-  background-color: rgb(239 68 68 / 0.15);
-  color: rgb(185 28 28);
+  background-color: var(--color-error-bg);
+  color: var(--color-error-text);
   font-weight: var(--font-weight-bold);
 }
 
@@ -1184,7 +1214,7 @@ p {
 }
 
 .community-secondary-btn {
-  background: rgba(255,255,255,0.1);
+  background: var(--color-overlay);
   color: white;
   border: 2px solid white;
 }

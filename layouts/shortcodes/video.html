@@ -1,0 +1,52 @@
+{{/* Video Embed Shortcode */}}
+{{ $youtube := .Get "youtube" }}
+{{ $vimeo := .Get "vimeo" }}
+{{ $title := .Get "title" }}
+{{ $description := .Get "description" }}
+{{ $thumbnail := .Get "thumbnail" }}
+{{ $autoplay := .Get "autoplay" | default "false" }}
+{{ $controls := .Get "controls" | default "true" }}
+{{ $privacy := .Get "privacy" | default "true" }}
+
+<div class="video-embed">
+  {{ if $title }}
+  <div class="video-header">
+    <h4 class="video-title">{{ $title }}</h4>
+    {{ if $description }}
+    <p class="video-description">{{ $description }}</p>
+    {{ end }}
+  </div>
+  {{ end }}
+  
+  <div class="video-container">
+    {{ if $youtube }}
+      {{ $domain := cond (eq $privacy "true") "youtube-nocookie.com" "youtube.com" }}
+      {{ $autoplayParam := cond (eq $autoplay "true") "autoplay=1&" "" }}
+      {{ $controlsParam := cond (eq $controls "true") "controls=1" "controls=0" }}
+      <iframe 
+        src="https://www.{{ $domain }}/embed/{{ $youtube }}?{{ $autoplayParam }}{{ $controlsParam }}&modestbranding=1&rel=0"
+        title="{{ $title | default "Video YouTube" }}"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        class="video-iframe">
+      </iframe>
+    {{ else if $vimeo }}
+      {{ $autoplayParam := cond (eq $autoplay "true") "autoplay=1&" "" }}
+      <iframe 
+        src="https://player.vimeo.com/video/{{ $vimeo }}?{{ $autoplayParam }}title=0&byline=0&portrait=0"
+        title="{{ $title | default "Video Vimeo" }}"
+        frameborder="0"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowfullscreen
+        class="video-iframe">
+      </iframe>
+    {{ end }}
+  </div>
+  
+  {{ if .Inner }}
+  <div class="video-content">
+    {{ .Inner | markdownify }}
+  </div>
+  {{ end }}
+</div>

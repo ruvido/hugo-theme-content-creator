@@ -64,6 +64,9 @@ other = "Durata"
 [tags]
 other = "Tag"
 
+[keywords]
+other = "Parole chiave"
+
 [page_of]
 other = "Pagina {{ .Current }} di {{ .Total }}"
 

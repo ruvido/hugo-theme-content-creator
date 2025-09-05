@@ -1,0 +1,35 @@
+{{/* Newsletter Signup Shortcode */}}
+{{ $title := .Get "title" | default "Iscriviti alla Newsletter" }}
+{{ $description := .Get "description" | default "Ricevi contenuti esclusivi direttamente nella tua inbox" }}
+{{ $button := .Get "button" | default "Iscriviti Gratis" }}
+{{ $placeholder := .Get "placeholder" | default "La tua email..." }}
+{{ $action := .Get "action" | default "#" }}
+{{ $method := .Get "method" | default "POST" }}
+
+<div class="newsletter-signup">
+  <div class="newsletter-content">
+    <div class="newsletter-header">
+      <h3 class="newsletter-title">{{ $title }}</h3>
+      <p class="newsletter-description">{{ $description }}</p>
+    </div>
+    
+    <form class="newsletter-form" action="{{ $action }}" method="{{ $method }}">
+      <div class="newsletter-input-group">
+        <input 
+          type="email" 
+          name="email" 
+          placeholder="{{ $placeholder }}" 
+          class="newsletter-input"
+          required
+          aria-label="Email per newsletter">
+        <button type="submit" class="newsletter-button">
+          {{ $button }}
+        </button>
+      </div>
+      
+      <p class="newsletter-privacy">
+        <small>📧 Niente spam, solo contenuti di valore. Cancellati quando vuoi.</small>
+      </p>
+    </form>
+  </div>
+</div>

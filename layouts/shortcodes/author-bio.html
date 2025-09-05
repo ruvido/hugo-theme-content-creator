@@ -1,0 +1,72 @@
+{{/* Author Bio Shortcode */}}
+{{ $name := .Get "name" | default .Site.Params.author.name }}
+{{ $bio := .Get "bio" | default .Site.Params.author.bio }}
+{{ $avatar := .Get "avatar" | default .Site.Params.author.avatar }}
+{{ $website := .Get "website" | default .Site.Params.author.website }}
+{{ $twitter := .Get "twitter" }}
+{{ $instagram := .Get "instagram" }}
+{{ $linkedin := .Get "linkedin" }}
+{{ $youtube := .Get "youtube" }}
+{{ $email := .Get "email" }}
+{{ $compact := .Get "compact" | default "false" }}
+
+<div class="author-bio{{ if eq $compact "true" }} author-bio-compact{{ end }}">
+  <div class="author-bio-content">
+    {{ if $avatar }}
+    <div class="author-avatar">
+      <img src="{{ $avatar }}" alt="{{ $name }}" class="author-avatar-img">
+    </div>
+    {{ end }}
+    
+    <div class="author-info">
+      {{ if $name }}
+      <h4 class="author-name">{{ $name }}</h4>
+      {{ end }}
+      
+      {{ if $bio }}
+      <p class="author-description">{{ $bio }}</p>
+      {{ end }}
+      
+      {{ if .Inner }}
+      <div class="author-extra">
+        {{ .Inner | markdownify }}
+      </div>
+      {{ end }}
+      
+      {{ if or $website $twitter $instagram $linkedin $youtube $email }}
+      <div class="author-social">
+        {{ if $website }}
+        <a href="{{ $website }}" target="_blank" rel="noopener" class="author-social-link" aria-label="Sito web">
+          🌐 Sito
+        </a>
+        {{ end }}
+        {{ if $twitter }}
+        <a href="https://twitter.com/{{ strings.TrimPrefix "@" $twitter }}" target="_blank" rel="noopener" class="author-social-link" aria-label="Twitter">
+          🐦 Twitter
+        </a>
+        {{ end }}
+        {{ if $instagram }}
+        <a href="https://instagram.com/{{ strings.TrimPrefix "@" $instagram }}" target="_blank" rel="noopener" class="author-social-link" aria-label="Instagram">
+          📷 Instagram
+        </a>
+        {{ end }}
+        {{ if $linkedin }}
+        <a href="{{ $linkedin }}" target="_blank" rel="noopener" class="author-social-link" aria-label="LinkedIn">
+          💼 LinkedIn
+        </a>
+        {{ end }}
+        {{ if $youtube }}
+        <a href="{{ $youtube }}" target="_blank" rel="noopener" class="author-social-link" aria-label="YouTube">
+          📺 YouTube
+        </a>
+        {{ end }}
+        {{ if $email }}
+        <a href="mailto:{{ $email }}" class="author-social-link" aria-label="Email">
+          📧 Contatti
+        </a>
+        {{ end }}
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</div>

@@ -72,4 +72,5 @@ defaultContentLanguage = "it"
 [taxonomies]
   category = "categories"
   tag = "tags"
+  keyword = "keywords"
   author = "authors"

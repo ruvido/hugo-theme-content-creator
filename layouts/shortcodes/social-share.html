@@ -1,0 +1,93 @@
+{{/* Social Sharing Shortcode */}}
+{{ $platforms := .Get "platforms" | default "twitter,facebook,linkedin" }}
+{{ $text := .Get "text" | default "Condividi questo contenuto" }}
+{{ $url := .Get "url" | default .Page.Permalink }}
+{{ $title := .Get "title" | default .Page.Title }}
+{{ $hashtags := .Get "hashtags" }}
+{{ $via := .Get "via" }}
+
+{{ $platformList := split $platforms "," }}
+
+<div class="social-share">
+  {{ if $text }}
+  <span class="social-share-text">{{ $text }}</span>
+  {{ end }}
+  
+  <div class="social-share-buttons">
+    {{ range $platformList }}
+      {{ $platform := . | strings.TrimSpace }}
+      
+      {{ if eq $platform "twitter" }}
+      {{ $twitterText := printf "%s %s" $title (cond $hashtags (printf " %s" $hashtags) "") }}
+      {{ $twitterUrl := printf "https://twitter.com/intent/tweet?text=%s&url=%s%s" 
+           (urlquery $twitterText) 
+           (urlquery $url)
+           (cond $via (printf "&via=%s" $via) "") }}
+      <a href="{{ $twitterUrl }}" 
+         target="_blank" 
+         rel="noopener"
+         class="social-share-btn social-share-twitter"
+         aria-label="Condividi su Twitter">
+        <span class="social-icon">🐦</span>
+        <span class="social-text">Twitter</span>
+      </a>
+      
+      {{ else if eq $platform "facebook" }}
+      {{ $facebookUrl := printf "https://www.facebook.com/sharer/sharer.php?u=%s" (urlquery $url) }}
+      <a href="{{ $facebookUrl }}" 
+         target="_blank" 
+         rel="noopener"
+         class="social-share-btn social-share-facebook"
+         aria-label="Condividi su Facebook">
+        <span class="social-icon">📘</span>
+        <span class="social-text">Facebook</span>
+      </a>
+      
+      {{ else if eq $platform "linkedin" }}
+      {{ $linkedinUrl := printf "https://www.linkedin.com/sharing/share-offsite/?url=%s" (urlquery $url) }}
+      <a href="{{ $linkedinUrl }}" 
+         target="_blank" 
+         rel="noopener"
+         class="social-share-btn social-share-linkedin"
+         aria-label="Condividi su LinkedIn">
+        <span class="social-icon">💼</span>
+        <span class="social-text">LinkedIn</span>
+      </a>
+      
+      {{ else if eq $platform "whatsapp" }}
+      {{ $whatsappText := printf "%s - %s" $title $url }}
+      {{ $whatsappUrl := printf "https://wa.me/?text=%s" (urlquery $whatsappText) }}
+      <a href="{{ $whatsappUrl }}" 
+         target="_blank" 
+         rel="noopener"
+         class="social-share-btn social-share-whatsapp"
+         aria-label="Condividi su WhatsApp">
+        <span class="social-icon">💬</span>
+        <span class="social-text">WhatsApp</span>
+      </a>
+      
+      {{ else if eq $platform "telegram" }}
+      {{ $telegramUrl := printf "https://t.me/share/url?url=%s&text=%s" (urlquery $url) (urlquery $title) }}
+      <a href="{{ $telegramUrl }}" 
+         target="_blank" 
+         rel="noopener"
+         class="social-share-btn social-share-telegram"
+         aria-label="Condividi su Telegram">
+        <span class="social-icon">✈️</span>
+        <span class="social-text">Telegram</span>
+      </a>
+      
+      {{ else if eq $platform "email" }}
+      {{ $emailSubject := printf "Ti consiglio: %s" $title }}
+      {{ $emailBody := printf "Ho trovato questo contenuto interessante:\n\n%s\n\n%s" $title $url }}
+      {{ $emailUrl := printf "mailto:?subject=%s&body=%s" (urlquery $emailSubject) (urlquery $emailBody) }}
+      <a href="{{ $emailUrl }}" 
+         class="social-share-btn social-share-email"
+         aria-label="Condividi via email">
+        <span class="social-icon">📧</span>
+        <span class="social-text">Email</span>
+      </a>
+      {{ end }}
+    {{ end }}
+  </div>
+</div>

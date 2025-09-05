@@ -1,0 +1,62 @@
+{{/* Podcast Player Shortcode */}}
+{{ $title := .Get "title" }}
+{{ $file := .Get "file" }}
+{{ $duration := .Get "duration" }}
+{{ $episode := .Get "episode" }}
+{{ $description := .Get "description" }}
+{{ $cover := .Get "cover" }}
+{{ $transcript := .Get "transcript" }}
+
+<div class="podcast-player">
+  <div class="podcast-header">
+    {{ if $cover }}
+    <div class="podcast-cover">
+      <img src="{{ $cover }}" alt="{{ $title }}" class="podcast-cover-img">
+    </div>
+    {{ end }}
+    
+    <div class="podcast-info">
+      {{ if $title }}
+      <h4 class="podcast-title">{{ $title }}</h4>
+      {{ end }}
+      
+      <div class="podcast-meta">
+        {{ if $episode }}
+        <span class="podcast-episode">🎙️ Episodio #{{ $episode }}</span>
+        {{ end }}
+        {{ if $duration }}
+        <span class="podcast-duration">⏱️ {{ $duration }}</span>
+        {{ end }}
+      </div>
+      
+      {{ if $description }}
+      <p class="podcast-description">{{ $description }}</p>
+      {{ end }}
+    </div>
+  </div>
+  
+  {{ if $file }}
+  <div class="podcast-controls">
+    <audio controls preload="metadata" class="podcast-audio">
+      <source src="{{ $file }}" type="audio/mpeg">
+      <source src="{{ $file }}" type="audio/ogg">
+      Il tuo browser non supporta l'audio HTML5.
+    </audio>
+  </div>
+  {{ end }}
+  
+  {{ if .Inner }}
+  <div class="podcast-content">
+    {{ .Inner | markdownify }}
+  </div>
+  {{ end }}
+  
+  {{ if $transcript }}
+  <details class="podcast-transcript">
+    <summary>📝 Mostra Trascrizione</summary>
+    <div class="transcript-content">
+      <a href="{{ $transcript }}" target="_blank" rel="noopener">Scarica trascrizione completa</a>
+    </div>
+  </details>
+  {{ end }}
+</div>
