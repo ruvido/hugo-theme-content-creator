@@ -1,0 +1,108 @@
+// ===== MOBILE MENU COMPONENT =====
+
+const MobileMenu = {
+  init() {
+    this.toggle = document.querySelector('.mobile-menu-toggle');
+    this.dropdown = document.querySelector('.mobile-menu-dropdown');
+    this.links = document.querySelectorAll('.mobile-menu-dropdown .nav-link');
+    
+    if (!this.toggle || !this.dropdown) {
+      return;
+    }
+    
+    this.isOpen = false;
+    this.bindEvents();
+    this.setupAccessibility();
+  },
+  
+  bindEvents() {
+    // Toggle menu on button click
+    this.toggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      this.toggleMenu();
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (this.isOpen && !this.toggle.contains(e.target) && !this.dropdown.contains(e.target)) {
+        this.closeMenu();
+      }
+    });
+    
+    // Close menu on ESC key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && this.isOpen) {
+        this.closeMenu();
+      }
+    });
+    
+    // Close menu when window is resized to desktop
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768 && this.isOpen) {
+        this.closeMenu();
+      }
+    });
+    
+    // Close menu when clicking on a link
+    this.links.forEach(link => {
+      link.addEventListener('click', () => {
+        setTimeout(() => this.closeMenu(), 100);
+      });
+    });
+  },
+  
+  setupAccessibility() {
+    this.toggle.setAttribute('aria-expanded', 'false');
+    this.toggle.setAttribute('aria-controls', 'mobile-menu');
+    this.dropdown.setAttribute('id', 'mobile-menu');
+    this.dropdown.setAttribute('role', 'menu');
+    this.dropdown.setAttribute('aria-hidden', 'true');
+  },
+  
+  toggleMenu() {
+    if (this.isOpen) {
+      this.closeMenu();
+    } else {
+      this.openMenu();
+    }
+  },
+  
+  openMenu() {
+    this.isOpen = true;
+    
+    this.toggle.classList.add('menu-open');
+    this.toggle.setAttribute('aria-expanded', 'true');
+    
+    this.dropdown.classList.add('show');
+    this.dropdown.setAttribute('aria-hidden', 'false');
+    
+    // Focus first link after animation
+    setTimeout(() => {
+      const firstLink = this.dropdown.querySelector('.nav-link');
+      if (firstLink) {
+        firstLink.focus();
+      }
+    }, 150);
+  },
+  
+  closeMenu() {
+    this.isOpen = false;
+    
+    this.toggle.classList.remove('menu-open');
+    this.toggle.setAttribute('aria-expanded', 'false');
+    
+    this.dropdown.classList.remove('show');
+    this.dropdown.setAttribute('aria-hidden', 'true');
+    
+    this.toggle.focus();
+  }
+};
+
+// Initialize when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+  MobileMenu.init();
+});
+
+// Export for external use
+window.MobileMenu = MobileMenu;
