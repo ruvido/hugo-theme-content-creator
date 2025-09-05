@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Successo on 5pani2pesci</title>
-    <link>http://localhost:1313/tags/successo/</link>
+    <link>http://localhost:1315/tags/successo/</link>
     <description>Recent content in Successo on 5pani2pesci</description>
     <generator>Hugo</generator>
     <language>it</language>
     <managingEditor>creator@example.com (Content Creator)</managingEditor>
     <webMaster>creator@example.com (Content Creator)</webMaster>
     <lastBuildDate>Thu, 25 Jan 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/successo/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1315/tags/successo/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Episodio #1: Il Mindset del Creator di Successo</title>
-      <link>http://localhost:1313/podcasts/episodio-001-mindset-del-creator/</link>
+      <link>http://localhost:1315/podcasts/episodio-001-mindset-del-creator/</link>
       <pubDate>Thu, 25 Jan 2024 00:00:00 +0000</pubDate><author>creator@example.com (Content Creator)</author>
-      <guid>http://localhost:1313/podcasts/episodio-001-mindset-del-creator/</guid>
+      <guid>http://localhost:1315/podcasts/episodio-001-mindset-del-creator/</guid>
       <description>&lt;p&gt;Benvenuto nel primo episodio di &lt;strong&gt;Creator Talks&lt;/strong&gt;, il podcast che esplora le strategie, le storie e i segreti dei content creator italiani di successo.&lt;/p&gt;&#xA;&lt;h2 id=&#34;-cosa-troverai-in-questo-episodio&#34;&gt;🎧 Cosa Troverai in Questo Episodio&lt;/h2&gt;&#xA;&lt;p&gt;In questo episodio inaugurale parliamo del &lt;strong&gt;mindset del creator di successo&lt;/strong&gt;. Dopo aver analizzato centinaia di creator che ce l&amp;rsquo;hanno fatta, ho identificato 5 caratteristiche mentali che li accomunano tutti.&lt;/p&gt;&#xA;&lt;h3 id=&#34;i-5-pilastri-del-mindset-vincente&#34;&gt;I 5 Pilastri del Mindset Vincente&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;1. Growth Mindset vs Fixed Mindset&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
   </channel>

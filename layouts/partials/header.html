@@ -1,9 +1,9 @@
 <header class="header">
   <div class="container">
     <div class="header-content">
-      <!-- Logo Left -->
-      <a href="{{ .Site.BaseURL }}" class="logo" aria-label="Torna alla homepage di {{ .Site.Title }}">
-        {{ .Site.Title }}
+      <!-- Logo Left - Optimized for LCP -->
+      <a href="{{ .Site.BaseURL }}" class="logo" aria-label="Torna alla homepage di {{ .Site.Title }}" rel="home">
+        <span itemprop="name">{{ .Site.Title }}</span>
       </a>
       
       <!-- Desktop Navigation -->
@@ -12,11 +12,11 @@
         {{ $menuData := index .Site.Data $currentLang "menu" }}
         {{ if $menuData }}
           {{ range $menuData.main }}
-            <a href="{{ .url }}" class="nav-link">{{ .name }}</a>
+            <a href="{{ .url }}" class="nav-link" {{ if eq .url $.RelPermalink }}aria-current="page"{{ end }}>{{ .name }}</a>
           {{ end }}
         {{ else }}
           {{ range .Site.Menus.main }}
-            <a href="{{ .URL }}" class="nav-link">{{ i18n (printf "menu_%s" .Identifier) }}</a>
+            <a href="{{ .URL }}" class="nav-link" {{ if eq .URL $.RelPermalink }}aria-current="page"{{ end }}>{{ i18n (printf "menu_%s" .Identifier) }}</a>
           {{ end }}
         {{ end }}
       </nav>
@@ -25,36 +25,13 @@
       <div class="header-controls">
         {{ if .Site.Params.enable_search }}
         <div class="search-container">
-          <a href="/search/" class="search-toggle" aria-label="Cerca">
-            <i class="search-icon"></i>
+          <a href="/search/" class="search-toggle" aria-label="Cerca contenuti" rel="search">
+            <span class="search-icon" aria-hidden="true"></span>
           </a>
         </div>
         {{ end }}
-        
-        
-        <!-- Mobile Menu Toggle -->
-        <button class="mobile-menu-toggle" aria-label="Apri menu di navigazione" aria-expanded="false" aria-controls="mobile-navigation">
-          <span class="hamburger-line"></span>
-          <span class="hamburger-line"></span>
-          <span class="hamburger-line"></span>
-        </button>
       </div>
     </div>
-    
-    <!-- Mobile Navigation -->
-    <nav id="mobile-navigation" class="nav nav-mobile" aria-label="Navigazione mobile" aria-hidden="true">
-      {{ $currentLang := .Site.Language.Lang }}
-      {{ $menuData := index .Site.Data $currentLang "menu" }}
-      {{ if $menuData }}
-        {{ range $menuData.main }}
-          <a href="{{ .url }}" class="nav-link" tabindex="-1">{{ .name }}</a>
-        {{ end }}
-      {{ else }}
-        {{ range .Site.Menus.main }}
-          <a href="{{ .URL }}" class="nav-link" tabindex="-1">{{ i18n (printf "menu_%s" .Identifier) }}</a>
-        {{ end }}
-      {{ end }}
-    </nav>
   </div>
 </header>
 

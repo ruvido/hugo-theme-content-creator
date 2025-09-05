@@ -2,144 +2,144 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/</loc>
+    <loc>http://localhost:1315/</loc>
     <lastmod>2024-02-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/en/"
+                href="http://localhost:1315/en/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="it"
-                href="http://localhost:1313/"
+                href="http://localhost:1315/"
                 />
   </url><url>
-    <loc>http://localhost:1313/categories/attrezzatura/</loc>
+    <loc>http://localhost:1315/categories/attrezzatura/</loc>
     <lastmod>2024-02-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/attrezzatura/</loc>
+    <loc>http://localhost:1315/tags/attrezzatura/</loc>
     <lastmod>2024-02-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>http://localhost:1315/categories/</loc>
     <lastmod>2024-02-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/en/categories/"
+                href="http://localhost:1315/en/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="it"
-                href="http://localhost:1313/categories/"
+                href="http://localhost:1315/categories/"
                 />
   </url><url>
-    <loc>http://localhost:1313/tags/setup/</loc>
+    <loc>http://localhost:1315/tags/setup/</loc>
     <lastmod>2024-02-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/videos/setup-perfetto-content-creator/</loc>
+    <loc>http://localhost:1315/videos/setup-perfetto-content-creator/</loc>
     <lastmod>2024-02-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>http://localhost:1315/tags/</loc>
     <lastmod>2024-02-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/en/tags/"
+                href="http://localhost:1315/en/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="it"
-                href="http://localhost:1313/tags/"
+                href="http://localhost:1315/tags/"
                 />
   </url><url>
-    <loc>http://localhost:1313/tags/tech/</loc>
+    <loc>http://localhost:1315/tags/tech/</loc>
     <lastmod>2024-02-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/video/</loc>
+    <loc>http://localhost:1315/categories/video/</loc>
     <lastmod>2024-02-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/video/</loc>
+    <loc>http://localhost:1315/tags/video/</loc>
     <lastmod>2024-02-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/videos/</loc>
+    <loc>http://localhost:1315/videos/</loc>
     <lastmod>2024-02-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/podcasts/episodio-001-mindset-del-creator/</loc>
+    <loc>http://localhost:1315/podcasts/episodio-001-mindset-del-creator/</loc>
     <lastmod>2024-01-25T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/mentalit%C3%A0/</loc>
+    <loc>http://localhost:1315/tags/mentalit%C3%A0/</loc>
     <lastmod>2024-01-25T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/mindset/</loc>
+    <loc>http://localhost:1315/categories/mindset/</loc>
     <lastmod>2024-01-25T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/mindset/</loc>
+    <loc>http://localhost:1315/tags/mindset/</loc>
     <lastmod>2024-01-25T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/podcast/</loc>
+    <loc>http://localhost:1315/categories/podcast/</loc>
     <lastmod>2024-01-25T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/podcasts/</loc>
+    <loc>http://localhost:1315/podcasts/</loc>
     <lastmod>2024-01-25T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/podcast/</loc>
+    <loc>http://localhost:1315/tags/podcast/</loc>
     <lastmod>2024-01-25T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/successo/</loc>
+    <loc>http://localhost:1315/tags/successo/</loc>
     <lastmod>2024-01-25T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/newsletters/newsletter-001/</loc>
+    <loc>http://localhost:1315/newsletters/newsletter-001/</loc>
     <lastmod>2024-01-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/motivazione/</loc>
+    <loc>http://localhost:1315/categories/motivazione/</loc>
     <lastmod>2024-01-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/newsletter/</loc>
+    <loc>http://localhost:1315/categories/newsletter/</loc>
     <lastmod>2024-01-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/newsletters/</loc>
+    <loc>http://localhost:1315/newsletters/</loc>
     <lastmod>2024-01-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/newsletter/</loc>
+    <loc>http://localhost:1315/tags/newsletter/</loc>
     <lastmod>2024-01-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/primi-passi/</loc>
+    <loc>http://localhost:1315/tags/primi-passi/</loc>
     <lastmod>2024-01-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/articles/</loc>
+    <loc>http://localhost:1315/articles/</loc>
     <lastmod>2024-01-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/articles/come-iniziare-content-creation/</loc>
+    <loc>http://localhost:1315/articles/come-iniziare-content-creation/</loc>
     <lastmod>2024-01-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/content-creation/</loc>
+    <loc>http://localhost:1315/tags/content-creation/</loc>
     <lastmod>2024-01-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/guide/</loc>
+    <loc>http://localhost:1315/categories/guide/</loc>
     <lastmod>2024-01-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/social-media/</loc>
+    <loc>http://localhost:1315/tags/social-media/</loc>
     <lastmod>2024-01-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/strategia/</loc>
+    <loc>http://localhost:1315/categories/strategia/</loc>
     <lastmod>2024-01-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/strategia/</loc>
+    <loc>http://localhost:1315/tags/strategia/</loc>
     <lastmod>2024-01-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/authors/</loc>
+    <loc>http://localhost:1315/authors/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/en/authors/"
+                href="http://localhost:1315/en/authors/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="it"
-                href="http://localhost:1313/authors/"
+                href="http://localhost:1315/authors/"
                 />
   </url><url>
-    <loc>http://localhost:1313/search/</loc>
+    <loc>http://localhost:1315/search/</loc>
   </url>
 </urlset>

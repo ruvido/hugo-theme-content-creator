@@ -1,0 +1,104 @@
+/* ===== THEME TOGGLE MODULE ===== */
+
+/* Theme Toggle Button */
+.theme-toggle {
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  padding: var(--space-sm);
+  cursor: pointer;
+  border-radius: 50%;
+  color: var(--color-text);
+  transition: all var(--transition-theme);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  position: relative;
+  box-shadow: var(--shadow-sm);
+  margin: 0 auto var(--space-lg);
+}
+
+.theme-toggle:hover {
+  background-color: var(--color-brand);
+  color: white;
+  border-color: var(--color-brand);
+  transform: scale(1.1);
+  box-shadow: var(--shadow-md);
+}
+
+.theme-toggle:focus {
+  outline: 3px solid var(--color-brand);
+  outline-offset: 2px;
+}
+
+/* Theme Icon */
+.theme-icon {
+  width: 20px;
+  height: 20px;
+  transition: all var(--transition-theme);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Light theme icon (sun) */
+.theme-icon::before {
+  content: '';
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: currentColor;
+  transition: all var(--transition-theme);
+  position: absolute;
+}
+
+.theme-icon::after {
+  content: '';
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  background: transparent;
+  transition: all var(--transition-theme);
+  position: absolute;
+  box-shadow: 
+    0 -18px 0 -14px currentColor,
+    12px -12px 0 -14px currentColor,
+    18px 0 0 -14px currentColor,
+    12px 12px 0 -14px currentColor,
+    0 18px 0 -14px currentColor,
+    -12px 12px 0 -14px currentColor,
+    -18px 0 0 -14px currentColor,
+    -12px -12px 0 -14px currentColor;
+}
+
+/* Dark theme icon (moon) */
+[data-theme="dark"] .theme-icon::before {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 4px -2px 0 0 var(--color-surface);
+  transform: rotate(-25deg);
+}
+
+[data-theme="dark"] .theme-icon::after {
+  display: none;
+}
+
+/* Footer Theme Toggle */
+.footer-theme-toggle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.theme-toggle-label {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  font-weight: var(--font-weight-medium);
+}

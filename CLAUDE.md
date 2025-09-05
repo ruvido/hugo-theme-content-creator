@@ -14,11 +14,11 @@ Professional Hugo theme for content creators with modern design, dark mode suppo
 ```
 /layouts/
   /_default/baseof.html     # Base template with theme system
-  /partials/header.html     # Header with mobile menu
+  /partials/header.html     # Header with navigation
   /partials/footer.html     # Footer with theme toggle
 /assets/
   /css/main.css            # Main stylesheet with CSS variables
-  /js/main.js              # Theme manager and mobile menu
+  /js/main.js              # Theme manager
 /exampleSite/
   /content/                # Example content structure
   /data/                   # Localized menu data
@@ -57,21 +57,11 @@ Professional Hugo theme for content creators with modern design, dark mode suppo
 - **FOUC Prevention**: Inline script in head
 - **Accessibility**: Full ARIA support, keyboard navigation
 
-## 📱 Mobile Menu System
-### Modern Implementation
-- **Layout**: Vertical dropdown with smooth animations
-- **JavaScript**: ES6 class-based with proper state management
-- **Accessibility**: Focus trap, keyboard support (Escape, Arrow keys)
-- **UX Features**: Click outside to close, auto-close on resize
-
-### CSS Structure
-```css
-.nav-mobile {
-  display: flex !important;
-  flex-direction: column !important;
-  /* Overrides base .nav flex layout */
-}
-```
+## 🎯 Navigation System
+### Desktop Navigation
+- **Layout**: Horizontal navigation bar
+- **Responsive**: Hidden on mobile devices
+- **Accessibility**: Full keyboard and screen reader support
 
 ## 🌐 Internationalization
 ### Menu System
@@ -98,15 +88,15 @@ hugo --minify
 # Test performance
 lighthouse http://localhost:1315/
 
-# Check mobile menu
-curl -s http://localhost:1315/ | grep -A 10 "nav-mobile"
+# Test navigation
+curl -s http://localhost:1315/ | grep -A 10 "nav-desktop"
 ```
 
 ## 🛠️ Common Issues & Fixes
 
-### Mobile Menu Not Vertical
-**Problem**: Base `.nav` class has `display: flex`
-**Solution**: Use `display: flex !important; flex-direction: column !important;` on `.nav-mobile`
+### Navigation Layout Issues
+**Problem**: Menu items not properly aligned
+**Solution**: Use proper flexbox properties and CSS variables for consistent spacing
 
 ### Dark Theme Not Working
 **Problem**: Missing FOUC prevention or CSS variables

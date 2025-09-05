@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Newsletter on 5pani2pesci</title>
-    <link>http://localhost:1313/newsletters/</link>
+    <link>http://localhost:1315/newsletters/</link>
     <description>Recent content in Newsletter on 5pani2pesci</description>
     <generator>Hugo</generator>
     <language>it</language>
     <managingEditor>creator@example.com (Content Creator)</managingEditor>
     <webMaster>creator@example.com (Content Creator)</webMaster>
     <lastBuildDate>Sat, 20 Jan 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/newsletters/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1315/newsletters/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Creator Weekly #1: L&#39;Arte del Primo Contenuto</title>
-      <link>http://localhost:1313/newsletters/newsletter-001/</link>
+      <link>http://localhost:1315/newsletters/newsletter-001/</link>
       <pubDate>Sat, 20 Jan 2024 00:00:00 +0000</pubDate><author>creator@example.com (Content Creator)</author>
-      <guid>http://localhost:1313/newsletters/newsletter-001/</guid>
+      <guid>http://localhost:1315/newsletters/newsletter-001/</guid>
       <description>&lt;p&gt;Ciao creator! 👋&lt;/p&gt;&#xA;&lt;p&gt;Benvenuto alla prima edizione di &lt;strong&gt;Creator Weekly&lt;/strong&gt;, la newsletter che ogni sabato mattina ti porta strategie, ispirazioni e strumenti concreti per far crescere la tua presenza online.&lt;/p&gt;&#xA;&lt;h2 id=&#34;-focus-della-settimana-il-primo-contenuto&#34;&gt;🎯 Focus della Settimana: Il Primo Contenuto&lt;/h2&gt;&#xA;&lt;p&gt;Il 90% delle persone che vogliono diventare content creator non pubblica mai il primo contenuto.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Perché?&lt;/strong&gt; La sindrome del perfezionismo paralizzante.&lt;/p&gt;&#xA;&lt;p&gt;&amp;ldquo;Non ho ancora l&amp;rsquo;attrezzatura giusta&amp;rdquo;&#xA;&amp;ldquo;Non so ancora abbastanza dell&amp;rsquo;argomento&amp;rdquo;&lt;br&gt;&#xA;&amp;ldquo;E se non piace a nessuno?&amp;rdquo;&lt;/p&gt;</description>
     </item>
   </channel>

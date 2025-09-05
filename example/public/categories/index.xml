@@ -2,68 +2,68 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on 5pani2pesci</title>
-    <link>http://localhost:1313/categories/</link>
+    <link>http://localhost:1315/categories/</link>
     <description>Recent content in Categories on 5pani2pesci</description>
     <generator>Hugo</generator>
     <language>it</language>
     <managingEditor>creator@example.com (Content Creator)</managingEditor>
     <webMaster>creator@example.com (Content Creator)</webMaster>
     <lastBuildDate>Thu, 01 Feb 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1315/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Attrezzatura</title>
-      <link>http://localhost:1313/categories/attrezzatura/</link>
+      <link>http://localhost:1315/categories/attrezzatura/</link>
       <pubDate>Thu, 01 Feb 2024 00:00:00 +0000</pubDate><author>creator@example.com (Content Creator)</author>
-      <guid>http://localhost:1313/categories/attrezzatura/</guid>
+      <guid>http://localhost:1315/categories/attrezzatura/</guid>
       <description></description>
     </item>
     <item>
       <title>Video</title>
-      <link>http://localhost:1313/categories/video/</link>
+      <link>http://localhost:1315/categories/video/</link>
       <pubDate>Thu, 01 Feb 2024 00:00:00 +0000</pubDate><author>creator@example.com (Content Creator)</author>
-      <guid>http://localhost:1313/categories/video/</guid>
+      <guid>http://localhost:1315/categories/video/</guid>
       <description></description>
     </item>
     <item>
       <title>Mindset</title>
-      <link>http://localhost:1313/categories/mindset/</link>
+      <link>http://localhost:1315/categories/mindset/</link>
       <pubDate>Thu, 25 Jan 2024 00:00:00 +0000</pubDate><author>creator@example.com (Content Creator)</author>
-      <guid>http://localhost:1313/categories/mindset/</guid>
+      <guid>http://localhost:1315/categories/mindset/</guid>
       <description></description>
     </item>
     <item>
       <title>Podcast</title>
-      <link>http://localhost:1313/categories/podcast/</link>
+      <link>http://localhost:1315/categories/podcast/</link>
       <pubDate>Thu, 25 Jan 2024 00:00:00 +0000</pubDate><author>creator@example.com (Content Creator)</author>
-      <guid>http://localhost:1313/categories/podcast/</guid>
+      <guid>http://localhost:1315/categories/podcast/</guid>
       <description></description>
     </item>
     <item>
       <title>Motivazione</title>
-      <link>http://localhost:1313/categories/motivazione/</link>
+      <link>http://localhost:1315/categories/motivazione/</link>
       <pubDate>Sat, 20 Jan 2024 00:00:00 +0000</pubDate><author>creator@example.com (Content Creator)</author>
-      <guid>http://localhost:1313/categories/motivazione/</guid>
+      <guid>http://localhost:1315/categories/motivazione/</guid>
       <description></description>
     </item>
     <item>
       <title>Newsletter</title>
-      <link>http://localhost:1313/categories/newsletter/</link>
+      <link>http://localhost:1315/categories/newsletter/</link>
       <pubDate>Sat, 20 Jan 2024 00:00:00 +0000</pubDate><author>creator@example.com (Content Creator)</author>
-      <guid>http://localhost:1313/categories/newsletter/</guid>
+      <guid>http://localhost:1315/categories/newsletter/</guid>
       <description></description>
     </item>
     <item>
       <title>Guide</title>
-      <link>http://localhost:1313/categories/guide/</link>
+      <link>http://localhost:1315/categories/guide/</link>
       <pubDate>Mon, 15 Jan 2024 00:00:00 +0000</pubDate><author>creator@example.com (Content Creator)</author>
-      <guid>http://localhost:1313/categories/guide/</guid>
+      <guid>http://localhost:1315/categories/guide/</guid>
       <description></description>
     </item>
     <item>
       <title>Strategia</title>
-      <link>http://localhost:1313/categories/strategia/</link>
+      <link>http://localhost:1315/categories/strategia/</link>
       <pubDate>Mon, 15 Jan 2024 00:00:00 +0000</pubDate><author>creator@example.com (Content Creator)</author>
-      <guid>http://localhost:1313/categories/strategia/</guid>
+      <guid>http://localhost:1315/categories/strategia/</guid>
       <description></description>
     </item>
   </channel>
