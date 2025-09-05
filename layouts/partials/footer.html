@@ -1,6 +1,14 @@
 <footer class="footer">
   <div class="container">
     <div class="footer-content">
+      <!-- Theme Toggle -->
+      <div class="footer-theme-toggle">
+        <button class="theme-toggle" aria-label="Cambia tema" title="Cambia tema">
+          <span class="theme-icon"></span>
+        </button>
+        <span class="theme-toggle-label">Tema</span>
+      </div>
+      
       <div class="footer-main">
         <p>&copy; {{ now.Format "2006" }} {{ .Site.Title }}. {{ i18n "all_rights_reserved" }}</p>
         
@@ -25,57 +33,3 @@
     </div>
   </div>
 </footer>
-
-<style>
-.footer {
-  background-color: #f8fafc;
-  border-top: 1px solid #e2e8f0;
-  padding: 3rem 0 1.5rem;
-}
-
-.footer-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-}
-
-.footer-main {
-  flex: 1;
-}
-
-.footer-main p {
-  margin: 0 0 1rem;
-  color: #64748b;
-}
-
-.social-links {
-  display: flex;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-}
-
-.social-link {
-  color: #64748b;
-  text-decoration: none;
-  font-size: 0.9rem;
-  transition: color 0.15s ease;
-}
-
-.social-link:hover {
-  color: #2563eb;
-}
-
-
-@media (max-width: 768px) {
-  .footer-content {
-    flex-direction: column;
-    text-align: center;
-  }
-  
-  .social-links {
-    justify-content: center;
-  }
-}
-</style>

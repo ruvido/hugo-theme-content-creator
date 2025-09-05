@@ -34,6 +34,7 @@ class ThemeManager {
     try {
       this.initMobileMenu();
       this.initLazyLoading();
+      this.initThemeToggle();
     } catch (error) {
       console.warn('Component initialization failed:', error);
     }
@@ -229,6 +230,108 @@ class ThemeManager {
     };
 
     tempImg.src = img.dataset.src;
+  }
+
+  // Modern theme toggle with localStorage persistence
+  initThemeToggle() {
+    const toggle = this.getElement('.theme-toggle');
+    if (!toggle) return;
+
+    // Get current theme from localStorage or default to light
+    let currentTheme = this.getStoredTheme();
+    
+    // Apply initial theme
+    this.applyTheme(currentTheme);
+    
+    // Theme toggle event handler
+    const handleThemeToggle = (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      
+      // Toggle theme
+      currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      
+      // Apply new theme
+      this.applyTheme(currentTheme);
+      
+      // Store in localStorage
+      this.storeTheme(currentTheme);
+      
+      // Update aria-label for accessibility
+      const label = currentTheme === 'dark' ? 'Passa al tema chiaro' : 'Passa al tema scuro';
+      toggle.setAttribute('aria-label', label);
+      toggle.setAttribute('title', label);
+    };
+
+    // Attach event listener
+    toggle.addEventListener('click', handleThemeToggle);
+
+    // Handle system theme changes
+    if (window.matchMedia) {
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      const handleSystemThemeChange = (e) => {
+        // Only change if user hasn't set a preference
+        if (!localStorage.getItem('theme-preference')) {
+          const systemTheme = e.matches ? 'dark' : 'light';
+          this.applyTheme(systemTheme);
+          currentTheme = systemTheme;
+        }
+      };
+      
+      mediaQuery.addListener(handleSystemThemeChange);
+    }
+
+    // Cleanup on page unload
+    window.addEventListener('beforeunload', () => {
+      toggle.removeEventListener('click', handleThemeToggle);
+    }, { once: true });
+  }
+
+  // Get stored theme preference
+  getStoredTheme() {
+    try {
+      const stored = localStorage.getItem('theme-preference');
+      if (stored && (stored === 'light' || stored === 'dark')) {
+        return stored;
+      }
+    } catch (e) {
+      console.warn('Could not access localStorage:', e);
+    }
+
+    // Default to system preference or light
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return 'dark';
+    }
+    return 'light';
+  }
+
+  // Store theme preference
+  storeTheme(theme) {
+    try {
+      localStorage.setItem('theme-preference', theme);
+    } catch (e) {
+      console.warn('Could not save theme preference:', e);
+    }
+  }
+
+  // Apply theme to document
+  applyTheme(theme) {
+    const html = document.documentElement;
+    
+    // Use requestAnimationFrame for smooth transition
+    requestAnimationFrame(() => {
+      if (theme === 'dark') {
+        html.setAttribute('data-theme', 'dark');
+      } else {
+        html.removeAttribute('data-theme');
+      }
+    });
+
+    // Update meta theme-color for browsers
+    const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+    if (themeColorMeta) {
+      themeColorMeta.setAttribute('content', theme === 'dark' ? '#0f172a' : '#2563eb');
+    }
   }
 }
 

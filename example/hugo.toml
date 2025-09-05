@@ -20,7 +20,7 @@ theme = "content-creator"
   
   # Features
   enable_search = true
-  enable_dark_mode = false
+  enable_dark_mode = true
   show_reading_time = true
   
   # Featured content

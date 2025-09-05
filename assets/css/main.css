@@ -77,6 +77,9 @@ h6 {
   --color-accent: #7c3aed;
   --color-border: #e2e8f0;
   --color-surface: #ffffff;
+  --color-card-hover: #ffffff;
+  --color-input-bg: #ffffff;
+  --color-overlay: rgba(0, 0, 0, 0.5);
   
   /* Typography */
   --font-family: 'Inter', system-ui, -apple-system, sans-serif;
@@ -104,6 +107,7 @@ h6 {
   
   /* Transitions */
   --transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-theme: 300ms cubic-bezier(0.4, 0, 0.2, 1);
   
   /* Shadows */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
@@ -111,7 +115,26 @@ h6 {
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
-/* Dark mode removed - not supported */
+/* Dark Theme */
+[data-theme="dark"] {
+  /* Colors - Dark Theme */
+  --color-bg: #0f172a;
+  --color-bg-secondary: #1e293b;
+  --color-text: #f1f5f9;
+  --color-text-muted: #94a3b8;
+  --color-brand: #3b82f6;
+  --color-accent: #8b5cf6;
+  --color-border: #334155;
+  --color-surface: #1e293b;
+  --color-card-hover: #334155;
+  --color-input-bg: #1e293b;
+  --color-overlay: rgba(0, 0, 0, 0.7);
+  
+  /* Dark Theme Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.4);
+}
 
 /* ===== BASE STYLES ===== */
 html {
@@ -123,7 +146,7 @@ body {
   font-weight: var(--font-weight-normal);
   color: var(--color-text);
   background-color: var(--color-bg);
-  transition: background-color var(--transition), color var(--transition);
+  transition: background-color var(--transition-theme), color var(--transition-theme);
 }
 
 /* ===== TYPOGRAPHY ===== */
@@ -421,12 +444,12 @@ p {
 }
 
 .mobile-menu-toggle:hover {
-  background-color: #f8fafc;
+  background-color: var(--color-bg-secondary);
   transform: scale(1.05);
 }
 
 .mobile-menu-toggle:focus {
-  outline: 2px solid #2563eb;
+  outline: 2px solid var(--color-brand);
   outline-offset: 2px;
 }
 
@@ -434,7 +457,7 @@ p {
   display: block;
   width: 20px;
   height: 2px;
-  background-color: #1e293b;
+  background-color: var(--color-text);
   border-radius: 1px;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -460,14 +483,14 @@ p {
   top: 100%;
   left: 0;
   right: 0;
-  background-color: #ffffff;
-  border-top: 1px solid #e2e8f0;
-  box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  background-color: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  box-shadow: var(--shadow-lg);
   z-index: 50;
   transform: translateY(-20px);
   opacity: 0;
   visibility: hidden;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all var(--transition-theme);
   max-height: 0;
   overflow: hidden;
 }
@@ -482,12 +505,12 @@ p {
 .nav-mobile .nav-link {
   display: block;
   padding: 1.25rem 1.5rem;
-  color: #1e293b;
+  color: var(--color-text);
   text-decoration: none;
-  border-bottom: 1px solid #f1f5f9;
-  font-weight: 500;
+  border-bottom: 1px solid var(--color-border);
+  font-weight: var(--font-weight-medium);
   font-size: 1.05rem;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all var(--transition);
   position: relative;
   overflow: hidden;
 }
@@ -499,14 +522,14 @@ p {
   top: 0;
   height: 100%;
   width: 4px;
-  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  background: linear-gradient(135deg, var(--color-brand), var(--color-accent));
   transform: scaleY(0);
-  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform var(--transition);
 }
 
 .nav-mobile .nav-link:hover {
-  background-color: #f8fafc;
-  color: #2563eb;
+  background-color: var(--color-bg-secondary);
+  color: var(--color-brand);
   padding-left: 2rem;
   transform: translateX(4px);
 }
@@ -520,9 +543,9 @@ p {
 }
 
 .nav-mobile .nav-link:focus {
-  outline: 2px solid #2563eb;
+  outline: 2px solid var(--color-brand);
   outline-offset: -2px;
-  background-color: #eff6ff;
+  background-color: var(--color-bg-secondary);
 }
 
 /* Search - Lazy loaded styles */
@@ -547,33 +570,107 @@ p {
   box-shadow: 0 0 0 3px rgb(37 99 235 / 0.1);
 }
 
-/* Theme Toggle */
+/* Theme Toggle Button */
 .theme-toggle {
-  background: none;
-  border: none;
-  padding: var(--space-md);
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  padding: var(--space-sm);
   cursor: pointer;
-  border-radius: var(--border-radius);
+  border-radius: 50%;
   color: var(--color-text);
-  transition: all var(--transition);
+  transition: all var(--transition-theme);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
-  font-size: 1.25rem;
+  width: 48px;
+  height: 48px;
+  position: relative;
+  box-shadow: var(--shadow-sm);
+  margin: 0 auto var(--space-lg);
 }
 
 .theme-toggle:hover {
-  background-color: var(--color-bg-secondary);
+  background-color: var(--color-brand);
+  color: white;
+  border-color: var(--color-brand);
   transform: scale(1.1);
+  box-shadow: var(--shadow-md);
+}
+
+.theme-toggle:focus {
+  outline: 3px solid var(--color-brand);
+  outline-offset: 2px;
 }
 
 .theme-icon {
-  transition: transform var(--transition);
+  width: 20px;
+  height: 20px;
+  transition: all var(--transition-theme);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Theme toggle removed - dark mode not supported */
+/* Sun Icon (Default - Light Mode) */
+.theme-icon::before {
+  content: '';
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: currentColor;
+  transition: all var(--transition-theme);
+  position: absolute;
+}
+
+.theme-icon::after {
+  content: '';
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  background: transparent;
+  transition: all var(--transition-theme);
+  position: absolute;
+  box-shadow: 
+    0 -18px 0 -14px currentColor,
+    12px -12px 0 -14px currentColor,
+    18px 0 0 -14px currentColor,
+    12px 12px 0 -14px currentColor,
+    0 18px 0 -14px currentColor,
+    -12px 12px 0 -14px currentColor,
+    -18px 0 0 -14px currentColor,
+    -12px -12px 0 -14px currentColor;
+}
+
+/* Moon Icon (Dark Mode) */
+[data-theme="dark"] .theme-icon::before {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 4px -2px 0 0 var(--color-surface);
+  transform: rotate(-25deg);
+}
+
+[data-theme="dark"] .theme-icon::after {
+  display: none;
+}
+
+/* Theme Toggle Container in Footer */
+.footer-theme-toggle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.theme-toggle-label {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  font-weight: var(--font-weight-medium);
+}
 
 
 /* Hero Section - Optimized for LCP and CLS */
