@@ -6,12 +6,10 @@ const ThemeToggle = {
     this.toggle = document.querySelector('.theme-toggle');
     
     if (!this.toggle) {
-      console.warn('Theme toggle not found');
       return;
     }
     
     this.bindEvents();
-    console.log('Theme toggle initialized');
   },
   
   bindEvents() {
@@ -25,7 +23,6 @@ const ThemeToggle = {
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
     
     this.setTheme(newTheme);
-    console.log(`Theme switched to: ${newTheme}`);
   },
   
   getCurrentTheme() {
