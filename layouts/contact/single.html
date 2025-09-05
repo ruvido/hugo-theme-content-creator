@@ -1,0 +1,103 @@
+{{ define "main" }}
+<section class="contact-page">
+  <div class="container">
+    <article class="contact-content">
+      <header class="contact-header">
+        <h1 class="contact-title">{{ .Title | default "Contattami" }}</h1>
+        {{ if .Params.description }}
+        <p class="contact-description">{{ .Params.description }}</p>
+        {{ end }}
+      </header>
+
+      <!-- Page content if any -->
+      {{ if .Content }}
+      <div class="contact-intro">
+        {{ .Content }}
+      </div>
+      {{ end }}
+
+      <!-- Contact Form -->
+      <form class="contact-form" name="contact" method="POST" netlify>
+        <div class="form-group">
+          <label for="name" class="form-label">Nome *</label>
+          <input 
+            type="text" 
+            id="name" 
+            name="name" 
+            class="contact-input" 
+            placeholder="Il tuo nome"
+            required
+            autocomplete="name">
+        </div>
+
+        <div class="form-group">
+          <label for="email" class="form-label">Email *</label>
+          <input 
+            type="email" 
+            id="email" 
+            name="email" 
+            class="contact-input" 
+            placeholder="la-tua-email@esempio.com"
+            required
+            autocomplete="email">
+        </div>
+
+        <div class="form-group">
+          <label for="subject" class="form-label">Oggetto</label>
+          <input 
+            type="text" 
+            id="subject" 
+            name="subject" 
+            class="contact-input" 
+            placeholder="Di cosa vorresti parlare?"
+            autocomplete="off">
+        </div>
+
+        <div class="form-group">
+          <label for="message" class="form-label">Messaggio *</label>
+          <textarea 
+            id="message" 
+            name="message" 
+            rows="6" 
+            class="contact-textarea" 
+            placeholder="Scrivi il tuo messaggio qui..."
+            required></textarea>
+        </div>
+
+        <div class="form-submit">
+          <button type="submit" class="contact-submit-btn">
+            Invia Messaggio
+          </button>
+          <p class="form-note">
+            <small>* Campi obbligatori. Ti risponderò entro 48 ore.</small>
+          </p>
+        </div>
+      </form>
+
+      <!-- Alternative contact methods -->
+      {{ if or .Site.Params.author.email .Site.Params.social }}
+      <div class="contact-alternatives">
+        <h3>Altri modi per contattarmi</h3>
+        <div class="contact-links">
+          {{ if .Site.Params.author.email }}
+          <a href="mailto:{{ .Site.Params.author.email }}" class="contact-link">
+            📧 {{ .Site.Params.author.email }}
+          </a>
+          {{ end }}
+          {{ if .Site.Params.social.twitter }}
+          <a href="https://twitter.com/{{ strings.TrimPrefix "@" .Site.Params.social.twitter }}" target="_blank" rel="noopener" class="contact-link">
+            🐦 Twitter
+          </a>
+          {{ end }}
+          {{ if .Site.Params.social.linkedin }}
+          <a href="{{ .Site.Params.social.linkedin }}" target="_blank" rel="noopener" class="contact-link">
+            💼 LinkedIn
+          </a>
+          {{ end }}
+        </div>
+      </div>
+      {{ end }}
+    </article>
+  </div>
+</section>
+{{ end }}

@@ -1,0 +1,70 @@
+# Giulia Bianchi - Social Media Manager & Podcaster
+
+name = "Giulia Bianchi"
+role = "Social Media Manager & Podcaster"
+bio = "Social media strategist specializzata in TikTok e Instagram, con una passione per l'audio storytelling. Host del podcast 'Voci Digitali' con oltre 50K download mensili. Aiuto brand e creator a trovare la loro voce unica online."
+avatar = "/images/authors/giulia-bianchi.jpg"
+featured = true
+order = 2
+
+# Contact & Social  
+email = "giulia@vocedigitali.com"
+website = "https://giuliabianchi.me"
+twitter = "@giulia_digital"
+instagram = "@giulia.bianchi.sm"
+linkedin = "https://linkedin.com/in/giuliabianchidigital"
+tiktok = "@giuliadigital"
+podcast = "https://open.spotify.com/show/vocidigiiali"
+
+# Professional Info
+company = "Freelance Creator & Consultant"
+location = "Roma, Italy"
+languages = ["Italiano", "English"]
+
+# Specialties & Skills
+specialties = [
+    "TikTok Strategy",
+    "Instagram Growth",
+    "Podcast Production",
+    "Audio Content",
+    "Viral Marketing",
+    "Gen Z Communication"
+]
+
+# Stats & Achievements
+followers_count = "85K+"
+years_experience = 5
+brands_worked_with = "150+"
+podcast_downloads = "500K+"
+tiktok_views = "10M+"
+
+# Fun Facts
+fun_fact = "Ho creato il mio primo viral TikTok per caso mentre spiegavo il marketing a mia nonna!"
+favorite_tools = ["TikTok Creator Tools", "Spotify for Podcasters", "Reels Play", "Later"]
+favorite_microphone = "Blue Yeti"
+
+# Content Types
+content_types = ["TikTok Videos", "Instagram Reels", "Podcast Episodes", "Stories Strategy", "Live Streaming"]
+
+# Podcast Info
+podcast_name = "Voci Digitali"
+podcast_episodes = 127
+podcast_rating = "4.9/5"
+podcast_description = "Il podcast che racconta il dietro le quinte del digital marketing italiano"
+
+# Featured Work
+featured_project = "Strategia TikTok per Coca-Cola Italia - 5M views in una settimana"
+latest_achievement = "Podcast dell'Anno 2024 - Digital Marketing Awards Italia"
+
+# Personal Touch
+personality_type = "ENFP - The Campaigner"
+zodiac_sign = "Gemelli ♊"
+favorite_emoji = "🎙️"
+
+# Quotes
+favorite_quote = "La voce è il nuovo volto del marketing digitale."
+personal_motto = "Ogni storia merita di essere raccontata, ogni voce merita di essere sentita."
+
+# Current Projects
+current_focus = "Nuovo corso su TikTok Marketing per aziende B2B"
+next_podcast_guest = "Top secret... ma sarà una bomba! 🤫"

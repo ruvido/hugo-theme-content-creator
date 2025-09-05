@@ -1,0 +1,52 @@
+# Marco Rossi - Content Creator & Digital Strategist
+
+name = "Marco Rossi"
+role = "Content Creator & Digital Strategist"
+bio = "Content creator da oltre 8 anni, aiuto aziende e professionisti a crescere online attraverso strategie di contenuto autentiche e data-driven. Founder di 3 startup digitali e speaker internazionale."
+avatar = "/images/authors/marco-rossi.jpg"
+featured = true
+order = 1
+
+# Contact & Social
+email = "marco@esempio.com"
+website = "https://marcorossi.digital"
+twitter = "@marcorossi_"
+instagram = "@marco.rossi.creator"
+linkedin = "https://linkedin.com/in/marcorossicreator"
+youtube = "https://youtube.com/c/marcorossicreator"
+
+# Professional Info
+company = "Digital Growth Agency"
+location = "Milano, Italy"
+languages = ["Italiano", "English", "Español"]
+
+# Specialties & Skills
+specialties = [
+    "Content Strategy",
+    "Social Media Marketing", 
+    "Personal Branding",
+    "Digital Storytelling",
+    "Growth Hacking"
+]
+
+# Stats & Achievements
+followers_count = "125K+"
+years_experience = 8
+clients_helped = "500+"
+courses_created = 12
+
+# Fun Facts
+fun_fact = "Ho scritto il mio primo blog a 16 anni e da allora non ho mai smesso!"
+favorite_tools = ["Notion", "Canva", "Buffer", "Google Analytics"]
+coffee_per_day = 4
+
+# Content Types
+content_types = ["Blog Posts", "Video YouTube", "Podcast", "Newsletter", "Corsi Online"]
+
+# Featured Work
+featured_project = "Strategia Social per Nike Italia - +300% engagement in 6 mesi"
+latest_achievement = "Speaker TEDx Milano 2024: 'Il Futuro del Content Marketing'"
+
+# Quotes
+favorite_quote = "Content is fire, social media is gasoline."
+personal_motto = "Creare contenuti che cambiano le persone, non solo che le intrattengono."

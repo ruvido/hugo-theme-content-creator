@@ -1,0 +1,207 @@
+{{ define "main" }}
+<section class="about-page">
+  <div class="container">
+    <!-- Page Header -->
+    <header class="about-header">
+      <h1 class="about-title">{{ .Title | default "Chi Siamo" }}</h1>
+      {{ if .Params.description }}
+      <p class="about-description">{{ .Params.description }}</p>
+      {{ end }}
+    </header>
+
+    <!-- Page Content -->
+    {{ if .Content }}
+    <div class="about-intro">
+      {{ .Content }}
+    </div>
+    {{ end }}
+
+    <!-- Authors Grid -->
+    <div class="authors-section">
+      <h2 class="section-title">Il Nostro Team</h2>
+      <div class="authors-grid">
+        {{ range $authorFile := (readDir "data/authors") }}
+          {{ $authorData := index $.Site.Data.authors (strings.TrimSuffix ".toml" $authorFile.Name) }}
+          {{ if $authorData }}
+          <article class="author-card">
+            <!-- Author Avatar -->
+            {{ if $authorData.avatar }}
+            <div class="author-card-avatar">
+              <img src="{{ $authorData.avatar }}" alt="{{ $authorData.name }}" class="author-avatar-img">
+              {{ if $authorData.featured }}
+              <div class="featured-badge">⭐</div>
+              {{ end }}
+            </div>
+            {{ end }}
+            
+            <!-- Author Info -->
+            <div class="author-card-content">
+              <h3 class="author-card-name">{{ $authorData.name }}</h3>
+              {{ if $authorData.role }}
+              <p class="author-card-role">{{ $authorData.role }}</p>
+              {{ end }}
+              
+              {{ if $authorData.bio }}
+              <p class="author-card-bio">{{ $authorData.bio }}</p>
+              {{ end }}
+
+              <!-- Stats -->
+              {{ if or $authorData.followers_count $authorData.years_experience $authorData.clients_helped }}
+              <div class="author-stats">
+                {{ if $authorData.followers_count }}
+                <div class="stat">
+                  <span class="stat-number">{{ $authorData.followers_count }}</span>
+                  <span class="stat-label">Follower</span>
+                </div>
+                {{ end }}
+                {{ if $authorData.years_experience }}
+                <div class="stat">
+                  <span class="stat-number">{{ $authorData.years_experience }}+</span>
+                  <span class="stat-label">Anni</span>
+                </div>
+                {{ end }}
+                {{ if $authorData.clients_helped }}
+                <div class="stat">
+                  <span class="stat-number">{{ $authorData.clients_helped }}</span>
+                  <span class="stat-label">Clienti</span>
+                </div>
+                {{ end }}
+              </div>
+              {{ end }}
+
+              <!-- Specialties -->
+              {{ if $authorData.specialties }}
+              <div class="author-specialties">
+                <h4>Specialità:</h4>
+                <div class="specialties-tags">
+                  {{ range $authorData.specialties }}
+                  <span class="specialty-tag">{{ . }}</span>
+                  {{ end }}
+                </div>
+              </div>
+              {{ end }}
+
+              <!-- Social Links -->
+              {{ if or $authorData.website $authorData.twitter $authorData.instagram $authorData.linkedin $authorData.youtube $authorData.tiktok $authorData.podcast }}
+              <div class="author-card-social">
+                {{ if $authorData.website }}
+                <a href="{{ $authorData.website }}" target="_blank" rel="noopener" class="social-link" aria-label="Sito web di {{ $authorData.name }}">
+                  🌐 Sito
+                </a>
+                {{ end }}
+                {{ if $authorData.twitter }}
+                <a href="https://twitter.com/{{ strings.TrimPrefix "@" $authorData.twitter }}" target="_blank" rel="noopener" class="social-link" aria-label="Twitter di {{ $authorData.name }}">
+                  🐦 Twitter
+                </a>
+                {{ end }}
+                {{ if $authorData.instagram }}
+                <a href="https://instagram.com/{{ strings.TrimPrefix "@" $authorData.instagram }}" target="_blank" rel="noopener" class="social-link" aria-label="Instagram di {{ $authorData.name }}">
+                  📷 Instagram
+                </a>
+                {{ end }}
+                {{ if $authorData.linkedin }}
+                <a href="{{ $authorData.linkedin }}" target="_blank" rel="noopener" class="social-link" aria-label="LinkedIn di {{ $authorData.name }}">
+                  💼 LinkedIn
+                </a>
+                {{ end }}
+                {{ if $authorData.youtube }}
+                <a href="{{ $authorData.youtube }}" target="_blank" rel="noopener" class="social-link" aria-label="YouTube di {{ $authorData.name }}">
+                  📺 YouTube
+                </a>
+                {{ end }}
+                {{ if $authorData.tiktok }}
+                <a href="https://tiktok.com/{{ strings.TrimPrefix "@" $authorData.tiktok }}" target="_blank" rel="noopener" class="social-link" aria-label="TikTok di {{ $authorData.name }}">
+                  🎵 TikTok
+                </a>
+                {{ end }}
+                {{ if $authorData.podcast }}
+                <a href="{{ $authorData.podcast }}" target="_blank" rel="noopener" class="social-link" aria-label="Podcast di {{ $authorData.name }}">
+                  🎙️ Podcast
+                </a>
+                {{ end }}
+              </div>
+              {{ end }}
+
+              <!-- Fun Facts -->
+              {{ if $authorData.fun_fact }}
+              <div class="author-fun-fact">
+                <strong>Fun Fact:</strong> {{ $authorData.fun_fact }}
+              </div>
+              {{ end }}
+
+              <!-- Featured Work -->
+              {{ if $authorData.featured_project }}
+              <div class="author-featured-work">
+                <strong>Progetto in Evidenza:</strong>
+                <p>{{ $authorData.featured_project }}</p>
+              </div>
+              {{ end }}
+
+              <!-- Contact CTA -->
+              {{ if $authorData.email }}
+              <div class="author-contact">
+                <a href="mailto:{{ $authorData.email }}" class="contact-author-btn">
+                  📧 Contatta {{ strings.Split $authorData.name " " | first }}
+                </a>
+              </div>
+              {{ end }}
+            </div>
+          </article>
+          {{ end }}
+        {{ end }}
+      </div>
+    </div>
+
+    <!-- Team Stats (if we have data) -->
+    {{ $totalFollowers := 0 }}
+    {{ $totalExperience := 0 }}
+    {{ $authorCount := 0 }}
+    
+    {{ range $authorFile := (readDir "data/authors") }}
+      {{ $authorData := index $.Site.Data.authors (strings.TrimSuffix ".toml" $authorFile.Name) }}
+      {{ if $authorData }}
+        {{ $authorCount = add $authorCount 1 }}
+        {{ if $authorData.years_experience }}
+          {{ $totalExperience = add $totalExperience $authorData.years_experience }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+
+    {{ if gt $authorCount 1 }}
+    <div class="team-stats">
+      <h2 class="section-title">Il Team in Numeri</h2>
+      <div class="team-stats-grid">
+        <div class="team-stat">
+          <div class="team-stat-number">{{ $authorCount }}</div>
+          <div class="team-stat-label">Creator nel Team</div>
+        </div>
+        {{ if gt $totalExperience 0 }}
+        <div class="team-stat">
+          <div class="team-stat-number">{{ $totalExperience }}+</div>
+          <div class="team-stat-label">Anni di Esperienza Combinata</div>
+        </div>
+        {{ end }}
+        <div class="team-stat">
+          <div class="team-stat-number">1M+</div>
+          <div class="team-stat-label">Persone Raggiunte</div>
+        </div>
+        <div class="team-stat">
+          <div class="team-stat-number">24/7</div>
+          <div class="team-stat-label">Passione per i Contenuti</div>
+        </div>
+      </div>
+    </div>
+    {{ end }}
+
+    <!-- Call to Action -->
+    <div class="about-cta">
+      <h2>Vuoi Collaborare con Noi?</h2>
+      <p>Siamo sempre alla ricerca di nuove opportunità e partnership interessanti.</p>
+      <div class="cta-buttons">
+        <a href="/contact/" class="cta-btn primary">Contattaci</a>
+        <a href="/articles/" class="cta-btn secondary">Leggi i Nostri Contenuti</a>
+      </div>
+    </div>
+  </div>
+</section>
+{{ end }}

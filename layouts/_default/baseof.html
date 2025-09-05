@@ -140,11 +140,17 @@
     <link rel="stylesheet" href="{{ $themeCss.Permalink }}" fetchpriority="low">
     {{ end }}
     
-    <!-- Search page specific CSS -->
+    <!-- Page specific CSS -->
     {{ if eq .Kind "page" }}
       {{ if eq .Layout "search" }}
         {{ $searchCss := resources.Get "css/components/search.css" | resources.Minify | resources.Fingerprint }}
         <link rel="stylesheet" href="{{ $searchCss.Permalink }}" fetchpriority="low">
+      {{ else if eq .Layout "contact" }}
+        {{ $contactCss := resources.Get "css/components/contact.css" | resources.Minify | resources.Fingerprint }}
+        <link rel="stylesheet" href="{{ $contactCss.Permalink }}" fetchpriority="low">
+      {{ else if eq .Layout "about" }}
+        {{ $aboutCss := resources.Get "css/components/about.css" | resources.Minify | resources.Fingerprint }}
+        <link rel="stylesheet" href="{{ $aboutCss.Permalink }}" fetchpriority="low">
       {{ end }}
     {{ end }}
     
