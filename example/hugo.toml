@@ -81,6 +81,7 @@ theme = "content-creator"
 [taxonomies]
   category = "categories"
   tag = "tags"
+  keyword = "keywords"
   author = "authors"
 
 # Menu is now defined per-language in [languages.{lang}.menu] sections above
