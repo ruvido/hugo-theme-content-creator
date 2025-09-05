@@ -1,0 +1,24 @@
+[[main]]
+name = "Home"
+url = "/"
+weight = 10
+
+[[main]]
+name = "Articoli"
+url = "/articles/"
+weight = 20
+
+[[main]]
+name = "Newsletter"
+url = "/newsletters/"
+weight = 30
+
+[[main]]
+name = "Podcast"
+url = "/podcasts/"
+weight = 40
+
+[[main]]
+name = "Video"
+url = "/videos/"
+weight = 50
