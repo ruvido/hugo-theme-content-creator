@@ -15,10 +15,7 @@ Benvenuto nella demo completa degli shortcodes! Questo tema include una potente 
 
 Prima di tutto, la base di ogni content creator: raccogliere email!
 
-{{< newsletter 
-   title="🚀 Iscriviti alla Newsletter di Ruvido" 
-   description="Ricevi ogni settimana strategie di content creation, case study e strumenti esclusivi. Solo contenuti di valore, niente spam."
-   button="Voglio i Contenuti Esclusivi!" >}}
+{{< newsletter title="Iscriviti alla Newsletter di Ruvido" description="Ricevi ogni settimana strategie di content creation, case study e strumenti esclusivi. Solo contenuti di valore, niente spam." button="Voglio i Contenuti Esclusivi!" >}}
 
 Questo è perfetto per inserire form di iscrizione in qualsiasi articolo, convertendo lettori in subscribers.
 
@@ -65,6 +62,7 @@ Ecco come promuovere lead magnet in modo professionale:
 - ✅ La mia strategia per 100K follower in 12 mesi  
 - ✅ 5 case study con fatturati reali
 - ✅ Checklist per ogni tipo di contenuto
+
 {{< /book-download >}}
 
 ---
@@ -80,12 +78,14 @@ Niente converte meglio della social proof autentica:
    avatar="/images/testimonial-maria.jpg"
    rating="5"
    platform="LinkedIn" >}}
+{{< /testimonial >}}
 
 {{< testimonial 
    quote="La strategia di content creation più pratica e actionable che abbia mai trovato. Risultati immediati!"
    author="Luca Verdi"  
    role="Content Creator & Influencer"
    rating="5" >}}
+{{< /testimonial >}}
 
 ---
 
@@ -109,6 +109,7 @@ Ecco come presento i miei libri e prodotti:
 - "Il miglior investimento per la mia crescita online" - ⭐⭐⭐⭐⭐
 - "Strategie che funzionano davvero" - ⭐⭐⭐⭐⭐  
 - "Da leggere assolutamente" - ⭐⭐⭐⭐⭐
+
 {{< /book-showcase >}}
 
 ---
@@ -122,6 +123,7 @@ I video sono fondamentali nel content marketing moderno:
    title="🎯 La Mia Strategia Content in 15 Minuti"
    description="In questo video ti spiego passo-passo come creo contenuti che convertono, dalla ricerca delle keyword alla call-to-action finale."
    privacy="true" >}}
+{{< /video >}}
 
 Questo video ha ottenuto oltre 50.000 visualizzazioni e centinaia di nuovi iscritti alla newsletter!
 
@@ -144,6 +146,7 @@ Il mio podcast sta crescendo molto, ecco l'ultimo episodio:
 - Come identificare i contenuti che convertono meglio  
 - 3 errori da evitare assolutamente
 - La mia roadmap per arrivare a 6 cifre
+
 {{< /podcast >}}
 
 ---
@@ -152,9 +155,7 @@ Il mio podcast sta crescendo molto, ecco l'ultimo episodio:
 
 Se questo contenuto ti è piaciuto, condividilo!
 
-{{< social-share 
-   platforms="twitter,linkedin,facebook,whatsapp"
-   text="🚀 Condividi questa demo" >}}
+{{< social-share platforms="twitter,linkedin,facebook,whatsapp" text="Condividi questa demo" >}}
 
 ---
 
@@ -171,6 +172,7 @@ Se questo contenuto ti è piaciuto, condividilo!
    youtube="https://youtube.com/c/ruvido" >}}
 
 Seguimi sui social per contenuti quotidiani su content creation, digital marketing e crescita personale!
+
 {{< /author-bio >}}
 
 ---
