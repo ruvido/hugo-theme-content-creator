@@ -1,30 +1,17 @@
-{{/* Testimonial Shortcode */}}
+{{/* Testimonial - Ghost-inspired clean design */}}
 {{ $quote := .Get "quote" }}
 {{ $author := .Get "author" }}
 {{ $role := .Get "role" }}
 {{ $avatar := .Get "avatar" }}
 {{ $rating := .Get "rating" }}
-{{ $link := .Get "link" }}
 {{ $platform := .Get "platform" }}
 
 <div class="testimonial">
-  <div class="testimonial-content">
+  <div class="testimonial-quote">
     {{ if $quote }}
-    <blockquote class="testimonial-quote">
-      "{{ $quote }}"
-    </blockquote>
+    {{ $quote }}
     {{ else }}
-    <blockquote class="testimonial-quote">
-      "{{ .Inner | plainify }}"
-    </blockquote>
-    {{ end }}
-    
-    {{ if $rating }}
-    <div class="testimonial-rating">
-      {{ range seq (int $rating) }}
-      <span class="star">⭐</span>
-      {{ end }}
-    </div>
+    {{ .Inner | plainify }}
     {{ end }}
   </div>
   
@@ -40,18 +27,16 @@
       <cite class="testimonial-name">{{ $author }}</cite>
       {{ end }}
       {{ if $role }}
-      <span class="testimonial-role">{{ $role }}</span>
+      <div class="testimonial-role">{{ $role }}</div>
       {{ end }}
       {{ if $platform }}
-      <span class="testimonial-platform">{{ $platform }}</span>
+      <div class="testimonial-platform">via {{ $platform }}</div>
       {{ end }}
     </div>
     
-    {{ if $link }}
-    <div class="testimonial-link">
-      <a href="{{ $link }}" target="_blank" rel="noopener" class="testimonial-source">
-        🔗 Fonte
-      </a>
+    {{ if $rating }}
+    <div class="testimonial-rating">
+      {{ range seq (int $rating) }}★{{ end }}
     </div>
     {{ end }}
   </div>

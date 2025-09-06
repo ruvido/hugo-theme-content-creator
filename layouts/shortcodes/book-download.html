@@ -1,5 +1,5 @@
-{{/* Book Download Lead Magnet Shortcode */}}
-{{ $title := .Get "title" | default "📚 Scarica il Libro Gratuito" }}
+{{/* Book Download Lead Magnet - Ghost-inspired design */}}
+{{ $title := .Get "title" | default "Scarica il Libro Gratuito" }}
 {{ $cover := .Get "cover" }}
 {{ $description := .Get "description" | default "Una risorsa gratuita per te" }}
 {{ $file := .Get "file" }}
@@ -11,61 +11,61 @@
 
 <div class="book-download">
   <div class="book-download-content">
-    {{ if $cover }}
-    <div class="book-download-cover">
-      <img src="{{ $cover }}" alt="{{ $title }}" class="book-cover-image">
-      {{ if $format }}
-      <span class="book-format-badge">{{ $format }}</span>
-      {{ end }}
-    </div>
-    {{ end }}
-    
     <div class="book-download-info">
       <h3 class="book-download-title">{{ $title }}</h3>
       <p class="book-download-description">{{ $description }}</p>
       
-      {{ if or $pages $size }}
-      <div class="book-download-meta">
-        {{ if $pages }}
-        <span class="book-meta-item">📄 {{ $pages }}</span>
-        {{ end }}
-        {{ if $size }}
-        <span class="book-meta-item">💾 {{ $size }}</span>
-        {{ end }}
-      </div>
-      {{ end }}
-      
-      {{ if eq $email_required "true" }}
-      <form class="book-download-form" action="#" method="POST">
-        <div class="book-email-group">
-          <input 
-            type="email" 
-            name="email" 
-            placeholder="La tua email per il download..."
-            class="book-email-input"
-            required
-            aria-label="Email per download libro">
-          <button type="submit" class="book-download-button">
-            {{ $button }}
-          </button>
-        </div>
-        <p class="book-privacy">
-          <small>🔒 I tuoi dati sono al sicuro. Niente spam.</small>
-        </p>
-      </form>
-      {{ else }}
-      <div class="book-download-action">
-        <a href="{{ $file }}" class="book-download-button" download>
-          {{ $button }}
-        </a>
-      </div>
-      {{ end }}
-      
       {{ if .Inner }}
-      <div class="book-download-extra">
+      <div class="book-download-details">
         {{ .Inner | markdownify }}
       </div>
       {{ end }}
+      
+      <div class="book-download-form-wrapper">
+        {{ if eq $email_required "true" }}
+        <form class="book-download-form" action="#" method="POST">
+          <div class="book-email-group">
+            <input 
+              type="email" 
+              name="email" 
+              placeholder="La tua email per il download..."
+              class="book-email-input"
+              required
+              aria-label="Email per download libro">
+            <button type="submit" class="book-download-button">
+              {{ $button }}
+            </button>
+          </div>
+          <p class="book-privacy">I tuoi dati sono al sicuro. Niente spam.</p>
+        </form>
+        {{ else }}
+        <div class="book-download-action">
+          <a href="{{ $file }}" class="book-download-button" download>
+            {{ $button }}
+          </a>
+        </div>
+        {{ end }}
+        
+        {{ if or $pages $size $format }}
+        <div class="book-download-meta">
+          {{ if $format }}
+          <span class="book-meta-item">{{ $format }}</span>
+          {{ end }}
+          {{ if $pages }}
+          <span class="book-meta-item">{{ $pages }}</span>
+          {{ end }}
+          {{ if $size }}
+          <span class="book-meta-item">{{ $size }}</span>
+          {{ end }}
+        </div>
+        {{ end }}
+      </div>
     </div>
+    
+    {{ if $cover }}
+    <div class="book-download-cover">
+      <img src="{{ $cover }}" alt="{{ $title }}" class="book-cover-image">
+    </div>
+    {{ end }}
   </div>
 </div>

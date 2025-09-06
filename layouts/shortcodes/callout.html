@@ -1,29 +1,11 @@
-{{/* Callout Box Shortcode */}}
+{{/* Callout Box Shortcode - Ghost-inspired minimal design */}}
 {{ $type := .Get "type" | default "info" }}
 {{ $title := .Get "title" }}
-{{ $icon := .Get "icon" }}
-
-{{ $icons := dict 
-  "info" "💡"
-  "warning" "⚠️" 
-  "success" "✅"
-  "error" "❌"
-  "tip" "🎯"
-  "note" "📝"
-}}
-
-{{ $defaultIcon := index $icons $type }}
-{{ $displayIcon := $icon | default $defaultIcon }}
 
 <div class="callout callout-{{ $type }}">
-  {{ if or $displayIcon $title }}
+  {{ if $title }}
   <div class="callout-header">
-    {{ if $displayIcon }}
-    <span class="callout-icon">{{ $displayIcon }}</span>
-    {{ end }}
-    {{ if $title }}
     <span class="callout-title">{{ $title }}</span>
-    {{ end }}
   </div>
   {{ end }}
   

@@ -1,62 +1,69 @@
-{{/* Podcast Player Shortcode */}}
+{{/* Podcast Player - Ghost-inspired custom audio player */}}
 {{ $title := .Get "title" }}
 {{ $file := .Get "file" }}
 {{ $duration := .Get "duration" }}
 {{ $episode := .Get "episode" }}
 {{ $description := .Get "description" }}
 {{ $cover := .Get "cover" }}
-{{ $transcript := .Get "transcript" }}
 
-<div class="podcast-player">
-  <div class="podcast-header">
-    {{ if $cover }}
-    <div class="podcast-cover">
-      <img src="{{ $cover }}" alt="{{ $title }}" class="podcast-cover-img">
-    </div>
-    {{ end }}
-    
+<div class="podcast-player" data-podcast-player>
+  <div class="podcast-content">
     <div class="podcast-info">
       {{ if $title }}
       <h4 class="podcast-title">{{ $title }}</h4>
       {{ end }}
       
-      <div class="podcast-meta">
-        {{ if $episode }}
-        <span class="podcast-episode">🎙️ Episodio #{{ $episode }}</span>
-        {{ end }}
-        {{ if $duration }}
-        <span class="podcast-duration">⏱️ {{ $duration }}</span>
-        {{ end }}
-      </div>
-      
       {{ if $description }}
       <p class="podcast-description">{{ $description }}</p>
       {{ end }}
+      
+      {{ if .Inner }}
+      <div class="podcast-details">
+        {{ .Inner | markdownify }}
+      </div>
+      {{ end }}
     </div>
+    
+    {{ if $cover }}
+    <div class="podcast-cover">
+      <img src="{{ $cover }}" alt="{{ $title }}" class="podcast-cover-img">
+    </div>
+    {{ end }}
   </div>
   
   {{ if $file }}
   <div class="podcast-controls">
-    <audio controls preload="metadata" class="podcast-audio">
+    <audio preload="metadata" data-podcast-audio>
       <source src="{{ $file }}" type="audio/mpeg">
       <source src="{{ $file }}" type="audio/ogg">
-      Il tuo browser non supporta l'audio HTML5.
     </audio>
-  </div>
-  {{ end }}
-  
-  {{ if .Inner }}
-  <div class="podcast-content">
-    {{ .Inner | markdownify }}
-  </div>
-  {{ end }}
-  
-  {{ if $transcript }}
-  <details class="podcast-transcript">
-    <summary>📝 Mostra Trascrizione</summary>
-    <div class="transcript-content">
-      <a href="{{ $transcript }}" target="_blank" rel="noopener">Scarica trascrizione completa</a>
+    
+    <div class="podcast-player-controls">
+      <button class="podcast-play-btn" data-play-btn aria-label="Play/Pause">
+        <svg class="play-icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+        <svg class="pause-icon hidden" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+        </svg>
+      </button>
+      
+      <div class="podcast-progress-container">
+        <div class="podcast-progress-bar" data-progress-bar>
+          <div class="podcast-progress-fill" data-progress-fill></div>
+        </div>
+        <div class="podcast-time">
+          <span data-current-time>00:00</span>
+          <span class="podcast-duration">{{ $duration | default "00:00" }}</span>
+        </div>
+      </div>
+      
+      <div class="podcast-meta">
+        {{ if $episode }}
+        <span class="podcast-episode">Ep. {{ $episode }}</span>
+        {{ end }}
+      </div>
     </div>
-  </details>
+  </div>
   {{ end }}
 </div>

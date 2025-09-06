@@ -1,0 +1,41 @@
+{{/* Ghost Audio Card - Exact replica from Ghost CMS */}}
+{{ $src := .Get "src" }}
+{{ $title := .Get "title" | default "" }}
+{{ $duration := .Get "duration" | default "0:00" }}
+
+<div class="kg-card kg-audio-card">
+  <div class="kg-audio-thumbnail placeholder">
+    <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 15.33a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm-2.25.75a2.25 2.25 0 1 1 4.5 0 2.25 2.25 0 0 1-4.5 0ZM15 13.83a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm-2.25.75a2.25 2.25 0 1 1 4.5 0 2.25 2.25 0 0 1-4.5 0Z" fill="currentColor"/>
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M14.486 6.81A2.25 2.25 0 0 1 17.25 9v5.579a.75.75 0 0 1-1.5 0v-5.58a.75.75 0 0 0-.932-.727.755.755 0 0 1-.059.013l-4.465.744a.75.75 0 0 0-.544.72v6.33a.75.75 0 0 1-1.5 0v-6.33a2.25 2.25 0 0 1 1.763-2.194l4.473-.746Z" fill="currentColor"/>
+    </svg>
+  </div>
+  
+  <div class="kg-audio-player-container">
+    <audio class="kg-audio-player" preload="none"{{ if $src }} src="{{ $src }}"{{ end }}></audio>
+    
+    <div class="kg-audio-player">
+      <button class="kg-audio-play-icon">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path class="kg-audio-play-path" d="M8 5v14l11-7z" fill="currentColor"/>
+          <path class="kg-audio-pause-path" d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" fill="currentColor" style="display: none;"/>
+        </svg>
+      </button>
+      
+      <div class="kg-audio-current-time">0:00</div>
+      
+      <div class="kg-audio-time">
+        <progress class="kg-audio-time-track" max="100" value="0"></progress>
+        <input class="kg-audio-seek-slider" type="range" max="100" value="0" step="1">
+      </div>
+      
+      <div class="kg-audio-duration">{{ $duration }}</div>
+    </div>
+  </div>
+  
+  {{ if $title }}
+  <div class="kg-audio-title">
+    {{ $title }}
+  </div>
+  {{ end }}
+</div>
