@@ -134,13 +134,11 @@ Questo video ha ottenuto oltre 50.000 visualizzazioni e centinaia di nuovi iscri
 
 Il mio podcast sta crescendo molto, ecco l'ultimo episodio:
 
-{{< podcast 
-   title="🎙️ Episodio #47: Come Ho Fatto 1M€ con i Contenuti"
-   file="/audio/podcast-ep47.mp3"
-   duration="42:30"
-   episode="47"
-   cover="/images/podcast-cover.jpg"
-   description="In questo episodio condivido la mia strategia completa per monetizzare i contenuti: dalle sponsorizzazioni ai prodotti digitali, passando per le consulenze." >}}
+{{< ghost_audio 
+   src="/audio/podcast-ep47.mp3"
+   title="Episodio #47: Come Ho Fatto 1M€ con i Contenuti"
+   artist="Ruvido Podcast"
+   duration="42:30" >}}
 
 **Punti chiave dell'episodio:**
 - La regola del 80/20 nel content marketing
@@ -148,7 +146,17 @@ Il mio podcast sta crescendo molto, ecco l'ultimo episodio:
 - 3 errori da evitare assolutamente
 - La mia roadmap per arrivare a 6 cifre
 
-{{< /podcast >}}
+---
+
+### Ghost Audio Player Features
+
+Questo è il nuovo audio player basato sul design Ghost Solo:
+
+- **Design minimalista** ispirato al tema Ghost Solo
+- **Controlli intuitivi** con play/pause e controllo volume
+- **Progress bar interattiva** con preview del tempo
+- **Keyboard shortcuts** (Spazio, frecce, M per mute)
+- **Responsive design** ottimizzato per mobile
 
 ---
 
