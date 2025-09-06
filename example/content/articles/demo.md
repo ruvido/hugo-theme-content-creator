@@ -11,7 +11,7 @@ description: "Scopri tutti i shortcodes disponibili nel tema: newsletter, libri,
 
 Benvenuto nella demo completa degli shortcodes! Questo tema include una potente collezione di strumenti per content creator, ispirati a Ghost CMS. Ecco tutto quello che puoi fare.
 
-## 📧 Newsletter Signup
+## Newsletter Signup
 
 Prima di tutto, la base di ogni content creator: raccogliere email!
 
@@ -25,30 +25,30 @@ Questo è perfetto per inserire form di iscrizione in qualsiasi articolo, conver
 
 Gli shortcodes callout sono perfetti per evidenziare informazioni importanti:
 
-{{< callout type="info" title="💡 Pro Tip" >}}
+{{< callout type="info" title="Pro Tip" >}}
 I callout box aumentano l'engagement del 40% perché catturano l'attenzione del lettore e rendono i contenuti più scannable.
 {{< /callout >}}
 
-{{< callout type="warning" title="⚠️ Attenzione" >}}
+{{< callout type="warning" title="Attenzione" >}}
 Non abusare dei callout! Usali solo per le informazioni veramente importanti, altrimenti perdono efficacia.
 {{< /callout >}}
 
-{{< callout type="success" >}}
-✅ **Risultato:** Con questi shortcodes ho aumentato il tempo di permanenza sulla pagina del 65%!
+{{< callout type="success" title="Risultato" >}}
+Con questi shortcodes ho aumentato il tempo di permanenza sulla pagina del 65%!
 {{< /callout >}}
 
-{{< callout type="error" title="❌ Errore Comune" >}}
+{{< callout type="error" title="Errore Comune" >}}
 Molti content creator pensano che più colori = meglio. Sbagliato! La semplicità vince sempre.
 {{< /callout >}}
 
 ---
 
-## 📚 Lead Magnet: Scarica il Mio Libro
+## Lead Magnet: Scarica il Mio Libro
 
 Ecco come promuovere lead magnet in modo professionale:
 
 {{< book-download 
-   title="📚 Guida Completa al Content Marketing"
+   title="Guida Completa al Content Marketing"
    cover="/images/book-cover-placeholder.jpg"
    description="La mia guida da 150 pagine con tutte le strategie che uso per creare contenuti che convertono. Include template, checklist e case study reali."
    file="/downloads/content-marketing-guide.pdf"
@@ -58,10 +58,11 @@ Ecco come promuovere lead magnet in modo professionale:
    email_required="true" >}}
 
 **Cosa troverai nel libro:**
-- ✅ 15 template pronti all'uso
-- ✅ La mia strategia per 100K follower in 12 mesi  
-- ✅ 5 case study con fatturati reali
-- ✅ Checklist per ogni tipo di contenuto
+
+15 template pronti all'uso  
+La mia strategia per 100K follower in 12 mesi  
+5 case study con fatturati reali  
+Checklist per ogni tipo di contenuto
 
 {{< /book-download >}}
 
