@@ -15,11 +15,7 @@ function initComponents() {
     });
   }
   
-  // Initialize Ghost audio players
-  const ghostAudioCards = document.querySelectorAll('.kg-audio-card');
-  if (ghostAudioCards.length > 0) {
-    import('./components/ghost-audio.js');
-  }
+  // Ghost audio cards use native HTML5 controls - no JS needed
 }
 
 // Initialize when idle or fallback to DOMContentLoaded
